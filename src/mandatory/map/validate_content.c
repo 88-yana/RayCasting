@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/21 23:48:39 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/21 23:52:56 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	validate_file_contents(t_game *game, char **contents, size_t height)
 	size_t	line_after_elements;
 	char	**key;
 	char	**value;
-
+	//TODO: char **にする
 	key 
 	get_key_value(&key, &value, contents);
 	is_valid_key(key, value);
