@@ -13,6 +13,7 @@ CHR_SRCS = ft_isalpha.c \
 STR_SRCS = ft_strlen.c \
 		ft_split.c \
 		ft_strchr.c \
+		ft_strcmp.c \
 		ft_strcspn.c \
 		ft_strdup.c \
 		ft_striteri.c \
