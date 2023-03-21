@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/21 23:44:13 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/22 03:01:19 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define CUB3D_H
 
 # include <stdlib.h> //NULL
+# include <unistd.h> //close
 # include <fcntl.h> //O_RDONLY
 # include <stdbool.h>
+# include <errno.h>
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include "libft.h"
@@ -44,10 +46,10 @@ bool	is_valid_key(char **key);
 
 //map
 void	input_file(t_game *game, const char *filename);
-void	validate_file_contents(t_game *game, char **contents, size_t height);
+void	validate_file_contents(t_game *game, size_t height, char ***contents);
 
 //error
 void	free_char_array(char **array);
-void	free_elements(char **contents, char **key, char **value);
+void	free_elements(char ***contents, char ***key, char ***value);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:36:53 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/21 20:00:10 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/22 02:41:06 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void	put_error_message(char *err_msg)
 void	handle_error(t_game *game, char *message)
 {
 	put_error_message(message);
-	if (game)
+	// if (game)
 		// free_game_buffer(game);//TODO: implement
+	(void)game;
 	exit(EXIT_FAILURE);
 }

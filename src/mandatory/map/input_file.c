@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:50:17 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/21 23:42:43 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/22 03:32:40 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,42 @@ static size_t	cnt_file_height(int fd)
 	return (file_height);
 }
 
+static ssize_t	gnl_wrapper(int fd, char **line, char ***file_contents)
+{
+	errno = 0;
+	*line = get_next_line(fd);
+	if (errno)
+	{
+		ft_free_matrix(file_contents);
+		handle_error(NULL, ERR_MALLOC_FAILURE);
+		return (-1);
+	}
+	if (*line == NULL)
+		return (0);
+	return (strlen(*line));
+}
+
 static char	**get_file_contents(int fd, size_t file_height)
 {
 	char	**file_contents;
 	char	*temp;
 	size_t	i;
 
-	file_contents = malloc(sizeof(char *) * file_height);
+	file_contents = malloc(sizeof(char *) * (file_height + 1));
 	if (file_contents == NULL)
 		handle_error(NULL, ERR_MALLOC_FAILURE);
 	i = 0;
-	while (i < file_height)
+	while (gnl_wrapper(fd, &temp, &file_contents))
 	{
-		temp = get_next_line(fd);
-		if (temp == NULL)
+		if (ft_strcmp(temp, "\n") != 0)
 		{
-			ft_free_matrix(&file_contents);
-			handle_error(NULL, ERR_MALLOC_FAILURE);
-		}
-		if (ft_strcmp(file_contents[i], "\n") != 0)
 			file_contents[i] = temp;
+			i++;
+		}
 		else
 			free(temp);
-		i++;
 	}
+	file_contents[i] = NULL;
 	return (file_contents);
 }
 
@@ -75,10 +87,10 @@ void	input_file(t_game *game, const char *filename)
 
 	fd = open_file(filename);
 	file_height = cnt_file_height(fd);
-	close(fd);
 	fd = open_file(filename);
 	file_contents = get_file_contents(fd, file_height);
 	close(fd);
-	validate_file_contents(game, file_contents, file_height);
+	validate_file_contents(game, file_height, &file_contents);
 	ft_free_matrix(&file_contents);
+	system("leaks -q cub3D");
 }
