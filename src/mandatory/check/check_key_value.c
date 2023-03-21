@@ -6,42 +6,108 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 23:00:09 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/22 02:46:57 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/22 05:46:28 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-bool	is_valid_info_format(char **info)
+bool	is_valid_info_format(char ***info)
 {
-	size_t	i;
-
-	if (info == NULL)
-		return (false);
-	if (info[0] == NULL)
+	if (ft_matrixlen(*info) != 2)
 	{
-		free(info);
+		ft_free_matrix(info);
 		return (false);
-	}
-	if (info[1] == NULL)
-	{
-		free(info[0]);
-		free(info);
-		return (false);
-	}
-	if (info[2])
-	{
-		i = 0;
-		while (info[i])
-			free(info[i++]);
-		free(info);
 	}
 	return (true);
 }
 
-//TODO:keyがNO,SO,WE,EAであるか
+int	key_to_idx(char *key)
+{
+	if (ft_strcmp(key, "NO") == 0)
+		return (NO);
+	if (ft_strcmp(key, "SO") == 0)
+		return (SO);
+	if (ft_strcmp(key, "WE") == 0)
+		return (WE);
+	if (ft_strcmp(key, "EA") == 0)
+		return (EA);
+	if (ft_strcmp(key, "F") == 0)
+		return (F);
+	if (ft_strcmp(key, "C") == 0)
+		return (C);
+	return (-1);
+}
+
 bool	is_valid_key(char **key)
 {
-	(void) key;
+	size_t	i;
+
+	i = 0;
+	while (i < ELEMENT_SIZE)
+	{
+		if (ft_strcmp(key[i], "NO") == 0)
+			;
+		else if (ft_strcmp(key[i], "SO") == 0)
+			;
+		else if (ft_strcmp(key[i], "WE") == 0)
+			;
+		else if (ft_strcmp(key[i], "EA") == 0)
+			;
+		else if (ft_strcmp(key[i], "F") == 0)
+			;
+		else if (ft_strcmp(key[i], "C") == 0)
+			;
+		else
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool	is_valid_rgb(char *value)
+{
+	char	**rgb;
+
+	rgb = ft_split(value, ',');
+	if (ft_matrixlen(rgb) != 3)
+	{
+		ft_free_matrix(&rgb);
+		return (false);
+	}
+	if (!is_valid_number(rgb, 0))
+	{
+		ft_free_matrix(&rgb);
+		return (false);
+	}
+	ft_free_matrix(&rgb);
+	return (true);
+}
+
+bool	is_valid_value(char **key, char **value)
+{
+	size_t	i;
+	int		fd;
+
+	i = 0;
+	while (i < ELEMENT_SIZE)
+	{
+		if (key_to_idx(key[i]) < 4)
+		{
+			fd = open(value[i], O_RDONLY);
+			if (fd == -1)
+				;// return (false);FIXME: コメントアウトを戻す
+			else
+				close(fd);
+		}
+		else
+		{
+			if (!is_valid_rgb(value[i]))
+			{
+				return (false);
+			}
+		}
+		i++;
+	}
 	return (true);
 }

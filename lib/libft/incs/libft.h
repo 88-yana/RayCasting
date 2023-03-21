@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 19:49:55 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/03/21 19:59:01 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/22 05:21:35 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			ft_memcmp(const void *buff1, const void *buff2, size_t n);
 void		*ft_memset(void *p, int c, size_t len);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_calloc(size_t count, size_t size);
-size_t		ft_matrixlen(const char **src);
+size_t		ft_matrixlen(char **src);
 char		**ft_matrixdup(const char **src);
 void		ft_free_matrix(char ***src);
 void		ft_memswap(void *a, void *b, size_t size);

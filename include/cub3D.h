@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/22 03:01:19 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/22 05:23:25 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "config.h"
 
 typedef struct s_map_info {
-	char	**path_to_texture[4];
+	char	*path_to_texture[4];
 	int		floor[3];
 	int		ceiling[3];
 	int		height;
@@ -41,8 +41,12 @@ typedef struct s_game {
 //check
 void	check_arg(int argc, char **argv);
 void	handle_error(t_game *game, char *message);
-bool	is_valid_info_format(char **info);
+bool	is_valid_info_format(char ***info);
+int		key_to_idx(char *key);
 bool	is_valid_key(char **key);
+bool	is_valid_rgb(char *value);
+bool	is_valid_value(char **key, char **value);
+bool	is_valid_number(char **array, int i);
 
 //map
 void	input_file(t_game *game, const char *filename);

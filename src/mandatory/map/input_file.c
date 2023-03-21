@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:50:17 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/22 03:32:40 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/22 06:20:46 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,12 @@ void	input_file(t_game *game, const char *filename)
 
 	fd = open_file(filename);
 	file_height = cnt_file_height(fd);
+	close(fd);
+	if (file_height < ELEMENT_SIZE)
+		handle_error(NULL, ERR_INPUT_FILE);
 	fd = open_file(filename);
 	file_contents = get_file_contents(fd, file_height);
 	close(fd);
 	validate_file_contents(game, file_height, &file_contents);
 	ft_free_matrix(&file_contents);
-	system("leaks -q cub3D");
 }
