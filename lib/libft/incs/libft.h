@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
+/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 19:49:55 by tmuramat          #+#    #+#             */
-/*   Updated: 2022/06/25 06:00:23 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:59:01 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int			ft_atoi(const char *str);
 char		*ft_itoa(int n);
 
 /*** string functions ***/
+int			ft_strcmp(const char *s1, const char *s2);
 size_t		ft_strlen(const char *c);
 size_t		ft_strlcpy(char *dst, const char *src, size_t n);
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);

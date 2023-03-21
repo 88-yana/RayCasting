@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   message.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/21 19:53:02 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/03/21 19:50:19 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/03/21 19:51:36 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#ifndef MESSAGE_H
+# define MESSAGE_H
 
-int	main(int argc, char **argv)
-{
-	check_arg(argc, argv);
-	return (0);
-}
+/***** Error message *****/
+# define ERR_ARGS "Invalid arguments."
+# define ERR_FILE_NAME "Invalid filename."
+
+#endif
