@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/21 23:18:50 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/03/21 20:46:07 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/03/21 23:38:32 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#ifndef CONFIG_H
+# define CONFIG_H
 
-int	main(int argc, char **argv)
-{
-	t_game	game;
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
 
-	check_arg(argc, argv);
-	input_file(&game, argv[1]);
+# define R 0
+# define G 1
+# define B 2
 
-	return (0);
-}
+# define ELEMENT_SIZE 6
+
+#endif

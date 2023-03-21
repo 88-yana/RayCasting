@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/21 23:18:50 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/03/21 22:11:30 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/03/21 23:41:05 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	main(int argc, char **argv)
+void	free_char_array(char **array)
 {
-	t_game	game;
+	size_t	i;
 
-	check_arg(argc, argv);
-	input_file(&game, argv[1]);
+	i = 0;
+	while (array[i] != NULL)
+	{
+		free(array[i]);
+		i++;
+	}
+}
 
-	return (0);
+void	free_elements(char **contents, char **key, char **value)
+{
+	ft_free_matrix(&contents);
+	free_char_array(key);
+	free_char_array(value);
 }
