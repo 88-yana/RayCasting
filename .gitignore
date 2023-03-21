@@ -1,0 +1,7 @@
+cub3D
+libmlx.dylib
+obj/
+*.o
+*.a
+*.swiftdoc
+*.swiftmodule
