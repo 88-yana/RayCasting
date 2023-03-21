@@ -73,7 +73,7 @@ LST_SRCS = ft_lstadd_back.c \
 		ft_lstnew.c \
 		ft_lstsize.c \
 		ft_lstdelone.c
-GNL_SRCS = get_next_line.c
+GNL_SRCS = get_next_line.c get_next_line_utils.c
 PRF_SRCS = ft_printf.c doprintf.c composer.c parser.c converter.c utils.c printer.c
 SPRF_SRCS = ft_snprintf.c sconverter.c sutils.c
 
