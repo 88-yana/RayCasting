@@ -6,12 +6,18 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 04:43:22 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 05:42:07 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 06:51:27 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+/**
+ * @brief rgbを構造体に入れる。rgbはひとつ上の構造体でfreeされる
+ * 
+ * @param st 
+ * @param rgb 
+ */
 static void	set_rgb(t_rgb *st, char **rgb)
 {
 	st->r = ft_atoi(rgb[0]);
@@ -20,7 +26,7 @@ static void	set_rgb(t_rgb *st, char **rgb)
 }
 
 /**
- * @brief rgb構造体に入れる
+ * @brief rgb構造体に入れる.この時点で，rgbは正しいformatであることが保証されている
  * 
  * @param game 
  * @param key 
@@ -41,6 +47,12 @@ static void	get_rgb(t_game *game, char *key, char *value)
 	ft_free_matrix(&rgb);
 }
 
+/**
+ * @brief TODO:NO,SO,WEの配列を定義して，うまくやりたい
+ * 
+ * @param key 
+ * @return int 
+ */
 int	key_to_idx(char *key)
 {
 	if (ft_strcmp(key, "NO") == 0)

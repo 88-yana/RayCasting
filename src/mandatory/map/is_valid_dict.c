@@ -6,12 +6,14 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:24:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 06:17:15 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 06:23:42 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+//TODO:refactor
+//配列を使う
 static bool	is_valid_key(char **key)
 {
 	size_t	i;
@@ -49,7 +51,6 @@ static void	check_rgb(char *value)
 		handle_error(ERR_MALLOC_FAILURE);
 	ft_free_matrix(&rgb);
 }
-
 
 /**
  * @brief path_to_textureが利用可能なファイルかどうか，rgbのフォーマットがちゃんとしているかを調べる　

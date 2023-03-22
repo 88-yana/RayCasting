@@ -6,13 +6,20 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 06:18:06 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 06:55:46 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "map.h"
 
+/**
+ * @brief elementをkeyとvalueに分ける
+ * 			keyとvalueの2つなかったら，エラー
+ * 			最後が改行だったら，null文字に
+ * @param element 
+ * @return char** 
+ */
 static char	**get_key_value(char *element)
 {
 	char	**key_value;
@@ -21,6 +28,8 @@ static char	**get_key_value(char *element)
 	free(element);
 	if (ft_matrixlen(key_value) != 2)
 		handle_error(ERR_INPUT_FILE);
+	if (key_value[1][ft_strlen(key_value[1]) - 1] == '\n')
+		key_value[1][ft_strlen(key_value[1]) - 1] = '\0';
 	return (key_value);
 }
 
@@ -34,8 +43,6 @@ static void	get_dict(t_dictionary *dict, char **contents)
 	{
 		key_value = get_key_value(contents[i]);
 		dict->key[i] = key_value[0];
-		if (key_value[1][ft_strlen(key_value[1]) - 1] == '\n')
-			key_value[1][ft_strlen(key_value[1]) - 1] = '\0';
 		dict->value[i] = key_value[1];
 		free(key_value);
 		i++;
@@ -46,6 +53,13 @@ static void	get_dict(t_dictionary *dict, char **contents)
 		handle_error(ERR_INPUT_FILE);
 }
 
+/**
+ * @brief 最初の6行は，identifierとinformationのため，それ以降からmapの情報を取る
+ * 		行末に改行がある場合とない場合があるので，null文字にする
+ * 
+ * @param game 
+ * @param contents 
+ */
 static void	get_map(t_game *game, char **contents)
 {
 	size_t	i;
