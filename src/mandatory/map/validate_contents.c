@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 04:50:42 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 06:18:06 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	**get_key_value(char *element)
 
 	key_value = ft_split(element, ' ');
 	free(element);
-	if (!is_valid_key_value_format(&key_value))
+	if (ft_matrixlen(key_value) != 2)
 		handle_error(ERR_INPUT_FILE);
 	return (key_value);
 }
