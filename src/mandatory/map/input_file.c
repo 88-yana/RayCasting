@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:50:17 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 03:35:55 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 04:47:32 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static size_t	calc_line_count(int fd)
 		free(temp);
 	}
 	if (line_count < ELEMENT_SIZE)
-		handle_error(NULL, ERR_INPUT_FILE);
+		handle_error(ERR_INPUT_FILE);
 	return (line_count);
 }
 

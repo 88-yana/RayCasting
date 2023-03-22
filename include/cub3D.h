@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 03:12:25 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 05:42:10 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_game {
 
 //check
 void	check_arg(int argc, char **argv);
-void	handle_error(t_game *game, char *message);
+void	handle_error(char *message);
 bool	is_valid_key_value_format(char ***info);
 int		key_to_idx(char *key);
 bool	is_valid_rgb(char *value);
@@ -56,6 +56,7 @@ bool	is_valid_number(char **array, int i);
 void	input_file(t_game *game, const char *filename);
 void	validate_file_contents(t_game *game, size_t height, char **contents);
 bool	is_valid_dict(t_dictionary *dict);
+void	get_map_info(t_game *game, t_dictionary *dict);
 
 //error
 void	free_char_array(char **array);

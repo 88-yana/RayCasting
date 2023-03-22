@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:36:53 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/22 02:41:06 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 04:46:16 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,8 @@ static void	put_error_message(char *err_msg)
 	ft_putendl_fd(DEFAULT, 2);
 }
 
-void	handle_error(t_game *game, char *message)
+void	handle_error(char *message)
 {
 	put_error_message(message);
-	// if (game)
-		// free_game_buffer(game);//TODO: implement
-	(void)game;
 	exit(EXIT_FAILURE);
 }

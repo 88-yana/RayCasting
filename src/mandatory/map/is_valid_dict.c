@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:24:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 01:45:50 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 05:43:41 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,34 @@ bool	is_valid_dict(t_dictionary *dict)
 		return (false);
 	if (!is_valid_value(dict->key, dict->value))
 		return (false);
+	return (true);
+}
+
+bool	is_valid_key_value_format(char ***info)
+{
+	if (ft_matrixlen(*info) != 2)
+	{
+		ft_free_matrix(info);
+		return (false);
+	}
+	return (true);
+}
+
+bool	is_valid_rgb(char *value)
+{
+	char	**rgb;
+
+	rgb = ft_split(value, ',');
+	if (ft_matrixlen(rgb) != 3)
+	{
+		ft_free_matrix(&rgb);
+		return (false);
+	}
+	if (!is_valid_number(rgb, 0))
+	{
+		ft_free_matrix(&rgb);
+		return (false);
+	}
+	ft_free_matrix(&rgb);
 	return (true);
 }
