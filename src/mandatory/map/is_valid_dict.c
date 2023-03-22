@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:24:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 05:43:41 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 06:17:15 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,30 @@ static bool	is_valid_key(char **key)
 	return (true);
 }
 
+static void	check_rgb(char *value)
+{
+	char	**rgb;
+
+	rgb = ft_split(value, ',');
+	if (ft_matrixlen(rgb) != 3)
+		handle_error(ERR_MALLOC_FAILURE);
+	if (!is_valid_rgb_number(rgb, 0))
+		handle_error(ERR_MALLOC_FAILURE);
+	ft_free_matrix(&rgb);
+}
+
+
+/**
+ * @brief path_to_textureが利用可能なファイルかどうか，rgbのフォーマットがちゃんとしているかを調べる　
+ * 			key_to_idxで変換したときに，NO,SOなどを意味するインデックスであれば，一度ファイルが開けるかを調べる
+ * 			F,Cであれば，rgbのフォーマットをcheck
+ * 			FIXME:refactorが必要
+ * 
+ * @param key 
+ * @param value 
+ * @return true 
+ * @return false 
+ */
 static bool	is_valid_value(char **key, char **value)
 {
 	size_t	i;
@@ -55,12 +79,7 @@ static bool	is_valid_value(char **key, char **value)
 				close(fd);
 		}
 		else
-		{
-			if (!is_valid_rgb(value[i]))
-			{
-				return (false);
-			}
-		}
+			check_rgb(value[i]);
 		i++;
 	}
 	return (true);
@@ -72,34 +91,5 @@ bool	is_valid_dict(t_dictionary *dict)
 		return (false);
 	if (!is_valid_value(dict->key, dict->value))
 		return (false);
-	return (true);
-}
-
-bool	is_valid_key_value_format(char ***info)
-{
-	if (ft_matrixlen(*info) != 2)
-	{
-		ft_free_matrix(info);
-		return (false);
-	}
-	return (true);
-}
-
-bool	is_valid_rgb(char *value)
-{
-	char	**rgb;
-
-	rgb = ft_split(value, ',');
-	if (ft_matrixlen(rgb) != 3)
-	{
-		ft_free_matrix(&rgb);
-		return (false);
-	}
-	if (!is_valid_number(rgb, 0))
-	{
-		ft_free_matrix(&rgb);
-		return (false);
-	}
-	ft_free_matrix(&rgb);
 	return (true);
 }
