@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:24:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 07:05:54 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 07:07:45 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static void	check_rgb(char *value)
 
 	rgb = ft_split(value, ',');
 	if (ft_matrixlen(rgb) != 3)
-		handle_error(ERR_MALLOC_FAILURE);
+		handle_error(ERR_INPUT_FILE);
 	if (!is_valid_rgb_number(rgb, 0))
-		handle_error(ERR_MALLOC_FAILURE);
+		handle_error(ERR_INPUT_FILE);
 	ft_free_matrix(&rgb);
 }
 
