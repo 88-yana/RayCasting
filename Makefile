@@ -13,6 +13,11 @@ LIBFT_A = $(LIBFTDIR)/libft.a
 MINILIBXDIR = ./lib/minilibx
 MINILIBX = libmlx.dylib
 
+TEST_MAPS = $(shell find test)
+DEFAULT := \033[0;39m
+BLUE := \033[0;94m
+GREEN := \033[0;92m
+
 NAME = cub3D
 
 all: $(OBJDIR) $(NAME)
@@ -44,4 +49,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY : all clean fclean re
+t:
+	@for map in ${TEST_MAPS} ; \
+	do echo $$map ; ./${NAME} $$map ; echo "$?"; done
+	@echo "${GREEN}----finish----${DEFAULT}"
+
+.PHONY : all clean fclean re t test
