@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/22 05:23:25 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 03:12:25 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,17 @@
 # include "mlx.h"
 # include "message.h"
 # include "config.h"
+# include "map.h"
 
+typedef struct s_rgb {
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
 typedef struct s_map_info {
 	char	*path_to_texture[4];
-	int		floor[3];
-	int		ceiling[3];
+	t_rgb	floor;
+	t_rgb	ceiling;
 	int		height;
 	int		width;
 }	t_map_info;
@@ -41,19 +47,21 @@ typedef struct s_game {
 //check
 void	check_arg(int argc, char **argv);
 void	handle_error(t_game *game, char *message);
-bool	is_valid_info_format(char ***info);
+bool	is_valid_key_value_format(char ***info);
 int		key_to_idx(char *key);
-bool	is_valid_key(char **key);
 bool	is_valid_rgb(char *value);
-bool	is_valid_value(char **key, char **value);
 bool	is_valid_number(char **array, int i);
 
 //map
 void	input_file(t_game *game, const char *filename);
-void	validate_file_contents(t_game *game, size_t height, char ***contents);
+void	validate_file_contents(t_game *game, size_t height, char **contents);
+bool	is_valid_dict(t_dictionary *dict);
 
 //error
 void	free_char_array(char **array);
 void	free_elements(char ***contents, char ***key, char ***value);
+
+//utils
+ssize_t	gnl_wrapper(int fd, char **line);
 
 #endif

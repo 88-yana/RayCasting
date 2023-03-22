@@ -6,13 +6,13 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 23:00:09 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/22 05:46:28 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:49:13 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-bool	is_valid_info_format(char ***info)
+bool	is_valid_key_value_format(char ***info)
 {
 	if (ft_matrixlen(*info) != 2)
 	{
@@ -39,32 +39,6 @@ int	key_to_idx(char *key)
 	return (-1);
 }
 
-bool	is_valid_key(char **key)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < ELEMENT_SIZE)
-	{
-		if (ft_strcmp(key[i], "NO") == 0)
-			;
-		else if (ft_strcmp(key[i], "SO") == 0)
-			;
-		else if (ft_strcmp(key[i], "WE") == 0)
-			;
-		else if (ft_strcmp(key[i], "EA") == 0)
-			;
-		else if (ft_strcmp(key[i], "F") == 0)
-			;
-		else if (ft_strcmp(key[i], "C") == 0)
-			;
-		else
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 bool	is_valid_rgb(char *value)
 {
 	char	**rgb;
@@ -81,33 +55,5 @@ bool	is_valid_rgb(char *value)
 		return (false);
 	}
 	ft_free_matrix(&rgb);
-	return (true);
-}
-
-bool	is_valid_value(char **key, char **value)
-{
-	size_t	i;
-	int		fd;
-
-	i = 0;
-	while (i < ELEMENT_SIZE)
-	{
-		if (key_to_idx(key[i]) < 4)
-		{
-			fd = open(value[i], O_RDONLY);
-			if (fd == -1)
-				;// return (false);FIXME: コメントアウトを戻す
-			else
-				close(fd);
-		}
-		else
-		{
-			if (!is_valid_rgb(value[i]))
-			{
-				return (false);
-			}
-		}
-		i++;
-	}
 	return (true);
 }

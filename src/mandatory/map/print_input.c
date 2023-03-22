@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 06:14:08 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/22 06:18:13 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 03:37:12 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,22 @@ void	print_input(t_game *game)
 	i = 0;
 	while (game->map[i])
 	{
-		printf("%s\n", game->map[i]);
+		ft_printf("%s", game->map[i]);
 		i++;
 	}
+	ft_printf("\n");
 	i = 0;
 	while (i < 4)
 	{
-		printf("%s\n", game->map_info.path_to_texture[i]);
+		ft_printf("%s\n", game->map_info.path_to_texture[i]);
 		i++;
 	}
-	i = 0;
-	while (i < 3)
-	{
-		printf("%d\n", game->map_info.floor[i]);
-		i++;
-	}
-	i = 0;
-	while (i < 3)
-	{
-		printf("%d\n", game->map_info.ceiling[i]);
-		i++;
-	}
+	ft_printf("floor : ");
+	ft_printf("%d ", game->map_info.floor.r);
+	ft_printf("%d ", game->map_info.floor.g);
+	ft_printf("%d\n", game->map_info.floor.b);
+	ft_printf("ceiling : ");
+	ft_printf("%d ", game->map_info.ceiling.r);
+	ft_printf("%d ", game->map_info.ceiling.g);
+	ft_printf("%d\n", game->map_info.ceiling.b);
 }

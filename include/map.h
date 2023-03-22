@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 03:38:07 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/03/22 23:47:06 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/03/23 00:08:30 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#ifndef MAP_H
+# define MAP_H
 
-void	print_input(t_game *game);
-
-int	main(int argc, char **argv)
+typedef struct s_dictionary
 {
-	t_game	game;
+	char	**key;
+	char	**value;
+}	t_dictionary;
 
-	check_arg(argc, argv);
-	input_file(&game, argv[1]);
-	print_input(&game);
-	system("leaks -q cub3D");
-	return (0);
-}
+#endif
