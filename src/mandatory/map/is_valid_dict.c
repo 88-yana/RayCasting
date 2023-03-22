@@ -6,14 +6,19 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:24:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 06:23:42 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 07:05:54 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-//TODO:refactor
-//配列を使う
+/**
+ * @brief keyが規定のうちのどれかに当てはまるかを調べる
+ * 			TODO: refactor，globalな配列を使う
+ * @param key 
+ * @return true 
+ * @return false 
+ */
 static bool	is_valid_key(char **key)
 {
 	size_t	i;
@@ -40,6 +45,11 @@ static bool	is_valid_key(char **key)
 	return (true);
 }
 
+/**
+ * @brief 一回，rgbの数が正しいか，rgbの数値に収まっているかを調べる
+ * 
+ * @param value 
+ */
 static void	check_rgb(char *value)
 {
 	char	**rgb;
@@ -86,6 +96,13 @@ static bool	is_valid_value(char **key, char **value)
 	return (true);
 }
 
+/**
+ * @brief keyとvalueを調べるwrap関数
+ * 
+ * @param dict 
+ * @return true 
+ * @return false 
+ */
 bool	is_valid_dict(t_dictionary *dict)
 {
 	if (!is_valid_key(dict->key))

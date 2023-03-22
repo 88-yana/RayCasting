@@ -6,12 +6,17 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 06:14:08 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 04:20:55 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 07:01:50 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+/**
+ * @brief debug用，取得したファイルの中身を表示
+ * 
+ * @param game 
+ */
 void	print_input(t_game *game)
 {
 	size_t	i;

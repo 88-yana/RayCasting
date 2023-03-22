@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 06:17:40 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 07:01:11 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int		key_to_idx(char *key);
 void	validate_file_contents(t_game *game, size_t height, char **contents);
 
 //error
-void	free_char_array(char **array);
-void	free_elements(char ***contents, char ***key, char ***value);
 
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);

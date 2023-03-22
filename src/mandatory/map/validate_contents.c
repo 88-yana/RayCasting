@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 06:55:46 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 07:02:32 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ static char	**get_key_value(char *element)
 	return (key_value);
 }
 
+/**
+ * @brief 取得したkeyとvalueを構造体に代入
+ * 
+ * @param dict 
+ * @param contents 
+ */
 static void	get_dict(t_dictionary *dict, char **contents)
 {
 	size_t	i;
