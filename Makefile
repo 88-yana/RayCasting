@@ -49,7 +49,7 @@ fclean: clean
 
 re: fclean all
 
-t:
+t: all
 	@for map in ${TEST_MAPS} ; \
 	do echo $$map ; ./${NAME} $$map ; echo "$?"; done
 	@echo "${GREEN}----finish----${DEFAULT}"
