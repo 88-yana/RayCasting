@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/22 06:25:20 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/22 08:37:39 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,12 @@ void	validate_file_contents(t_game *game, size_t height, char ***contents)
 
 	key = malloc(sizeof(char *) * (ELEMENT_SIZE + 1));
 	value = malloc(sizeof(char *) * (ELEMENT_SIZE + 1));
-	if (key == NULL || value == NULL)
+	game->map = malloc(sizeof(char *) * (height - ELEMENT_SIZE + 1));
+	if (key == NULL || value == NULL || game->map == NULL)
 	{
 		free(key);
 		free(value);
+		free(game->map);
 		ft_free_matrix(contents);
 		handle_error(NULL, ERR_MALLOC_FAILURE);
 	}
@@ -140,12 +142,6 @@ void	validate_file_contents(t_game *game, size_t height, char ***contents)
 		handle_error(NULL, ERR_INPUT_FILE);
 	}
 	get_map_info(game, &key, &value, contents);
-	game->map = malloc(sizeof(char *) * (height - ELEMENT_SIZE + 1));
-	if (game->map == NULL)
-	{
-		free_elements(&key, &value, contents);
-		handle_error(NULL, ERR_MALLOC_FAILURE);
-	}
 	get_map(game, *contents);
 	ft_free_matrix(&key);
 	free(value);

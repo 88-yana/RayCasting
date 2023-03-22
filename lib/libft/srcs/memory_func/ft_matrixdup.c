@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	**ft_matrixdup(const char **src)
+char	**ft_matrixdup(char **src)
 {
 	char	**dst;
 	size_t	m_len;
