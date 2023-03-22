@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 06:14:08 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 03:37:12 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 04:20:55 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ void	print_input(t_game *game)
 	size_t	i;
 
 	i = 0;
+	printf("--------------------map--------------------\n");
 	while (game->map[i])
 	{
-		ft_printf("%s", game->map[i]);
+		ft_printf("%s\n", game->map[i]);
 		i++;
 	}
-	ft_printf("\n");
+	printf("--------------------map--------------------\n");
 	i = 0;
 	while (i < 4)
 	{
@@ -36,5 +37,5 @@ void	print_input(t_game *game)
 	ft_printf("ceiling : ");
 	ft_printf("%d ", game->map_info.ceiling.r);
 	ft_printf("%d ", game->map_info.ceiling.g);
-	ft_printf("%d\n", game->map_info.ceiling.b);
+	ft_printf("%d\n\n", game->map_info.ceiling.b);
 }
