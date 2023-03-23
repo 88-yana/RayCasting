@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 07:01:11 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 02:13:44 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	input_file(t_game *game, const char *filename);
 bool	is_valid_rgb_number(char **array, int i);
 bool	is_valid_dict(t_dictionary *dict);
 int		key_to_idx(char *key);
-void	validate_file_contents(t_game *game, size_t height, char **contents);
+void	validate_file_contents(t_game *game, char **contents);
 
 //error
 

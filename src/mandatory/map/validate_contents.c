@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 07:02:32 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 02:13:21 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static void	get_map(t_game *game, char **contents)
 {
 	size_t	i;
 
+	game->map = ft_xmalloc(sizeof(char *) * (game->map_info.height + 1));
 	i = ELEMENT_SIZE;
 	while (contents[i])
 	{
@@ -88,7 +89,7 @@ static void	get_map(t_game *game, char **contents)
  * @param height 
  * @param contents 
  */
-void	validate_file_contents(t_game *game, size_t height, char **contents)
+void	validate_file_contents(t_game *game, char **contents)
 {
 	t_dictionary	dict;
 
@@ -98,6 +99,5 @@ void	validate_file_contents(t_game *game, size_t height, char **contents)
 	get_map_info(game, &dict);
 	ft_free_matrix(&dict.key);
 	free(dict.value);
-	game->map = ft_xmalloc(sizeof(char *) * (height - ELEMENT_SIZE + 1));
 	get_map(game, contents);
 }
