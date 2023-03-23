@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 19:49:55 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/03/21 19:59:01 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:50:55 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <errno.h>
 # include <string.h>
 # include <stdbool.h>
+# include <fcntl.h>
 
 typedef struct s_list {
 	void			*content;
@@ -75,12 +76,13 @@ int			ft_memcmp(const void *buff1, const void *buff2, size_t n);
 void		*ft_memset(void *p, int c, size_t len);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_calloc(size_t count, size_t size);
-size_t		ft_matrixlen(const char **src);
-char		**ft_matrixdup(const char **src);
+size_t		ft_matrixlen(char **src);
+char		**ft_matrixdup(char **src);
 void		ft_free_matrix(char ***src);
 void		ft_memswap(void *a, void *b, size_t size);
 void		*ft_realloc(void *ptr, size_t size);
 void		*ft_xmalloc(size_t size);
+int			ft_xopen(const char *filename, int flag);
 void		*ft_memcat(const void *buff1, const void *buff2,
 				size_t s1, size_t s2);
 void		ft_qsort(void *base, size_t n, size_t size,

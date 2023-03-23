@@ -40,6 +40,7 @@ MEM_SRCS = ft_bzero.c \
 		ft_memset.c \
 		ft_memswap.c \
 		ft_xmalloc.c \
+		ft_xopen.c \
 		ft_memcat.c \
 		ft_qsort.c
 MTH_SRCS = ft_abs.c \
@@ -73,7 +74,7 @@ LST_SRCS = ft_lstadd_back.c \
 		ft_lstnew.c \
 		ft_lstsize.c \
 		ft_lstdelone.c
-GNL_SRCS = get_next_line.c
+GNL_SRCS = get_next_line.c get_next_line_utils.c
 PRF_SRCS = ft_printf.c doprintf.c composer.c parser.c converter.c utils.c printer.c
 SPRF_SRCS = ft_snprintf.c sconverter.c sutils.c
 

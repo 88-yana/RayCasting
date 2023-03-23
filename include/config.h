@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 03:38:07 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/03/21 20:46:07 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/03/22 04:26:40 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#ifndef CONFIG_H
+# define CONFIG_H
 
-void	print_input(t_game *game);
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
+# define F 4
+# define C 5
 
-int	main(int argc, char **argv)
-{
-	t_game	game;
+# define R 0
+# define G 1
+# define B 2
 
-	check_arg(argc, argv);
-	input_file(&game, argv[1]);
-	print_input(&game);
-	system("leaks -q cub3D");
-	return (0);
-}
+# define ELEMENT_SIZE 6
+
+#endif

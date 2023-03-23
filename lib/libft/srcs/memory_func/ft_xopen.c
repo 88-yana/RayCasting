@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_xopen.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 03:38:07 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/03/23 00:54:23 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/03/23 00:57:07 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
 
-void	print_input(t_game *game);
-
-int	main(int argc, char **argv)
+int	ft_xopen(const char *filename, int flag)
 {
-	t_game	game;
+	int	fd;
 
-	check_arg(argc, argv);
-	input_file(&game, argv[1]);
-	print_input(&game);
-	system("leaks -q cub3D");
-	return (0);
+	fd = open(filename, flag);
+	if (fd == -1)
+		exit(EXIT_FAILURE);
+	return (fd);
 }

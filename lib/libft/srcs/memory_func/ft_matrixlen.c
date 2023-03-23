@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-size_t	ft_matrixlen(const char **src)
+size_t	ft_matrixlen(char **src)
 {
 	size_t	len;
 

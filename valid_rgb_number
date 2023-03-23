@@ -1,0 +1,3 @@
+[feature/CUB3D-1 dc290f3] RENAME:valid_number=
+ 1 file changed, 64 insertions(+)
+ create mode 100644 src/mandatory/map/is_valid_rgb_number.c
