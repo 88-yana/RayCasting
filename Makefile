@@ -10,8 +10,8 @@ OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 LIBFTDIR = ./lib/libft
 LIBFT_A = $(LIBFTDIR)/libft.a
 
-MINILIBXDIR = ./lib/minilibx
-MINILIBX = libmlx.dylib
+# MINILIBXDIR = ./lib/minilibx
+# MINILIBX = libmlx.dylib
 
 TEST_MAPS = $(shell find test)
 DEFAULT := \033[0;39m
@@ -42,7 +42,7 @@ clean:
 	$(RM) -rf $(OBJDIR)
 	$(RM) $(MINILIBX)
 	$(MAKE) fclean -C $(LIBFTDIR)
-	$(MAKE) clean -C $(MINILIBXDIR)
+# $(MAKE) clean -C $(MINILIBXDIR)
 
 fclean: clean
 	$(RM) $(NAME)
