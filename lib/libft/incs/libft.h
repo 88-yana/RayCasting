@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 19:49:55 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/03/23 01:50:55 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 02:35:58 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ bool		ft_vector_cmp(t_vector2 v1, t_vector2 v2);
 t_vector2	ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t);
 int			ft_abs(int n);
 int			ft_max(int a, int b);
+size_t		ft_max_s(size_t a, size_t b);
 int			ft_min(int a, int b);
 int			ft_count_digits(long long int num, int radix);
 double		ft_diff_timespec(const t_timespec *t1, const t_timespec *t2);

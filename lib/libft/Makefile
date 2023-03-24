@@ -56,6 +56,7 @@ MTH_SRCS = ft_abs.c \
 		ft_lower_bound.c \
 		ft_max.c \
 		ft_min.c \
+		ft_max_s.c \
 		ft_swap.c
 CNV_SRCS = ft_atoi.c \
 		ft_itoa.c \
