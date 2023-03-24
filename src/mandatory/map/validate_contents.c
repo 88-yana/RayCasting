@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 08:29:38 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 09:13:53 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,4 @@ void	validate_file_contents(t_game *game, char **contents)
 	ft_free_matrix(&dict.key);
 	free(dict.value);
 	get_map(game, contents);
-	system("leaks -q cub3D");
 }
