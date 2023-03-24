@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 03:47:15 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:16:58 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ typedef struct s_map_info {
 	t_rgb	ceiling;
 	size_t	height;
 	size_t	width;
+	size_t	nswt[4];
+	size_t	n;
+	size_t	s;
+	size_t	w;
+	size_t	t;
 }	t_map_info;
 
 typedef struct s_game {
@@ -51,8 +56,10 @@ void	handle_error(char *message);
 //map
 void	get_map_info(t_game *game, t_dictionary *dict);
 void	input_file(t_game *game, const char *filename);
-bool	is_valid_rgb_number(char **array, int i);
+bool	is_map_surrounded(t_game *game);
 bool	is_valid_dict(t_dictionary *dict);
+bool	is_valid_map(t_game *game);
+bool	is_valid_rgb_number(char **array, int i);
 int		key_to_idx(char *key);
 void	validate_file_contents(t_game *game, char **contents);
 void	get_map(t_game *game, char **contents);

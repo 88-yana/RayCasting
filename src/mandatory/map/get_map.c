@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 02:17:18 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 09:00:59 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:34:08 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,6 @@ void	get_map(t_game *game, char **contents)
 	malloc_map(game);
 	fill_map_with_spaces(game);
 	set_map(game, contents);
+	if (!is_valid_map(game))
+		handle_error(ERR_MAP);
 }
