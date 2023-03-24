@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/25 01:19:24 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/25 04:07:10 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include "libft.h"
-// # include "mlx.h"
+# include "mlx.h"
 # include "message.h"
 # include "config.h"
 # include "map.h"
