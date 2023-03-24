@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 19:49:55 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/03/24 02:35:58 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:46:21 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ typedef struct s_list {
 	struct s_list	*next;
 }	t_list;
 
-typedef struct s_vector2 {
-	int	x;
-	int	y;
-}	t_vector2;
+typedef struct s_vec {
+	float	x;
+	float	y;
+}	t_vec;
 
 typedef struct timespec	t_timespec;
 
@@ -106,11 +106,12 @@ void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /*** math functions ***/
-t_vector2	ft_vector_add(t_vector2 v1, t_vector2 v2);
-t_vector2	ft_vector_sub(t_vector2 v1, t_vector2 v2);
-t_vector2	ft_vector_mul(t_vector2 v1, float t);
-bool		ft_vector_cmp(t_vector2 v1, t_vector2 v2);
-t_vector2	ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t);
+float		ft_deg_to_rad(float deg);
+t_vec		ft_add_vec(t_vec v1, t_vec v2);
+bool		ft_cmp_vec(t_vec v1, t_vec v2);
+t_vec		ft_lerp_vec(t_vec v1, t_vec v2, float t);
+t_vec		ft_mul_vec(t_vec v1, float t);
+t_vec		ft_sub_vec(t_vec v1, t_vec v2);
 int			ft_abs(int n);
 int			ft_max(int a, int b);
 size_t		ft_max_s(size_t a, size_t b);

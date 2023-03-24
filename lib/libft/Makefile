@@ -44,11 +44,13 @@ MEM_SRCS = ft_bzero.c \
 		ft_memcat.c \
 		ft_qsort.c
 MTH_SRCS = ft_abs.c \
-		ft_vector_add.c \
-		ft_vector_cmp.c \
-		ft_vector_lerp.c \
-		ft_vector_mul.c \
-		ft_vector_sub.c \
+		ft_deg_to_rad.c \
+		ft_add_vec.c \
+		ft_cmp_vec.c \
+		ft_lerp_vec.c \
+		ft_mul_vec.c \
+		ft_rotate_vec.c \
+		ft_sub_vec.c \
 		ft_diff_timespec.c \
 		ft_count_digits.c \
 		ft_binary_search.c \
