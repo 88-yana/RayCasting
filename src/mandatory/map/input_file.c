@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:50:17 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 02:11:40 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 08:43:07 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,5 @@ void	input_file(t_game *game, const char *filename)
 	file_contents = read_file(filename, line_count);
 	game->map_info.height = line_count - ELEMENT_SIZE;
 	validate_file_contents(game, file_contents);
-	free(file_contents);
+	ft_free_matrix(&file_contents);
 }

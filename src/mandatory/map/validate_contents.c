@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 02:13:21 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 08:29:38 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	**get_key_value(char *element)
 	char	**key_value;
 
 	key_value = ft_split(element, ' ');
-	free(element);
+	// free(element);
 	if (ft_matrixlen(key_value) != 2)
 		handle_error(ERR_INPUT_FILE);
 	if (key_value[1][ft_strlen(key_value[1]) - 1] == '\n')
@@ -60,29 +60,6 @@ static void	get_dict(t_dictionary *dict, char **contents)
 }
 
 /**
- * @brief 最初の6行は，identifierとinformationのため，それ以降からmapの情報を取る
- * 		行末に改行がある場合とない場合があるので，null文字にする
- * 
- * @param game 
- * @param contents 
- */
-static void	get_map(t_game *game, char **contents)
-{
-	size_t	i;
-
-	game->map = ft_xmalloc(sizeof(char *) * (game->map_info.height + 1));
-	i = ELEMENT_SIZE;
-	while (contents[i])
-	{
-		if (contents[i][ft_strlen(contents[i]) - 1] == '\n')
-			contents[i][ft_strlen(contents[i]) - 1] = '\0';
-		game->map[i - ELEMENT_SIZE] = contents[i];
-		i++;
-	}
-	game->map[i - ELEMENT_SIZE] = NULL;
-}
-
-/**
  * @brief ファイルの中身を構造体に入れる
  * 
  * @param game 
@@ -100,4 +77,5 @@ void	validate_file_contents(t_game *game, char **contents)
 	ft_free_matrix(&dict.key);
 	free(dict.value);
 	get_map(game, contents);
+	system("leaks -q cub3D");
 }

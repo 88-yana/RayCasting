@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 06:14:08 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 07:01:50 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 08:43:43 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief debug用，取得したファイルの中身を表示
- * 
+ * 		 mapの右端に2マス空白が入るのは，\nの分
  * @param game 
  */
 void	print_input(t_game *game)
@@ -22,19 +22,21 @@ void	print_input(t_game *game)
 	size_t	i;
 
 	i = 0;
-	printf("--------------------map--------------------\n");
+	ft_printf("--------------------map--------------------\n");
 	while (game->map[i])
 	{
-		ft_printf("%s\n", game->map[i]);
+		ft_printf("|%s|\n", game->map[i]);
 		i++;
 	}
-	printf("--------------------map--------------------\n");
+	ft_printf("--------------------map--------------------\n");
 	i = 0;
 	while (i < 4)
 	{
 		ft_printf("%s\n", game->map_info.path_to_texture[i]);
 		i++;
 	}
+	ft_printf("height : %u\n", game->map_info.height);
+	ft_printf("width : %u\n", game->map_info.width);
 	ft_printf("floor : ");
 	ft_printf("%d ", game->map_info.floor.r);
 	ft_printf("%d ", game->map_info.floor.g);
