@@ -6,12 +6,18 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:22:20 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 10:35:00 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:47:23 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
+/**
+ * @brief char **mapに含まれていいものであればtrue
+ * 
+ * @param c 
+ * @return true 
+ * @return false 
+ */
 static bool	is_valid_identifier(char c)
 {
 	if (c == 'N')
@@ -43,6 +49,13 @@ static void	cnt_start(t_map_info *map_info, char c)
 		map_info->t++;
 }
 
+/**
+ * @brief N,S,W,T合わせて１つであれば，OK
+ * 
+ * @param map_info 
+ * @return true 
+ * @return false 
+ */
 static bool	is_valid_start_num(t_map_info *map_info)
 {
 	if (map_info->n + map_info->s + map_info->w + map_info->t == 1)
@@ -50,6 +63,14 @@ static bool	is_valid_start_num(t_map_info *map_info)
 	return (false);
 }
 
+/**
+ * @brief mapの要素として，適当なものしかないか
+ * スタートの数が１つだけかを調べる
+ * 
+ * @param game 
+ * @return true 
+ * @return false 
+ */
 static bool	is_valid_map_contents(t_game *game)
 {
 	size_t	i;

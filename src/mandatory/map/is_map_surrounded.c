@@ -6,12 +6,19 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:58:51 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 10:38:05 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:45:34 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+/**
+ * @brief map内の要素の場合true
+ * 
+ * @param c 
+ * @return true 
+ * @return false 
+ */
 static bool	is_in_map(char c)
 {
 	if (c == 'N')
@@ -27,6 +34,14 @@ static bool	is_in_map(char c)
 	return (false);
 }
 
+/**
+ * @brief 範囲外やMARK,WALLであったら,return
+ * マップ内に到達したら,エラー
+ * 現時点にMARKを付けて，探索
+ * @param game 
+ * @param i 
+ * @param j 
+ */
 void	dfs(t_game *game, size_t i, size_t j)
 {
 	if (i < 0 || game->map_info.height + SP <= i)
@@ -44,6 +59,14 @@ void	dfs(t_game *game, size_t i, size_t j)
 	dfs(game, i, j + 1);
 }
 
+/**
+ * @brief map外であるスペースを探す
+ * スペースからdfsを開始する
+ * map内に侵入できないかをcheckする
+ * @param game 
+ * @return true 
+ * @return false 
+ */
 bool	is_map_surrounded(t_game *game)
 {
 	size_t	i;
