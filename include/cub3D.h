@@ -56,9 +56,23 @@ typedef struct s_game {
 	char		**map;
 	t_map_info	map_info;
 	t_image		images;
+	int			key_code;
 	void		*mlx;
 	void		*win;
 }	t_game;
+
+typedef enum e_input_key {
+	MOVE_NONE = 0,
+	MOVE_FORWARD = 1 << 0,
+	MOVE_BACK = 1 << 1,
+	MOVE_RIGHT = 1 << 2,
+	MOVE_LEFT = 1 << 3,
+	ROTATE_RIGHT = 1 << 4,
+	ROTATE_LEFT = 1 << 5,
+	GAME_EXIT = 1 << 6,
+	ALL = ~0,
+}	t_input_key;
+
 
 //check
 void	check_arg(int argc, char **argv);
@@ -77,8 +91,11 @@ void	get_map(t_game *game, char **contents);
 //init
 void	init_game(t_game *game);
 void	load_images(t_game *game);
+void	set_event_hooks(t_game *game);
+int		exit_game(char *msg);
 
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);
+int	create_trgb(int t, int r, int g, int b);
 
 #endif
