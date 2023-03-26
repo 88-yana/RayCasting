@@ -52,13 +52,25 @@ typedef struct s_map_info {
 	size_t				t;
 }	t_map_info;
 
+typedef struct s_player_info {
+	t_vec	pos;
+	t_vec	dir;
+	float	distance_to_wall;
+	float	wall_height;
+	bool	n_wall;
+	bool	s_wall;
+	bool	w_wall;
+	bool	e_wall;
+}	t_player_info;
+
 typedef struct s_game {
-	char		**map;
-	t_map_info	map_info;
-	t_image		images;
-	int			key_code;
-	void		*mlx;
-	void		*win;
+	char			**map;
+	t_map_info		map_info;
+	t_image			images;
+	t_player_info	player;
+	int				key_code;
+	void			*mlx;
+	void			*win;
 }	t_game;
 
 typedef enum e_input_key {
@@ -96,6 +108,9 @@ int		exit_game(char *msg);
 
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);
-int	create_trgb(int t, int r, int g, int b);
+int		create_trgb(int t, int r, int g, int b);
+
+//debug
+void	print_debug_info(t_game *game);
 
 #endif
