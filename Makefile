@@ -42,7 +42,7 @@ clean:
 	$(RM) -rf $(OBJDIR)
 	$(RM) $(MINILIBX)
 	$(MAKE) fclean -C $(LIBFTDIR)
-$(MAKE) clean -C $(MINILIBXDIR)
+	$(MAKE) clean -C $(MINILIBXDIR)
 
 fclean: clean
 	$(RM) $(NAME)

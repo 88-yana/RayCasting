@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 19:49:55 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/03/24 11:46:21 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 16:01:08 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 float		ft_deg_to_rad(float deg);
 t_vec		ft_add_vec(t_vec v1, t_vec v2);
 bool		ft_cmp_vec(t_vec v1, t_vec v2);
+float		ft_distance_vec(t_vec v1, t_vec v2);
 t_vec		ft_lerp_vec(t_vec v1, t_vec v2, float t);
 t_vec		ft_mul_vec(t_vec v1, float t);
 t_vec		ft_sub_vec(t_vec v1, t_vec v2);
