@@ -44,9 +44,21 @@ typedef struct s_map_info {
 	size_t				t;
 }	t_map_info;
 
+typedef struct s_player_info {
+	t_vec	pos;
+	t_vec	dir;
+	float	distance_to_wall;
+	float	wall_height;
+	bool	n_wall;
+	bool	s_wall;
+	bool	w_wall;
+	bool	e_wall;
+}	t_player_info;
+
 typedef struct s_game {
-	char		**map;
-	t_map_info	map_info;
+	char			**map;
+	t_map_info		map_info;
+	t_player_info	player;
 }	t_game;
 
 //check
