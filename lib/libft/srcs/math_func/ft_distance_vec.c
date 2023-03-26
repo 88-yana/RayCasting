@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   ft_distance_vec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 23:47:06 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 00:08:30 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/03/26 15:56:20 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/03/26 16:04:58 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "libft.h"
+#include "math.h"
 
-typedef struct s_dictionary
+float	ft_distance_vec(t_vec v1, t_vec v2)
 {
-	char	**key;
-	char	**value;
-}	t_dictionary;
+	float	x;
+	float	y;
+	float	distance;
 
-#endif
+	x = v1.x - v2.x;
+	y = v1.y - v2.y;
+	distance = sqrt(x * x + y * y);
+	return (distance);
+}

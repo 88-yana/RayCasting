@@ -47,6 +47,7 @@ MTH_SRCS = ft_abs.c \
 		ft_deg_to_rad.c \
 		ft_add_vec.c \
 		ft_cmp_vec.c \
+		ft_distance_vec.c \
 		ft_lerp_vec.c \
 		ft_mul_vec.c \
 		ft_rotate_vec.c \
