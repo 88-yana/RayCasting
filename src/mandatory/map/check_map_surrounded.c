@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_map_surrounded.c                                :+:      :+:    :+:   */
+/*   check_map_surrounded.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:58:51 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 10:45:34 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:51:47 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static bool	is_in_map(char c)
  * @param i 
  * @param j 
  */
-void	dfs(t_game *game, size_t i, size_t j)
+static void	dfs_map(t_game *game, size_t i, size_t j)
 {
 	if (i < 0 || game->map_info.height + SP <= i)
 		return ;
@@ -53,21 +53,21 @@ void	dfs(t_game *game, size_t i, size_t j)
 	if (is_in_map(game->map[i][j]))
 		handle_error(ERR_MAP);
 	game->map[i][j] = MARK;
-	dfs(game, i - 1, j);
-	dfs(game, i + 1, j);
-	dfs(game, i, j - 1);
-	dfs(game, i, j + 1);
+	dfs_map(game, i - 1, j);
+	dfs_map(game, i + 1, j);
+	dfs_map(game, i, j - 1);
+	dfs_map(game, i, j + 1);
 }
 
 /**
  * @brief map外であるスペースを探す
- * スペースからdfsを開始する
+ * スペースからdfs_mapを開始する
  * map内に侵入できないかをcheckする
  * @param game 
  * @return true 
  * @return false 
  */
-bool	is_map_surrounded(t_game *game)
+void	check_map_surrounded(t_game *game)
 {
 	size_t	i;
 	size_t	j;
@@ -79,10 +79,9 @@ bool	is_map_surrounded(t_game *game)
 		while (j < game->map_info.width + SP)
 		{
 			if (game->map[i][j] == OUT)
-				dfs(game, i, j);
+				dfs_map(game, i, j);
 			j++;
 		}
 		i++;
 	}
-	return (true);
 }

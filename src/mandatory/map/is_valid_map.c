@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:22:20 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 10:47:23 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:49:39 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static bool	is_valid_start_num(t_map_info *map_info)
  * @return true 
  * @return false 
  */
-static bool	is_valid_map_contents(t_game *game)
+static void	check_valid_map_contents(t_game *game)
 {
 	size_t	i;
 	size_t	j;
@@ -87,22 +87,19 @@ static bool	is_valid_map_contents(t_game *game)
 		while (j < game->map_info.width + SP)
 		{
 			if (!is_valid_identifier(game->map[i][j]))
-				return (false);
+				handle_error(ERR_MAP);
 			cnt_start(&game->map_info, game->map[i][j]);
 			j++;
 		}
 		i++;
 	}
 	if (!is_valid_start_num(&game->map_info))
-		return (false);
-	return (true);
+		handle_error(ERR_MAP);
 }
 
-bool	is_valid_map(t_game *game)
+bool	check_valid_map(t_game *game)
 {
-	if (!is_valid_map_contents(game))
-		return (false);
-	if (!is_map_surrounded(game))
-		return (false);
+	check_valid_map_contents(game);
+	check_map_surrounded(game);
 	return (true);
 }
