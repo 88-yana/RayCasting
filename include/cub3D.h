@@ -76,7 +76,7 @@ typedef struct s_game {
 typedef enum e_input_key {
 	MOVE_NONE = 0,
 	MOVE_FORWARD = 1 << 0,
-	MOVE_BACK = 1 << 1,
+	MOVE_BACKWARD = 1 << 1,
 	MOVE_RIGHT = 1 << 2,
 	MOVE_LEFT = 1 << 3,
 	ROTATE_RIGHT = 1 << 4,
@@ -105,6 +105,9 @@ void	init_game(t_game *game);
 void	load_images(t_game *game);
 void	set_event_hooks(t_game *game);
 int		exit_game(char *msg);
+
+//move
+void	move_player(t_game *game);
 
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);
