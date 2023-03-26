@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 04:43:22 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 06:51:27 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 14:40:57 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	get_map_info(t_game *game, t_dictionary *dict)
 	size_t	i;
 
 	i = 0;
-	while (i < ELEMENT_SIZE)
+	while (i < FILE_HEADER_SIZE)
 	{
 		if (key_to_idx(dict->key[i]) < 4)
 			game->map_info.path_to_texture[key_to_idx(dict->key[i])]

@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:50:17 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 08:43:07 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 14:42:03 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static size_t	calc_line_count(int fd)
 			line_count++;
 		free(temp);
 	}
-	if (line_count <= ELEMENT_SIZE)
+	if (line_count <= FILE_HEADER_SIZE)
 		handle_error(ERR_INPUT_FILE);
 	return (line_count);
 }
@@ -115,7 +115,7 @@ void	input_file(t_game *game, const char *filename)
 
 	line_count = get_line_count(filename);
 	file_contents = read_file(filename, line_count);
-	game->map_info.height = line_count - ELEMENT_SIZE;
+	game->map_info.height = line_count - FILE_HEADER_SIZE;
 	validate_file_contents(game, file_contents);
 	ft_free_matrix(&file_contents);
 }

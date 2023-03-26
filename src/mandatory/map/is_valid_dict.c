@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:24:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 07:07:45 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 14:42:20 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool	is_valid_key(char **key)
 	size_t	i;
 
 	i = 0;
-	while (i < ELEMENT_SIZE)
+	while (i < FILE_HEADER_SIZE)
 	{
 		if (ft_strcmp(key[i], "NO") == 0)
 			;
@@ -79,7 +79,7 @@ static bool	is_valid_value(char **key, char **value)
 	int		fd;
 
 	i = 0;
-	while (i < ELEMENT_SIZE)
+	while (i < FILE_HEADER_SIZE)
 	{
 		if (key_to_idx(key[i]) < 4)
 		{

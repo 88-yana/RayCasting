@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:46:07 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 07:38:22 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 14:40:49 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@
 
 # define SP 2
 
-# define ELEMENT_SIZE 6
+# define FILE_HEADER_SIZE 6
 
 #endif
