@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 06:14:08 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 15:15:55 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:17:58 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	print_input(t_game *game)
 		i++;
 	}
 	ft_printf("--------------------map--------------------\n");
-
 	ft_printf("%s\n", game->map_info.path.north);
 	ft_printf("%s\n", game->map_info.path.south);
 	ft_printf("%s\n", game->map_info.path.west);
