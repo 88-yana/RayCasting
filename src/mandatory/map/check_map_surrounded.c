@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:58:51 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 15:51:47 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 16:30:50 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ static bool	is_in_map(char c)
  * @param i 
  * @param j 
  */
-static void	dfs_map(t_game *game, size_t i, size_t j)
+static void	dfs_map(t_game *game, int i, int j)
 {
-	if (i < 0 || game->map_info.height + SP <= i)
+	if (i < 0 || (int) game->map_info.height + SP <= i)
 		return ;
-	if (j < 0 || game->map_info.width + SP <= j)
+	if (j < 0 || (int) game->map_info.width + SP <= j)
 		return ;
 	if (game->map[i][j] == MARK || game->map[i][j] == WALL)
 		return ;

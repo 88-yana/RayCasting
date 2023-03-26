@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_vector_rotate.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 11:53:02 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/03/24 11:23:27 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/03/24 11:29:33 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
+#include "math.h"
 
-void	print_input(t_game *game);
-
-int	main(int argc, char **argv)
+t_vec	ft_rotate_vec(t_vec v, float rad)
 {
-	t_game	game;
+	t_vec	ret;
 
-	check_arg(argc, argv);
-	input_file(&game, argv[1]);
-	print_input(&game);
-	system("leaks -q cub3D");
-	return (0);
+	ret.x = cos(rad) * v.x - sin(rad) * v.y;
+	ret.y = sin(rad) * v.x + cos(rad) * v.y;
+	return (ret);
 }

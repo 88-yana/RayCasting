@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 16:16:41 by hyanagim         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -24,7 +12,12 @@
 # include "mlx.h"
 # include "message.h"
 # include "config.h"
-# include "map.h"
+
+typedef struct s_dictionary
+{
+	char	**key;
+	char	**value;
+}	t_dictionary;
 
 typedef struct s_rgb {
 	int	r;

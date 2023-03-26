@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-bool	ft_vector_cmp(t_vector2 v1, t_vector2 v2)
+bool	ft_cmp_vec(t_vec v1, t_vec v2)
 {
 	if (v1.x == v2.x && v1.y == v2.y)
 		return (true);
