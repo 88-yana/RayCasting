@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:24:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 16:29:28 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 16:54:47 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,6 @@ static bool	is_valid_key(char **key)
 	}
 	return (true);
 }
-
-// static const char *valid_keys[] = {"NO", "SO", "WE", "EA", "F", "C"};
-
-// static bool is_valid_key(char **key)
-// {
-// 	for (size_t i = 0; i < ELEMENT_SIZE; i++) {
-// 		bool is_valid = false;
-// 		for (size_t j = 0; j < sizeof(valid_keys) / sizeof(valid_keys[0]); j++) {
-// 			if (ft_strcmp(key[i], valid_keys[j]) == 0) {
-// 				is_valid = true;
-// 				break;
-// 			}
-// 		}
-// 		if (!is_valid) {
-// 			return false;
-// 		}
-// 	}
-// 	return true;
-// }
-
-//どっちの方がいいか
 
 /**
  * @brief 一回，rgbの数が正しいか，rgbの数値に収まっているかを調べる
