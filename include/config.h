@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:46:07 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 14:40:49 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 16:16:30 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 # define EA 3
 # define F 4
 # define C 5
+
+# define WALL '1'
+# define ROAD '0'
+# define OUT ' '
+# define MARK '2'
 
 # define R 0
 # define G 1
