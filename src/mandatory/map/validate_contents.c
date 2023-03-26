@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 14:46:29 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 14:55:52 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
  * @param element 
  * @return char** 
  */
-static char	**get_key_value(char *element)
+static char	**parse_line(char *element)
 {
-	char	**key_value;
+	char	**parsed_line;
 
-	key_value = ft_split(element, ' ');
-	if (ft_matrixlen(key_value) != 2)
+	parsed_line = ft_split(element, ' ');
+	if (ft_matrixlen(parsed_line) != 2)
 		handle_error(ERR_INPUT_FILE);
-	if (key_value[1][ft_strlen(key_value[1]) - 1] == '\n')
-		key_value[1][ft_strlen(key_value[1]) - 1] = '\0';
-	return (key_value);
+	if (parsed_line[1][ft_strlen(parsed_line[1]) - 1] == '\n')
+		parsed_line[1][ft_strlen(parsed_line[1]) - 1] = '\0';
+	return (parsed_line);
 }
 
 /**
@@ -38,20 +38,20 @@ static char	**get_key_value(char *element)
  * @param dict 
  * @param contents 
  */
-static void	get_dict(t_dictionary *dict, char **contents)
+static void	parse_header_lines(t_dictionary *dict, char **contents)
 {
 	size_t	i;
-	char	**key_value;
+	char	**parsed_line;
 
 	dict->key = ft_xmalloc(sizeof(char *) * (FILE_HEADER_SIZE + 1));
 	dict->value = ft_xmalloc(sizeof(char *) * (FILE_HEADER_SIZE + 1));
 	i = 0;
 	while (i < FILE_HEADER_SIZE)
 	{
-		key_value = get_key_value(contents[i]);
-		dict->key[i] = key_value[0];
-		dict->value[i] = key_value[1];
-		free(key_value);
+		parsed_line = parse_line(contents[i]);
+		dict->key[i] = parsed_line[0];
+		dict->value[i] = parsed_line[1];
+		free(parsed_line);
 		i++;
 	}
 	dict->key[i] = NULL;
@@ -67,12 +67,10 @@ static void	get_dict(t_dictionary *dict, char **contents)
  * @param height 
  * @param contents 
  */
-void	validate_file_contents(t_game *game, char **contents)
+void	get_map_info(t_game *game, char **contents)
 {
 	t_dictionary	dict;
 
-	get_dict(&dict, contents);
-	get_map_info(game, &dict);
-	ft_free_matrix(&dict.key);
-	free(dict.value);
+	parse_header_lines(&dict, contents);
+	set_map_info(game, &dict);
 }

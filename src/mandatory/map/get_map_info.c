@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 04:43:22 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 14:40:57 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 14:56:03 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	key_to_idx(char *key)
  * @param game 
  * @param dict 
  */
-void	get_map_info(t_game *game, t_dictionary *dict)
+void	set_map_info(t_game *game, t_dictionary *dict)
 {
 	size_t	i;
 
@@ -90,4 +90,6 @@ void	get_map_info(t_game *game, t_dictionary *dict)
 			get_rgb(game, dict->key[i], dict->value[i]);
 		i++;
 	}
+	ft_free_matrix(&dict->key);
+	free(dict->value);
 }
