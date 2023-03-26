@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:24:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 07:07:45 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:20:39 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool	is_valid_key(char **key)
 	size_t	i;
 
 	i = 0;
-	while (i < ELEMENT_SIZE)
+	while (i < FILE_HEADER_SIZE)
 	{
 		if (ft_strcmp(key[i], "NO") == 0)
 			;
@@ -63,6 +63,29 @@ static void	check_rgb(char *value)
 }
 
 /**
+ * @brief TODO:NO,SO,WEの配列を定義して，うまくやりたい
+ * 
+ * @param key 
+ * @return int 
+ */
+static int	key_to_idx(char *key)
+{
+	if (ft_strcmp(key, "NO") == 0)
+		return (NO);
+	if (ft_strcmp(key, "SO") == 0)
+		return (SO);
+	if (ft_strcmp(key, "WE") == 0)
+		return (WE);
+	if (ft_strcmp(key, "EA") == 0)
+		return (EA);
+	if (ft_strcmp(key, "F") == 0)
+		return (F);
+	if (ft_strcmp(key, "C") == 0)
+		return (C);
+	return (-1);
+}
+
+/**
  * @brief path_to_textureが利用可能なファイルかどうか，rgbのフォーマットがちゃんとしているかを調べる　
  * 			key_to_idxで変換したときに，NO,SOなどを意味するインデックスであれば，一度ファイルが開けるかを調べる
  * 			F,Cであれば，rgbのフォーマットをcheck
@@ -79,7 +102,7 @@ static bool	is_valid_value(char **key, char **value)
 	int		fd;
 
 	i = 0;
-	while (i < ELEMENT_SIZE)
+	while (i < FILE_HEADER_SIZE)
 	{
 		if (key_to_idx(key[i]) < 4)
 		{

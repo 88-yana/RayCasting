@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 02:17:18 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 15:50:07 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 16:17:02 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	get_map_width(t_map_info *map_info, char **contents)
 {
 	size_t	i;
 
-	i = ELEMENT_SIZE;
+	i = FILE_HEADER_SIZE;
 	map_info->width = 0;
 	while (contents[i])
 	{
@@ -87,14 +87,14 @@ static void	set_map(t_game *game, char **contents)
 	size_t	i;
 	size_t	j;
 
-	i = ELEMENT_SIZE;
+	i = FILE_HEADER_SIZE;
 	while (contents[i])
 	{
 		j = 0;
 		while (contents[i][j])
 		{
 			if (contents[i][j] != '\n')
-				game->map[i - ELEMENT_SIZE + 1][j + 1] = contents[i][j];
+				game->map[i - FILE_HEADER_SIZE + 1][j + 1] = contents[i][j];
 			j++;
 		}
 		i++;
