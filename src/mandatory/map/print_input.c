@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 06:14:08 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 08:43:43 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:04:13 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ void	print_input(t_game *game)
 		i++;
 	}
 	ft_printf("--------------------map--------------------\n");
-	i = 0;
-	while (i < 4)
-	{
-		ft_printf("%s\n", game->map_info.path_to_texture[i]);
-		i++;
-	}
+	// i = 0;
+	// while (i < 4)
+	// {
+	// 	ft_printf("%s\n", game->map_info.path_to_texture[i]);
+	// 	i++;
+	// }
+	
 	ft_printf("height : %u\n", game->map_info.height);
 	ft_printf("width : %u\n", game->map_info.width);
 	ft_printf("floor : ");

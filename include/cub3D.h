@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 14:54:58 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 14:59:14 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,19 @@ typedef struct s_rgb {
 	int	g;
 	int	b;
 }	t_rgb;
+
+typedef struct s_path_to_texture {
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+}	t_path_to_texture;
 typedef struct s_map_info {
-	char	*path_to_texture[4];
-	t_rgb	floor;
-	t_rgb	ceiling;
-	size_t	height;
-	size_t	width;
+	t_path_to_texture	path;
+	t_rgb				floor;
+	t_rgb				ceiling;
+	size_t				height;
+	size_t				width;
 }	t_map_info;
 
 typedef struct s_game {
