@@ -1,8 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-EW ./path_to_the_west_texture
-
-EA ./path_to_the_east_texture
+NO ./img/north_mock.xpm
+SO ./img/south_mock.xpm
+EW ./img/west_mock.xpm
+EA ./img/east_mock.xpm
 
 
 F 220,100,0
