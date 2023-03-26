@@ -1,93 +1,76 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_info.c                                     :+:      :+:    :+:   */
+/*   validate_contents.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 04:43:22 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/23 06:51:27 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/03/26 14:55:52 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include "map.h"
 
 /**
- * @brief rgbを構造体に入れる。rgbはひとつ上の構造体でfreeされる
- * 
- * @param st 
- * @param rgb 
+ * @brief elementをkeyとvalueに分ける
+ * 			keyとvalueの2つなかったら，エラー
+ * 			最後が改行だったら，null文字に
+ * @param element 
+ * @return char** 
  */
-static void	set_rgb(t_rgb *st, char **rgb)
+static char	**parse_line(char *element)
 {
-	st->r = ft_atoi(rgb[0]);
-	st->g = ft_atoi(rgb[1]);
-	st->b = ft_atoi(rgb[2]);
+	char	**parsed_line;
+
+	parsed_line = ft_split(element, ' ');
+	if (ft_matrixlen(parsed_line) != 2)
+		handle_error(ERR_INPUT_FILE);
+	if (parsed_line[1][ft_strlen(parsed_line[1]) - 1] == '\n')
+		parsed_line[1][ft_strlen(parsed_line[1]) - 1] = '\0';
+	return (parsed_line);
 }
 
 /**
- * @brief rgb構造体に入れる.この時点で，rgbは正しいformatであることが保証されている
+ * @brief 取得したkeyとvalueを構造体に代入
  * 
- * @param game 
- * @param key 
- * @param value 
- */
-static void	get_rgb(t_game *game, char *key, char *value)
-{
-	char	**rgb;
-
-	rgb = ft_split(value, ',');
-	free(value);
-	if (rgb == NULL)
-		handle_error(ERR_MALLOC_FAILURE);
-	if (ft_strcmp(key, "F") == 0)
-		set_rgb(&game->map_info.floor, rgb);
-	if (ft_strcmp(key, "C") == 0)
-		set_rgb(&game->map_info.ceiling, rgb);
-	ft_free_matrix(&rgb);
-}
-
-/**
- * @brief TODO:NO,SO,WEの配列を定義して，うまくやりたい
- * 
- * @param key 
- * @return int 
- */
-int	key_to_idx(char *key)
-{
-	if (ft_strcmp(key, "NO") == 0)
-		return (NO);
-	if (ft_strcmp(key, "SO") == 0)
-		return (SO);
-	if (ft_strcmp(key, "WE") == 0)
-		return (WE);
-	if (ft_strcmp(key, "EA") == 0)
-		return (EA);
-	if (ft_strcmp(key, "F") == 0)
-		return (F);
-	if (ft_strcmp(key, "C") == 0)
-		return (C);
-	return (-1);
-}
-
-/**
- * @brief path_to_textureとrgbを取る
- * 
- * @param game 
  * @param dict 
+ * @param contents 
  */
-void	get_map_info(t_game *game, t_dictionary *dict)
+static void	parse_header_lines(t_dictionary *dict, char **contents)
 {
 	size_t	i;
+	char	**parsed_line;
 
+	dict->key = ft_xmalloc(sizeof(char *) * (FILE_HEADER_SIZE + 1));
+	dict->value = ft_xmalloc(sizeof(char *) * (FILE_HEADER_SIZE + 1));
 	i = 0;
-	while (i < ELEMENT_SIZE)
+	while (i < FILE_HEADER_SIZE)
 	{
-		if (key_to_idx(dict->key[i]) < 4)
-			game->map_info.path_to_texture[key_to_idx(dict->key[i])]
-				= dict->value[i];
-		else
-			get_rgb(game, dict->key[i], dict->value[i]);
+		parsed_line = parse_line(contents[i]);
+		dict->key[i] = parsed_line[0];
+		dict->value[i] = parsed_line[1];
+		free(parsed_line);
 		i++;
 	}
+	dict->key[i] = NULL;
+	dict->value[i] = NULL;
+	if (!is_valid_dict(dict))
+		handle_error(ERR_INPUT_FILE);
+}
+
+/**
+ * @brief ファイルの中身を構造体に入れる
+ * 
+ * @param game 
+ * @param height 
+ * @param contents 
+ */
+void	get_map_info(t_game *game, char **contents)
+{
+	t_dictionary	dict;
+
+	parse_header_lines(&dict, contents);
+	set_map_info(game, &dict);
 }
