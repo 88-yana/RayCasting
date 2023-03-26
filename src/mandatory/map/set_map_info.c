@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 04:43:22 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 15:10:47 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:20:37 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,6 @@ static void	get_rgb(t_game *game, char *key, char *value)
 	if (ft_strcmp(key, "C") == 0)
 		set_rgb(&game->map_info.ceiling, rgb);
 	ft_free_matrix(&rgb);
-}
-
-/**
- * @brief TODO:NO,SO,WEの配列を定義して，うまくやりたい
- * 
- * @param key 
- * @return int 
- */
-int	key_to_idx(char *key)
-{
-	if (ft_strcmp(key, "NO") == 0)
-		return (NO);
-	if (ft_strcmp(key, "SO") == 0)
-		return (SO);
-	if (ft_strcmp(key, "WE") == 0)
-		return (WE);
-	if (ft_strcmp(key, "EA") == 0)
-		return (EA);
-	if (ft_strcmp(key, "F") == 0)
-		return (F);
-	if (ft_strcmp(key, "C") == 0)
-		return (C);
-	return (-1);
 }
 
 /**

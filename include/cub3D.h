@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:29:32 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 14:59:14 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:20:45 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	set_map_info(t_game *game, t_dictionary *dict);
 void	input_file(t_game *game, const char *filename);
 bool	is_valid_rgb_number(char **array, int i);
 bool	is_valid_dict(t_dictionary *dict);
-int		key_to_idx(char *key);
 void	get_map_info(t_game *game, char **contents);
 void	get_map(t_game *game, char **contents);
 
