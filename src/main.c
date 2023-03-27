@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/24 11:53:02 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/26 19:42:10 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int argc, char **argv)
 	check_arg(argc, argv);
 	input_file(&game, argv[1]);
 	print_input(&game);
+	init_game(&game);
+	mlx_loop(game.mlx);
 	system("leaks -q cub3D");
 	return (0);
 }

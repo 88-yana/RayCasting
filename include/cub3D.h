@@ -31,6 +31,14 @@ typedef struct s_path_to_texture {
 	char	*west;
 	char	*east;
 }	t_path_to_texture;
+
+typedef struct s_image {
+	void	*north;
+	void	*south;
+	void	*west;
+	void	*east;
+}	t_image;
+
 typedef struct s_map_info {
 	t_path_to_texture	path;
 	t_rgb				floor;
@@ -58,7 +66,10 @@ typedef struct s_player_info {
 typedef struct s_game {
 	char			**map;
 	t_map_info		map_info;
+	t_image			images;
 	t_player_info	player;
+	void			*mlx;
+	void			*win;
 }	t_game;
 
 //check
@@ -75,7 +86,9 @@ bool	is_valid_rgb_number(char **array, int i);
 void	get_map_info(t_game *game, char **contents);
 void	get_map(t_game *game, char **contents);
 
-//error
+//init
+void	init_game(t_game *game);
+void	load_images(t_game *game);
 
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);

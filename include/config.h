@@ -21,4 +21,8 @@
 
 # define FILE_HEADER_SIZE 6
 
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 480
+# define WIN_TITLE "Cub3D -- Mandatory"
+
 #endif
