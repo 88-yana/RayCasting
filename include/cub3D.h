@@ -82,6 +82,9 @@ typedef enum e_input_key {
 	ROTATE_RIGHT = 1 << 4,
 	ROTATE_LEFT = 1 << 5,
 	GAME_EXIT = 1 << 6,
+	MOVE = MOVE_FORWARD | MOVE_BACKWARD | MOVE_RIGHT | MOVE_LEFT,
+	ROTATE = ROTATE_RIGHT | ROTATE_LEFT,
+	CONFIG = GAME_EXIT,
 	ALL = ~0,
 }	t_input_key;
 
@@ -106,8 +109,8 @@ void	set_event_hooks(t_game *game);
 int		exit_game(char *msg);
 void	load_player(t_game *game);
 
-//move
-void	move_player(t_game *game);
+//key_input
+void	fetch_key_input(t_game *game);
 
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);
