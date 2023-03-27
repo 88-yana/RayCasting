@@ -85,7 +85,6 @@ typedef enum e_input_key {
 	ALL = ~0,
 }	t_input_key;
 
-
 //check
 void	check_arg(int argc, char **argv);
 void	handle_error(char *message);
@@ -105,6 +104,7 @@ void	init_game(t_game *game);
 void	load_images(t_game *game);
 void	set_event_hooks(t_game *game);
 int		exit_game(char *msg);
+void	load_player(t_game *game);
 
 //move
 void	move_player(t_game *game);

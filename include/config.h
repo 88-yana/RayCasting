@@ -22,8 +22,8 @@
 # define FILE_HEADER_SIZE 6
 
 /** Screen settings */
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 960
 # define WIN_TITLE "Cub3D -- Mandatory"
 
 /***** Key settings for Mac. *****/
