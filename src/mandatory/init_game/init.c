@@ -1,5 +1,10 @@
 #include "cub3D.h"
 
+/**
+ * @brief MLXの初期化処理
+ *
+ * @param game
+ */
 void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();

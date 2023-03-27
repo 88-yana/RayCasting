@@ -5,6 +5,13 @@
 #define RED "\033[31m"
 #define DEFAULT "\033[m"
 
+/**
+ * @brief スクリーンへの出力
+ *
+ * @param game
+ * @param str
+ * @param offset
+ */
 static void	putstr_to_window(t_game *game, char *str, size_t offset)
 {
 	int	color;
@@ -14,6 +21,12 @@ static void	putstr_to_window(t_game *game, char *str, size_t offset)
 	return ;
 }
 
+/**
+ * @brief コンソールへの出力
+ *
+ * @param game
+ * @param str
+ */
 static void	putstr_to_console(t_game *game, char *str)
 {
 	(void)game;
@@ -35,8 +48,6 @@ void	print_debug_info(t_game *game)
 	int				color;
 	t_player_info	*player;
 
-	game->player.pos.x = 0;
-	game->player.pos.y = 0;
 	player = &game->player;
 	color = create_trgb(0, 255, 255, 255);
 	snprintf(buff, 100, "pos:{%f, %f} dir:{%f, %f} ", \
@@ -47,6 +58,6 @@ void	print_debug_info(t_game *game)
 	{
 		ft_snprintf(buff, 100, "KEY: %d", game->key_code);
 		putstr_to_window(game, buff, 32);
-		putstr_to_console(game, buff);
+//		putstr_to_console(game, buff);
 	}
 }

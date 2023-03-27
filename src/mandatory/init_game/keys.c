@@ -1,5 +1,7 @@
 #include "cub3D.h"
 
+#define MOVE_COEF 0.1f
+
 /**
  * @brief キー入力：移動
  *
@@ -7,17 +9,17 @@
  */
 void	move_player(t_game *game)
 {
-	t_player_info	*player;
+	t_vec	*pos;
 
-	player = &game->player;
+	pos = &game->player.pos;
 	if (game->key_code & MOVE_FORWARD)
-		ft_add_vec(player->pos, (ft_mul_vec((t_vec){0, -1}, 0.1)));
+		*pos = ft_add_vec(*pos, (ft_mul_vec((t_vec){0, -1}, MOVE_COEF)));
 	else if (game->key_code & MOVE_BACKWARD)
-		ft_add_vec(player->pos, (ft_mul_vec((t_vec){0, 1}, 0.1)));
+		*pos = ft_add_vec(*pos, (ft_mul_vec((t_vec){0, 1}, MOVE_COEF)));
 	else if (game->key_code & MOVE_LEFT)
-		ft_add_vec(player->pos, (ft_mul_vec((t_vec){-1, 0}, 0.1)));
+		*pos = ft_add_vec(*pos, (ft_mul_vec((t_vec){-1, 0}, MOVE_COEF)));
 	else if (game->key_code & MOVE_RIGHT)
-		ft_add_vec(player->pos, (ft_mul_vec((t_vec){1, 0}, 0.1)));
+		*pos = ft_add_vec(*pos, (ft_mul_vec((t_vec){1, 0}, MOVE_COEF)));
 }
 
 /**

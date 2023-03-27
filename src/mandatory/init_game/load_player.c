@@ -1,5 +1,12 @@
 #include "cub3D.h"
 
+/**
+ * @brief  操作中の要素がスタート位置（NEWS）かどうか判定する
+ *
+ * @param tile
+ * @return true
+ * @return false
+ */
 static bool	is_start_position(char tile)
 {
 	if (ft_strchr("NEWS", tile))
@@ -7,6 +14,13 @@ static bool	is_start_position(char tile)
 	return (false);
 }
 
+/**
+ * @brief 取得した座標・方向を初期状態として保存する。
+ *
+ * @param game
+ * @param x
+ * @param y
+ */
 static void	set_start_position(t_game *game, size_t x, size_t y)
 {
 	game->player.pos = (t_vec){x, y};
@@ -21,7 +35,7 @@ static void	set_start_position(t_game *game, size_t x, size_t y)
 }
 
 /**
- * @brief プレーヤーの初期位置・方向を設定する
+ * @brief プレーヤーの初期座標・方向を設定する
  *
  * @param game
  */

@@ -3,6 +3,12 @@
 #define GREEN "\033[92m"
 #define DEFAULT "\033[m"
 
+/**
+ * @brief ゲームの正常終了
+ *
+ * @param msg
+ * @return int
+ */
 int	exit_game(char *msg)
 {
 	ft_putendl_fd(GREEN, 2);
