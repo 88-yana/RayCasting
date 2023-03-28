@@ -29,17 +29,13 @@ void	move_player(t_game *game)
  */
 void	rotate_player(t_game *game)
 {
-	t_player_info	*player;
+	t_vec	*dir;
 
-	player = &game->player;
+	dir = &game->player.dir;
 	if (game->key_code & ROTATE_LEFT)
-	{
-		// dirを回転させたい
-	}
+		*dir = ft_rotate_vec(*dir, ft_deg_to_rad(1));
 	if (game->key_code & ROTATE_RIGHT)
-	{
-		// dirを回転させたい
-	}
+		*dir = ft_rotate_vec(*dir, ft_deg_to_rad(-1));
 }
 
 /**
