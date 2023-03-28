@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 02:17:18 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 16:17:02 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/27 22:40:35 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 /**
  * @brief mapの最大の横幅を取る
- * 
- * @param map_info 
- * @param contents 
+ *
+ * @param map_info
+ * @param contents
  */
 static void	get_map_width(t_map_info *map_info, char **contents)
 {
@@ -34,7 +34,7 @@ static void	get_map_width(t_map_info *map_info, char **contents)
 /**
  * @brief mapの高さ+スペースの2行+NULL分のchar * をmallocする。　
  * mapの高さ+スペースの2行に　行を代入できるように，map+スペースの2列+NULL文字のcharをmallocをする。
- * 
+ *
  * @param game
  */
 static void	malloc_map(t_game *game)
@@ -54,7 +54,7 @@ static void	malloc_map(t_game *game)
 /**
  * @brief mapを一度スペースで埋める。
  * +1のところに，null文字，NULLを代入する。
- * @param game 
+ * @param game
  */
 static void	fill_map_with_spaces(t_game *game)
 {
@@ -79,8 +79,8 @@ static void	fill_map_with_spaces(t_game *game)
 /**
  * @brief 改行でなければ，mapの中身を代入する。
  * そのため，右の2マスは必ずスペース2つが入る。
- * @param game 
- * @param contents 
+ * @param game
+ * @param contents
  */
 static void	set_map(t_game *game, char **contents)
 {
@@ -107,8 +107,8 @@ static void	set_map(t_game *game, char **contents)
  * mallocする。
  * スペースで埋める。
  * 中身を入れる。
- * @param game 
- * @param contents 
+ * @param game
+ * @param contents
  */
 void	get_map(t_game *game, char **contents)
 {
