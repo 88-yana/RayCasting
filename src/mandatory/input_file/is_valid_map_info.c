@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_dict.c                                    :+:      :+:    :+:   */
+/*   is_valid_map_info.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:24:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/28 10:31:17 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/28 10:33:00 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ static bool	is_valid_value(char **key, char **value)
  * @return true 
  * @return false 
  */
-bool	is_valid_dict(t_dictionary *dict)
+bool	is_valid_map_info(t_dictionary *dict)
 {
 	if (!is_valid_key(dict->key))
 		return (false);

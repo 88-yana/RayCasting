@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/28 10:30:47 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/28 10:33:21 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	parse_header_lines(t_dictionary *dict, char **contents)
 	}
 	dict->key[i] = NULL;
 	dict->value[i] = NULL;
-	if (!is_valid_dict(dict))
+	if (!is_valid_map_info(dict))
 		handle_error(ERR_INPUT_FILE);
 }
 
