@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 01:24:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 16:54:47 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/03/28 10:31:17 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static bool	is_valid_value(char **key, char **value)
 		{
 			fd = open(value[i], O_RDONLY);
 			if (fd == -1)
-				;// return (false);FIXME: コメントアウトを戻す
+				return (false);
 			else
 				close(fd);
 		}
