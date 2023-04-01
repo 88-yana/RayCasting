@@ -8,6 +8,14 @@ typedef struct s_point {
 typedef struct s_raycasting {
 	float	dx;
 	float	dy;
+	t_vec	x_pos_on_grid;
+	t_vec	y_pos_on_grid;
+	float	x_step;
+	float	y_step;
+	float	x_tile_step;
+	float	y_tile_step;
+	float	x_distance_to_wall;
+	float	y_distance_to_wall;
 
 }	t_raycasting;
 
@@ -58,41 +66,6 @@ typedef struct s_raycasting {
 // 		nearest.x_pos
 // }
 
-bool	is_wall(char **map, t_vec ray_pos, float direction, char flag)
-{
-	if (flag == 'x')
-	{
-		if (direction >= 0)
-			if (map[(int)floor(ray_pos.y)][(int)ray_pos.x] == '1')
-				return (true);
-		if (direction < 0)
-			if (map[(int)floor(ray_pos.y)][(int)ray_pos.x - 1] == '1')
-				return (true);
-	}
-	else
-	{
-		if (direction >= 0)
-			if (map[(int)ray_pos.y][(int)floor(ray_pos.x)] == '1')
-				return (true);
-		if (direction < 0)
-			if (map[(int)ray_pos.y - 1][(int)floor(ray_pos.x)] == '1')
-				return (true);
-	}
-	return (false);
-}
-
-
-t_vec	calc_digital_difference(t_point nearest, char flag)
-{
-	t_point	next;
-
-	find_nearest_grid_lines(nearest, &next);
-	if (flag == 'x')
-		return (ft_sub_vec(next.x_pos, nearest.x_pos));
-	else
-		reutrn (ft_sub_vec(next.y_pos, nearest.y_pos));
-}
-
 t_vec	touch_wall(t_game *game, t_vec ray_pos, t_vec diff_vec, char flag)
 {
 	float	direction;
@@ -131,11 +104,124 @@ float find_nearest_grid_lines(t_player_info *player, t_point *nearest)
 	find_nearest_y_pos(nearest_y_pos);
 }
 
-float	find_nearest_grid_on_line(t_player_info *player, t_point *nearest)
+void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
 {
-	player->pos;
-	nearest find_nearest_x_pos(nearest_x_pos);
-	find_nearest_y_pos(nearest_y_pos);
+	ray_info->x_pos_on_grid.x = player->pos.x + ray_info->dx;
+	ray_info->x_pos_on_grid.y = player->pos.y - ray_info->dx * tan(theta);
+	if (tan(theta) != 0)
+		ray_info->y_pos_on_grid.x = player->pos.x - ray_info->dy / tan(theta);
+	ray_info->y_pos_on_grid.y = player->pos.y + ray_info->dy;
+}
+
+void	calc_dx_dy(t_player_info *player, t_raycasting *ray_info)
+{
+	if (player->dir.x > 0)
+		ray_info->dx = ceil(player->pos.x) - player->pos.x;
+	else
+		ray_info->dx = floor(player->pos.x) - player->pos.x;
+	if (player->dir.y > 0)
+		ray_info->dy = floor(player->pos.y) - player->pos.y;
+	else
+		ray_info->dy = ceil(player->pos.y) - player->pos.y;
+}
+
+void	calc_tile_step(t_player_info *player, t_raycasting *ray_info)
+{
+	if (player->dir.x > 0)
+		ray_info->x_tile_step = 1;
+	else
+		ray_info->x_tile_step = -1;
+	if (player->dir.y > 0)
+		ray_info->y_tile_step = -1;
+	else
+		ray_info->y_tile_step = 1;
+}
+
+float	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, float theta)
+{
+	calc_dx_dy(player, ray_info);
+	set_nearest_pos(player, ray_info, theta);
+}
+
+void	calc_digital_difference(t_raycasting *ray_info, float theta)
+{
+	if (M_PI < theta && theta < 2 * M_PI)
+		ray_info->x_step = - 1 / tan(theta);
+	else
+		ray_info->x_step = 1 / tan(theta);
+	if (M_PI / 2 < theta && theta < 3 * M_PI / 2)
+		ray_info->y_step = tan(theta);
+	else
+		ray_info->y_step = - tan(theta);
+}
+
+bool	is_x_wall(char **map, t_player_info *player, t_raycasting *ray_info)
+{
+	if (player->dir.x >= 0)
+	{
+		if (map[(int)ceil(ray_info->x_pos_on_grid.y)]
+			[(int)ray_info->x_pos_on_grid.x] == '1')
+			return (true);
+	}
+	else
+	{
+		if (map[(int)ceil(ray_info->x_pos_on_grid.y)]
+			[(int)ray_info->x_pos_on_grid.x - 1] == '1')
+			return (true);
+	}
+	return (false);
+}
+
+bool	is_y_wall(char **map, t_player_info *player, t_raycasting *ray_info)
+{
+	if (player->dir.y >= 0)
+	{
+		if (map[(int)ray_info->y_pos_on_grid.y]
+			[(int)floor(ray_info->y_pos_on_grid.x)] == '1')
+			return (true);
+	}
+	else
+	{
+		if (map[(int)ray_info->y_pos_on_grid.y - 1]
+			[(int)floor(ray_info->y_pos_on_grid.x)] == '1')
+			return (true);
+	}
+	return (false);
+}
+
+void	walk_to_wall(char **map, t_player_info *player, t_raycasting *ray_info)
+{
+	while (1)
+	{
+		if (is_x_wall(map, player, ray_info))
+			return ;
+		ray_info->x_pos_on_grid.x += ray_info->x_step;
+		ray_info->x_pos_on_grid.y += ray_info->x_tile_step;
+	}
+	while (1)
+	{
+		if (is_y_wall(map, player, ray_info))
+			return ;
+		ray_info->y_pos_on_grid.x += ray_info->y_tile_step;
+		ray_info->y_pos_on_grid.y += ray_info->y_step;
+	}
+}
+
+void	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
+{
+	float	angle;
+
+	angle = atan(player->dir.y / player->dir.x);
+	player->distance_to_wall = (wall_vec.x - player->pos.x) * cos(angle) + (wall_vec.y - player->pos.y) * sin(angle);
+}
+
+void	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
+{
+	
+	if (ft_distance_vec(ray_info->x_pos_on_grid) < ft_distance_vec(ray_info->y_pos_on_grid))
+		return (calc_distance_to_wall(player, ray_info->x_pos_on_grid));
+	else
+		return (calc_distance_to_wall(player, ray_info->y_pos_on_grid));
 }
 
 /**
@@ -146,28 +232,25 @@ float	find_nearest_grid_on_line(t_player_info *player, t_point *nearest)
  * @param game 
  * @return float 
  */
-float	measure_distance_to_wall(t_game *game, t_vec theta)
+float	measure_distance_to_wall(t_game *game, float theta)
 {
-	t_point	nearest;
-	t_vec	x_digital_diff_vec;
-	t_vec	y_digital_diff_vec;
-	float	x_distance_to_wall;
-	float	y_distance_to_wall;
+	t_point			nearest;
+	t_raycasting	ray_info;
 
-	find_nearest_grid_on_line(&game->player, &nearest);
-	x_digital_diff_vec = calc_digital_difference(nearest, 'x');//FIXME: 差分がない場合＝水平，垂直の場合を考える
-	y_digital_diff_vec = calc_digital_difference(nearest, 'y');
-	x_distance_to_wall = find_wall(game, nearest.x_pos, x_digital_diff_vec, 'x');
-	y_distance_to_wall = find_wall(game, nearest.y_pos, y_digital_diff_vec, 'y');
-	if (x_distance_to_wall < y_distance_to_wall)
-		return x_distance_to_wall;
+	find_nearest_grid_on_line(&game->player, &ray_info, theta);
+	calc_digital_difference(&ray_info, theta);
+	calc_tile_step(&game->player, &ray_info);
+	walk_to_wall(&game->map, &game->player, &ray_info);
+	choose_distance_to_wall(&game->player, &ray_info);
+	if (ray_info.x_distance_to_wall < ray_info.y_distance_to_wall)
+		return (ray_info.x_distance_to_wall);
 	else
-		return y_distance_to_wall;
+		return (ray_info.y_distance_to_wall);
 }
 
 float	get_wall_hight(t_game *game)
 {
-	float distance_to_wall;
+	float	distance_to_wall;
 
 	distance_to_wall = measure_distance_to_wall(game);
 	calculate_wall_hight();
