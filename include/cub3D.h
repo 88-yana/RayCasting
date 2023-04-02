@@ -34,6 +34,7 @@ void	load_images(t_game *game);
 void	set_event_hooks(t_game *game);
 int		exit_game(char *msg);
 void	load_player(t_game *game);
+void	draw_wall_collision_point(t_game *game);
 
 //key_input
 void	fetch_key_input(t_game *game);
@@ -41,7 +42,8 @@ void	fetch_key_input(t_game *game);
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);
 int		create_trgb(int t, int r, int g, int b);
-void	draw_circle(t_image *img, t_vec *p, int r, int color);
+void	draw_player_pos(t_game *game);
+void 	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 
 //raycasting
 void	emit_ray(t_game *game);
