@@ -24,9 +24,9 @@ static bool	is_start_position(char tile)
 static void	set_start_position(t_game *game, size_t x, size_t y)
 {
 	if (game->map[x][y] == 'N')
-		game->player.dir = (t_vec){0, -1};
-	if (game->map[x][y] == 'S')
 		game->player.dir = (t_vec){0, 1};
+	if (game->map[x][y] == 'S')
+		game->player.dir = (t_vec){0, -1};
 	if (game->map[x][y] == 'W')
 		game->player.dir = (t_vec){-1, 0};
 	if (game->map[x][y] == 'E')
