@@ -60,4 +60,3 @@ void	load_player(t_game *game)
 	}
 	game->key_code = 0;
 }
-

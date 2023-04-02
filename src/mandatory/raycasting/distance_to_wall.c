@@ -182,55 +182,89 @@ void	calc_digital_difference(t_raycasting *ray_info, float theta)
 		ray_info->y_step = - tan(theta);
 }
 
-bool	is_x_wall(char **map, t_player_info *player, t_raycasting *ray_info)
+bool	is_out_of_map_height(t_game *game, double y)
+{
+	if (y < 0 || game->map_info.height <= y)
+		return (true);
+	return (false);
+}
+
+bool	is_out_of_map_width(t_game *game, double x)
+{
+	if (x < 0 || game->map_info.width <= x)
+		return (true);
+	return (false);
+}
+
+bool	is_x_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 {
 	if (player->dir.x >= 0)
 	{
-		if (map[(int)ceil(ray_info->x_pos_on_grid.y)][(int)ray_info->x_pos_on_grid.x] == '1')
+		if (is_out_of_map_height(game, ceil(ray_info->x_pos_on_grid.y)))
+			return (true);
+		if (is_out_of_map_width(game, ray_info->x_pos_on_grid.x))
+			return (true);
+		if (game->map[(int)ceil(ray_info->x_pos_on_grid.y)][(int)ray_info->x_pos_on_grid.x] == '1')
 			return (true);
 	}
 	else
 	{
-		if (map[(int)ceil(ray_info->x_pos_on_grid.y)]
+		if (is_out_of_map_height(game, ceil(ray_info->x_pos_on_grid.y)))
+			return (true);
+		if (is_out_of_map_width(game, ray_info->x_pos_on_grid.x - 1))
+			return (true);
+		if (game->map[(int)ceil(ray_info->x_pos_on_grid.y)]
 			[(int)ray_info->x_pos_on_grid.x - 1] == '1')
 			return (true);
 	}
 	return (false);
 }
 
-bool	is_y_wall(char **map, t_player_info *player, t_raycasting *ray_info)
+bool	is_y_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 {
 	if (player->dir.y >= 0)
 	{
-		if (map[(int)ray_info->y_pos_on_grid.y]
+		if (is_out_of_map_height(game, ray_info->y_pos_on_grid.y))
+			return (true);
+		if (is_out_of_map_width(game, floor(ray_info->y_pos_on_grid.x)))
+			return (true);
+		if (game->map[(int)ray_info->y_pos_on_grid.y]
 			[(int)floor(ray_info->y_pos_on_grid.x)] == '1')
 			return (true);
 	}
 	else
 	{
-		if (map[(int)ray_info->y_pos_on_grid.y - 1]
+		if (is_out_of_map_height(game, ray_info->y_pos_on_grid.y + 1))
+			return (true);
+		if (is_out_of_map_width(game, floor(ray_info->y_pos_on_grid.x)))
+			return (true);
+		if (game->map[(int)ray_info->y_pos_on_grid.y + 1]
 			[(int)floor(ray_info->y_pos_on_grid.x)] == '1')
 			return (true);
 	}
 	return (false);
 }
 
-void	walk_to_wall(char **map, t_player_info *player, t_raycasting *ray_info)
+void	walk_to_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 {
 	while (1)
 	{
-		if (is_x_wall(map, player, ray_info))
-			return ;
+		printf("%f, %f\n", ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
+		if (is_x_wall(game, player, ray_info))
+			break ;
 		ray_info->x_pos_on_grid.x += ray_info->x_step;
 		ray_info->x_pos_on_grid.y += ray_info->x_tile_step;
 	}
+	printf("%d, %f, %f\n", __LINE__, ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
 	while (1)
 	{
-		if (is_y_wall(map, player, ray_info))
-			return ;
+		printf("%d, %f, %f\n", __LINE__, ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
+		if (is_y_wall(game, player, ray_info))
+			break ;
 		ray_info->y_pos_on_grid.x += ray_info->y_tile_step;
 		ray_info->y_pos_on_grid.y += ray_info->y_step;
 	}
+	printf("%d, %f, %f\n", __LINE__, ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
 }
 
 float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
@@ -267,14 +301,15 @@ float	measure_distance_to_wall(t_game *game, float theta)
 	find_nearest_grid_on_line(&game->player, &ray_info, theta);
 	calc_digital_difference(&ray_info, theta);
 	calc_tile_step(&game->player, &ray_info);
-	walk_to_wall(game->map, &game->player, &ray_info);
+	walk_to_wall(game, &game->player, &ray_info);
 	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	return (distance_to_wall);
 }
 
 float calculate_wall_height(float distance_to_wall)
 {
-	return (WALL_HEIGHT/distance_to_wall); //TODO:コンストの値を距離で割る
+	return (WALL_HEIGHT/distance_to_wall); //TODO:0で割るのを除外
 }
 
 void	get_wall_height(t_game *game, float theta)
@@ -282,7 +317,7 @@ void	get_wall_height(t_game *game, float theta)
 	float	distance_to_wall;
 
 	distance_to_wall = measure_distance_to_wall(game, theta);
-	game->player.wall_height = calculate_wall_height(distance_to_wall);
+	// game->player.wall_height = calculate_wall_height(distance_to_wall);
 }
 
 
@@ -299,25 +334,26 @@ void	emit_ray(t_game *game)
 	left_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
 	right_angle = dir_to_angle(right_vec);
 	left_angle = dir_to_angle(left_vec);
-	// get_wall_height(game, theta);
-	theta = right_angle;
-	if (left_angle < right_angle)
-	{
-		while (theta <= 2 * M_PI)
-		{
-			get_wall_height(game, theta);
-			theta++;
-		}
-		theta = 0;
-		while (theta <= left_angle)
-		{
-			get_wall_height(game, theta);
-			theta++;
-		}
-	}
-	while (theta <= left_angle)
-	{
-		get_wall_height(game, theta);
-		theta++;
-	}
+	theta = dir_to_angle(game->player.dir) - 1;
+	get_wall_height(game, theta);
+	printf("%d, %s\n", __LINE__, __FILE__);
+	// if (left_angle < right_angle)
+	// {
+	// 	while (theta <= 2 * M_PI)
+	// 	{
+	// 		get_wall_height(game, theta);
+	// 		theta++;
+	// 	}
+	// 	theta = 0;
+	// 	while (theta <= left_angle)
+	// 	{
+	// 		get_wall_height(game, theta);
+	// 		theta++;
+	// 	}
+	// }
+	// while (theta <= left_angle)
+	// {
+	// 	get_wall_height(game, theta);
+	// 	theta++;
+	// }
 }

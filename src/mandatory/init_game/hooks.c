@@ -49,7 +49,6 @@ void	draw_wall_intersection(t_game *game)
 	x = game->player.x_wall_on_minimap;
 	y = game->player.y_wall_on_minimap;
 	my_mlx_pixel_put(&game->img, x, y, COLOR_GREEN);
-
 }
 
 int	update_game(t_game *game)
@@ -58,10 +57,16 @@ int	update_game(t_game *game)
 	print_debug_info(game);
 	game->player.x_wall_on_minimap = 1;
 	game->player.y_wall_on_minimap = 1;
+	printf("\n");
+	printf("%d, %s\n", __LINE__, __FILE__);
 	emit_ray(game);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	draw_player_pos(game);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	draw_wall_intersection(game);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	return (0);
 }
 
