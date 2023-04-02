@@ -137,7 +137,7 @@ void	calc_tile_step(t_player_info *player, t_raycasting *ray_info)
 		ray_info->y_tile_step = 1;
 }
 
-float	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, float theta)
+void	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, float theta)
 {
 	calc_dx_dy(player, ray_info);
 	set_nearest_pos(player, ray_info, theta);
@@ -212,6 +212,8 @@ float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
 	float	angle;
 
 	angle = atan(player->dir.y / player->dir.x);
+	player->x_wall_on_minimap = (int) floor(10 * wall_vec.x);
+	player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y);
 	return ((wall_vec.x - player->pos.x) * cos(angle) + (wall_vec.y - player->pos.y) * sin(angle));
 }
 
@@ -239,7 +241,7 @@ float	measure_distance_to_wall(t_game *game, float theta)
 	find_nearest_grid_on_line(&game->player, &ray_info, theta);
 	calc_digital_difference(&ray_info, theta);
 	calc_tile_step(&game->player, &ray_info);
-	walk_to_wall(&game->map, &game->player, &ray_info);
+	walk_to_wall(game->map, &game->player, &ray_info);
 	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
 	return (distance_to_wall);
 }

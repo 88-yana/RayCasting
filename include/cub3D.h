@@ -6,6 +6,7 @@
 # include <fcntl.h> //O_RDONLY
 # include <stdbool.h>
 # include <errno.h>
+# include <math.h>
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include "libft.h"
@@ -55,8 +56,10 @@ typedef struct s_map_info {
 typedef struct s_player_info {
 	t_vec	pos;
 	t_vec	dir;
-	float	distance_to_wall;
+	float	distance_to_wall; //FIXME: 要らないかも
 	float	wall_height;
+	int		x_wall_on_minimap;
+	int		y_wall_on_minimap;
 	bool	n_wall;
 	bool	s_wall;
 	bool	w_wall;
