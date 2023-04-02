@@ -258,3 +258,23 @@ void	get_wall_height(t_game *game, float theta)
 	distance_to_wall = measure_distance_to_wall(game, theta);
 	game->player.wall_height = calculate_wall_height(distance_to_wall);
 }
+
+void	emit_ray(t_game *game)
+{
+	float	theta;
+	float	right_angle;
+	float	left_angle;
+	t_vec	right_vec;
+	t_vec	left_vec;
+
+	right_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(-VIEWING_ANGLE));
+	left_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
+	right_angle = atan(right_vec.y / right_vec.x);
+	left_angle = atan(left_vec.y / left_vec.x);
+	theta = right_angle;
+	while (theta <= left_angle)
+	{
+		get_wall_height(game, theta);
+		theta += 1;
+	}
+}

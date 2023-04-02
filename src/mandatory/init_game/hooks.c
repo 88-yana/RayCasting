@@ -46,6 +46,7 @@ int	update_game(t_game *game)
 	fetch_key_input(game);
 	print_debug_info(game);
 	usleep(1000);
+	emit_ray(game);
 	draw_circle(&game->img, &game->player.pos, 5, 0x000FF00);
 	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);
 	return (0);

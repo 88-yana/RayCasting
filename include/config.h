@@ -21,6 +21,7 @@
 
 # define FILE_HEADER_SIZE 6
 # define WALL_HEIGHT 3
+# define VIEWING_ANGLE 30
 
 /** Screen settings */
 # define WIN_WIDTH 1280
