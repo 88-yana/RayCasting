@@ -52,9 +52,9 @@ void	draw_minimap(t_game *game)
 		while (j < game->map_info.width + 2)
 		{
 			if (game->map[i][j] == '1')
-				draw_rectangle(&game->img, &(t_vec){i * 30, j * 30}, 30, 0x0afafb0);
+				draw_rectangle(&game->img, &(t_vec){i * 10, j * 10}, 10, 0x0afafb0);
 			else if (game->map[i][j] == '0')
-				draw_rectangle(&game->img, &(t_vec){i * 30, j * 30}, 30, 0x0eae8e1);
+				draw_rectangle(&game->img, &(t_vec){i * 10, j * 10}, 10, 0x0eae8e1);
 			j++;
 		}
 		i++;
@@ -64,7 +64,7 @@ void	draw_minimap(t_game *game)
 
 void	draw_player_pos(t_game *game)
 {
-	draw_circle(&game->img, &game->player.pos, 5, 0x000FF00);
+	my_mlx_pixel_put(&game->img, game->player.pos.x, game->player.pos.y, 0x000FF00);
 }
 
 void	init_image(t_game *game)

@@ -41,12 +41,24 @@ int	store_key_release(int keycode, t_game *game)
 	return (0);
 }
 
+void	draw_wall_intersection(t_game *game)
+{
+	int x;
+	int y;
+
+	x = game->player.x_wall_on_minimap;
+	y = game->player.y_wall_on_minimap;
+	my_mlx_pixel_put(&game->img, x, y, 0x0f15b5b);
+
+}
+
 int	update_game(t_game *game)
 {
 	fetch_key_input(game);
 	print_debug_info(game);
 	usleep(1000);
-	draw_circle(&game->img, &game->player.pos, 5, 0x000FF00);
+	draw_player_pos(game);
+	draw_wall_intersection(game);
 	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
 }

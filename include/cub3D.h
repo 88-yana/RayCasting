@@ -41,8 +41,10 @@ void	fetch_key_input(t_game *game);
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);
 int		create_trgb(int t, int r, int g, int b);
-void	draw_circle(t_image *img, t_vec *p, int r, int color);
+void	draw_player_pos(t_game *game);
+void 	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 
+void	draw_wall_collision_point(t_game *game);
 //debug
 void	print_debug_info(t_game *game);
 #endif
