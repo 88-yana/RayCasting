@@ -184,25 +184,17 @@ void	calc_digital_difference(t_raycasting *ray_info, float theta)
 
 bool	is_x_wall(char **map, t_player_info *player, t_raycasting *ray_info)
 {
-	printf("%d, %s\n", __LINE__, __FILE__);
 	if (player->dir.x >= 0)
 	{
-		printf("%d, %s\n", __LINE__, __FILE__);
-		printf("%f, %f\n", player->pos.y, player->pos.x);
-		printf("%d, %d\n", (int)ceil(ray_info->x_pos_on_grid.y), (int)ray_info->x_pos_on_grid.x);
 		if (map[(int)ceil(ray_info->x_pos_on_grid.y)][(int)ray_info->x_pos_on_grid.x] == '1')
 			return (true);
-		printf("%d, %s\n", __LINE__, __FILE__);
 	}
 	else
 	{
-		printf("%d, %s\n", __LINE__, __FILE__);
 		if (map[(int)ceil(ray_info->x_pos_on_grid.y)]
 			[(int)ray_info->x_pos_on_grid.x - 1] == '1')
 			return (true);
-		printf("%d, %s\n", __LINE__, __FILE__);
 	}
-	printf("%d, %s\n", __LINE__, __FILE__);
 	return (false);
 }
 
@@ -227,7 +219,6 @@ void	walk_to_wall(char **map, t_player_info *player, t_raycasting *ray_info)
 {
 	while (1)
 	{
-		printf("%d, %s\n", __LINE__, __FILE__);
 		if (is_x_wall(map, player, ray_info))
 			return ;
 		ray_info->x_pos_on_grid.x += ray_info->x_step;
@@ -235,7 +226,6 @@ void	walk_to_wall(char **map, t_player_info *player, t_raycasting *ray_info)
 	}
 	while (1)
 	{
-		printf("%d, %s\n", __LINE__, __FILE__);
 		if (is_y_wall(map, player, ray_info))
 			return ;
 		ray_info->y_pos_on_grid.x += ray_info->y_tile_step;
@@ -275,15 +265,10 @@ float	measure_distance_to_wall(t_game *game, float theta)
 	float			distance_to_wall;
 
 	find_nearest_grid_on_line(&game->player, &ray_info, theta);
-	printf("%d, %s\n", __LINE__, __FILE__);
 	calc_digital_difference(&ray_info, theta);
-	printf("%d, %s\n", __LINE__, __FILE__);
 	calc_tile_step(&game->player, &ray_info);
-	printf("%d, %s\n", __LINE__, __FILE__);
 	walk_to_wall(game->map, &game->player, &ray_info);
-	printf("%d, %s\n", __LINE__, __FILE__);
 	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
-	printf("%d, %s\n", __LINE__, __FILE__);
 	return (distance_to_wall);
 }
 
@@ -297,7 +282,6 @@ void	get_wall_height(t_game *game, float theta)
 	float	distance_to_wall;
 
 	distance_to_wall = measure_distance_to_wall(game, theta);
-	printf("%d, %s\n", __LINE__, __FILE__);
 	game->player.wall_height = calculate_wall_height(distance_to_wall);
 }
 
@@ -315,13 +299,25 @@ void	emit_ray(t_game *game)
 	left_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
 	right_angle = dir_to_angle(right_vec);
 	left_angle = dir_to_angle(left_vec);
+	// get_wall_height(game, theta);
 	theta = right_angle;
-	printf("%d, %s\n", __LINE__, __FILE__);
-	get_wall_height(game, theta);
-	printf("%d, %s\n", __LINE__, __FILE__);
-	// while (theta <= left_angle)
-	// {
-	// 	get_wall_height(game, theta);
-	// 	theta += 1;
-	// }
+	if (left_angle < right_angle)
+	{
+		while (theta <= 2 * M_PI)
+		{
+			get_wall_height(game, theta);
+			theta++;
+		}
+		theta = 0;
+		while (theta <= left_angle)
+		{
+			get_wall_height(game, theta);
+			theta++;
+		}
+	}
+	while (theta <= left_angle)
+	{
+		get_wall_height(game, theta);
+		theta++;
+	}
 }
