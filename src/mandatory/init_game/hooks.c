@@ -46,6 +46,8 @@ int	update_game(t_game *game)
 	fetch_key_input(game);
 	print_debug_info(game);
 	usleep(1000);
+	draw_circle(&game->img, &game->player.pos, 5, 0x000FF00);
+	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
 }
 
@@ -60,4 +62,5 @@ void	set_event_hooks(t_game *game)
 	mlx_hook(game->win, 03, 1L << 0, store_key_release, game);
 	mlx_hook(game->win, 17, 0, exit_game, game);
 	mlx_loop_hook(game->mlx, update_game, game);
+//	mlx_expose_hook (game->win, render_map, game);
 }

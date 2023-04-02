@@ -40,6 +40,7 @@ void	fetch_key_input(t_game *game);
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);
 int		create_trgb(int t, int r, int g, int b);
+void	draw_circle(t_image *img, t_vec *p, int r, int color);
 
 //debug
 void	print_debug_info(t_game *game);
