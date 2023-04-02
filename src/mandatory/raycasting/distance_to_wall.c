@@ -109,11 +109,11 @@ float	dir_to_angle(t_vec dir)
 	if (dir.x > 0 && dir.y > 0)
 		return (atan(dir.y / dir.x));
 	if (dir.x < 0 && dir.y > 0)
-		return (atan(dir.y / - dir.x) + M_PI / 2);
+		return (atan(-dir.x / dir.y) + M_PI_2);
 	if (dir.x < 0 && dir.y < 0)
 		return (atan(dir.y / dir.x) + M_PI);
 	if (dir.x > 0 && dir.y < 0)
-		return (atan(- dir.y / dir.x) + 3 * M_PI / 2);
+		return (atan(dir.x / -dir.y) + 3 * M_PI_2);
 	if (dir.x == 0)
 	{
 		if (dir.y == 1)
@@ -205,7 +205,9 @@ bool	is_x_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 		if (is_out_of_map_width(game, ray_info->x_pos_on_grid.x))
 			return (true);
 		if (game->map[(int)ceil(ray_info->x_pos_on_grid.y)][(int)ray_info->x_pos_on_grid.x] == '1')
+		{
 			return (true);
+		}
 	}
 	else
 	{
@@ -213,8 +215,7 @@ bool	is_x_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 			return (true);
 		if (is_out_of_map_width(game, ray_info->x_pos_on_grid.x - 1))
 			return (true);
-		if (game->map[(int)ceil(ray_info->x_pos_on_grid.y)]
-			[(int)ray_info->x_pos_on_grid.x - 1] == '1')
+		if (game->map[(int)ceil(ray_info->x_pos_on_grid.y)][(int)ray_info->x_pos_on_grid.x - 1] == '1')
 			return (true);
 	}
 	return (false);
@@ -249,22 +250,23 @@ void	walk_to_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 {
 	while (1)
 	{
-		printf("%f, %f\n", ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
+		printf("x_pos %f, %f\n", ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
 		if (is_x_wall(game, player, ray_info))
 			break ;
-		ray_info->x_pos_on_grid.x += ray_info->x_step;
-		ray_info->x_pos_on_grid.y += ray_info->x_tile_step;
+		printf("x_step %f, %f\n", ray_info->x_tile_step, ray_info->x_step);
+		ray_info->x_pos_on_grid.x += ray_info->x_tile_step;
+		ray_info->x_pos_on_grid.y += ray_info->x_step;
 	}
-	printf("%d, %f, %f\n", __LINE__, ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
+	printf("result of x walk %d, %f, %f\n", __LINE__, ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
 	while (1)
 	{
-		printf("%d, %f, %f\n", __LINE__, ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
+		printf("y_pos %d, %f, %f\n", __LINE__, ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
 		if (is_y_wall(game, player, ray_info))
 			break ;
-		ray_info->y_pos_on_grid.x += ray_info->y_tile_step;
-		ray_info->y_pos_on_grid.y += ray_info->y_step;
+		ray_info->y_pos_on_grid.x += ray_info->y_step;
+		ray_info->y_pos_on_grid.y += ray_info->y_tile_step;
 	}
-	printf("%d, %f, %f\n", __LINE__, ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
+	printf("result of y walk %d, %f, %f\n", __LINE__, ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
 }
 
 float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
@@ -335,6 +337,7 @@ void	emit_ray(t_game *game)
 	right_angle = dir_to_angle(right_vec);
 	left_angle = dir_to_angle(left_vec);
 	theta = dir_to_angle(game->player.dir) - 1;
+	printf("theta is %f\n", theta);
 	get_wall_height(game, theta);
 	printf("%d, %s\n", __LINE__, __FILE__);
 	// if (left_angle < right_angle)
