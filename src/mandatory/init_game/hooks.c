@@ -58,7 +58,7 @@ int	update_game(t_game *game)
 	print_debug_info(game);
 	game->player.x_wall_on_minimap = 1;
 	game->player.y_wall_on_minimap = 1;
-//	emit_ray(game);
+	emit_ray(game);
 	draw_player_pos(game);
 	draw_wall_intersection(game);
 	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);

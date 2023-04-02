@@ -51,7 +51,7 @@ void	load_player(t_game *game)
 		{
 			if (is_start_position(game->map[i][j]))
 			{
-				game->player.pos = (t_vec){j, i};
+				game->player.pos = (t_vec){j + 0.5, i + 0.5};
 				set_start_position(game, i, j);
 			}
 			j++;
