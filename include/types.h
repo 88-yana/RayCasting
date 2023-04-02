@@ -45,8 +45,10 @@ typedef struct s_map_info {
 typedef struct s_player_info {
 	t_vec	pos;
 	t_vec	dir;
-	float	distance_to_wall;
+	float	distance_to_wall; //FIXME: 要らないかも
 	float	wall_height;
+	int		x_wall_on_minimap;
+	int		y_wall_on_minimap;
 	bool	n_wall;
 	bool	s_wall;
 	bool	w_wall;
