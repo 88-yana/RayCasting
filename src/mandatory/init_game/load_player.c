@@ -23,7 +23,6 @@ static bool	is_start_position(char tile)
  */
 static void	set_start_position(t_game *game, size_t x, size_t y)
 {
-	game->player.pos = (t_vec){x, y};
 	if (game->map[x][y] == 'N')
 		game->player.dir = (t_vec){0, -1};
 	if (game->map[x][y] == 'S')
@@ -52,6 +51,7 @@ void	load_player(t_game *game)
 		{
 			if (is_start_position(game->map[i][j]))
 			{
+				game->player.pos = (t_vec){j, i};
 				set_start_position(game, i, j);
 			}
 			j++;

@@ -27,19 +27,6 @@ void	draw_rectangle(t_image *img, t_vec *p, int size, int color)
 	}
 }
 
-void	draw_circle(t_image *img, t_vec *p, int r, int color)
-{
-	int i, angle, x1, y1;
-
-	for(i = 0; i < 360; i++)
-	{
-		angle = i;
-		x1 = r * cos(angle * M_PI / 180);
-		y1 = r * sin(angle * M_PI / 180);
-		my_mlx_pixel_put(img, p->x + x1, p->y + y1, color);
-	}
-}
-
 void	draw_minimap(t_game *game)
 {
 	size_t	i;
@@ -90,6 +77,5 @@ void	init_game(t_game *game)
 	init_image(game);
 	load_images(game);
 	load_player(game);
-	draw_player_pos(game);
 	set_event_hooks(game);
 }
