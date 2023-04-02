@@ -104,6 +104,33 @@ typedef struct s_raycasting {
 // 	find_nearest_y_pos(nearest_y_pos);
 // }
 
+float	dir_to_angle(t_vec dir)
+{
+	if (dir.x > 0 && dir.y > 0)
+		return (atan(dir.y / dir.x));
+	if (dir.x < 0 && dir.y > 0)
+		return (atan(dir.y / - dir.x) + M_PI / 2);
+	if (dir.x < 0 && dir.y < 0)
+		return (atan(dir.y / dir.x) + M_PI);
+	if (dir.x > 0 && dir.y < 0)
+		return (atan(- dir.y / dir.x) + 3 * M_PI / 2);
+	if (dir.x == 0)
+	{
+		if (dir.y == 1)
+			return (M_PI / 2);
+		else if (dir.y == -1)
+			return (3 * M_PI / 2);
+	}
+	if (dir.y == 0)
+	{
+		if (dir.x == 1)
+			return (0);
+		else if (dir.x == -1)
+			return (M_PI);
+	}
+	return (0);
+}
+
 void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
 {
 	ray_info->x_pos_on_grid.x = player->pos.x + ray_info->dx;
@@ -157,18 +184,25 @@ void	calc_digital_difference(t_raycasting *ray_info, float theta)
 
 bool	is_x_wall(char **map, t_player_info *player, t_raycasting *ray_info)
 {
+	printf("%d, %s\n", __LINE__, __FILE__);
 	if (player->dir.x >= 0)
 	{
-		if (map[(int)ceil(ray_info->x_pos_on_grid.y)]
-			[(int)ray_info->x_pos_on_grid.x] == '1')
+		printf("%d, %s\n", __LINE__, __FILE__);
+		printf("%f, %f\n", player->pos.y, player->pos.x);
+		printf("%d, %d\n", (int)ceil(ray_info->x_pos_on_grid.y), (int)ray_info->x_pos_on_grid.x);
+		if (map[(int)ceil(ray_info->x_pos_on_grid.y)][(int)ray_info->x_pos_on_grid.x] == '1')
 			return (true);
+		printf("%d, %s\n", __LINE__, __FILE__);
 	}
 	else
 	{
+		printf("%d, %s\n", __LINE__, __FILE__);
 		if (map[(int)ceil(ray_info->x_pos_on_grid.y)]
 			[(int)ray_info->x_pos_on_grid.x - 1] == '1')
 			return (true);
+		printf("%d, %s\n", __LINE__, __FILE__);
 	}
+	printf("%d, %s\n", __LINE__, __FILE__);
 	return (false);
 }
 
@@ -193,6 +227,7 @@ void	walk_to_wall(char **map, t_player_info *player, t_raycasting *ray_info)
 {
 	while (1)
 	{
+		printf("%d, %s\n", __LINE__, __FILE__);
 		if (is_x_wall(map, player, ray_info))
 			return ;
 		ray_info->x_pos_on_grid.x += ray_info->x_step;
@@ -200,6 +235,7 @@ void	walk_to_wall(char **map, t_player_info *player, t_raycasting *ray_info)
 	}
 	while (1)
 	{
+		printf("%d, %s\n", __LINE__, __FILE__);
 		if (is_y_wall(map, player, ray_info))
 			return ;
 		ray_info->y_pos_on_grid.x += ray_info->y_tile_step;
@@ -211,7 +247,7 @@ float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
 {
 	float	angle;
 
-	angle = atan(player->dir.y / player->dir.x);
+	angle = dir_to_angle(player->dir);
 	player->x_wall_on_minimap = (int) floor(10 * wall_vec.x);
 	player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y);
 	return ((wall_vec.x - player->pos.x) * cos(angle) + (wall_vec.y - player->pos.y) * sin(angle));
@@ -239,10 +275,15 @@ float	measure_distance_to_wall(t_game *game, float theta)
 	float			distance_to_wall;
 
 	find_nearest_grid_on_line(&game->player, &ray_info, theta);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	calc_digital_difference(&ray_info, theta);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	calc_tile_step(&game->player, &ray_info);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	walk_to_wall(game->map, &game->player, &ray_info);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	return (distance_to_wall);
 }
 
@@ -256,8 +297,11 @@ void	get_wall_height(t_game *game, float theta)
 	float	distance_to_wall;
 
 	distance_to_wall = measure_distance_to_wall(game, theta);
+	printf("%d, %s\n", __LINE__, __FILE__);
 	game->player.wall_height = calculate_wall_height(distance_to_wall);
 }
+
+
 
 void	emit_ray(t_game *game)
 {
@@ -269,12 +313,15 @@ void	emit_ray(t_game *game)
 
 	right_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(-VIEWING_ANGLE));
 	left_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
-	right_angle = atan(right_vec.y / right_vec.x);
-	left_angle = atan(left_vec.y / left_vec.x);
+	right_angle = dir_to_angle(right_vec);
+	left_angle = dir_to_angle(left_vec);
 	theta = right_angle;
-	while (theta <= left_angle)
-	{
-		get_wall_height(game, theta);
-		theta += 1;
-	}
+	printf("%d, %s\n", __LINE__, __FILE__);
+	get_wall_height(game, theta);
+	printf("%d, %s\n", __LINE__, __FILE__);
+	// while (theta <= left_angle)
+	// {
+	// 	get_wall_height(game, theta);
+	// 	theta += 1;
+	// }
 }
