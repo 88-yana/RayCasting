@@ -21,7 +21,7 @@ void	handle_error(char *message);
 void	set_map_info(t_game *game, t_dictionary *dict);
 void	input_file(t_game *game, const char *filename);
 void	check_map_surrounded(t_game *game);
-bool	is_valid_dict(t_dictionary *dict);
+bool	is_valid_map_info(t_dictionary *dict);
 bool	check_valid_map(t_game *game);
 bool	is_valid_rgb_number(char **array, int i);
 void	get_map_info(t_game *game, char **contents);
