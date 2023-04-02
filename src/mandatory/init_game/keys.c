@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-#define MOVE_COEF 0.5f
+#define MOVE_COEF 0.1f
 
 /**
  * @brief キー入力：移動

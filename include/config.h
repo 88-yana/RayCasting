@@ -23,6 +23,12 @@
 # define WALL_HEIGHT 3
 # define VIEWING_ANGLE 30
 
+/** Color Settings */
+# define COLOR_RED  0x0f15b5b
+# define COLOR_GREEN 0x000FF00
+# define COLOR_GRAY 0x0eae8e1
+# define COLOR_LGRAY 0x0afafb0
+
 /** Screen settings */
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 960
