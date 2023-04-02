@@ -1,9 +1,9 @@
 #include "cub3D.h"
 
-typedef struct s_point {
-	t_vec x_pos;
-	t_vec y_pos;
-}	t_point;
+// typedef struct s_point {
+// 	t_vec x_pos;
+// 	t_vec y_pos;
+// }	t_point;
 
 typedef struct s_raycasting {
 	float	dx;
@@ -66,43 +66,43 @@ typedef struct s_raycasting {
 // 		nearest.x_pos
 // }
 
-t_vec	touch_wall(t_game *game, t_vec ray_pos, t_vec diff_vec, char flag)
-{
-	float	direction;
+// t_vec	touch_wall(t_game *game, t_vec ray_pos, t_vec diff_vec, char flag)
+// {
+// 	float	direction;
 
-	if (flag == 'x')
-		direction = game->player.dir.x;
-	else
-		direction = game->player.dir.y;
-	while(1)
-	{
-		if (is_wall(game->map, ray_pos, direction, flag))
-			return ray_pos;
-		ft_add_vec(ray_pos, diff_vec);
-	}
-}
+// 	if (flag == 'x')
+// 		direction = game->player.dir.x;
+// 	else
+// 		direction = game->player.dir.y;
+// 	while(1)
+// 	{
+// 		if (is_wall(game->map, ray_pos, direction, flag))
+// 			return ray_pos;
+// 		ft_add_vec(ray_pos, diff_vec);
+// 	}
+// }
 
-float	find_wall(t_game *game, t_vec nearest, t_vec diff_vec, char flag)
-{
-	t_vec wall_pos;
+// float	find_wall(t_game *game, t_vec nearest, t_vec diff_vec, char flag)
+// {
+// 	t_vec wall_pos;
 	
-		wall_pos = touch_wall(game, nearest, diff_vec, flag);
-	return (ft_distance_vec(game->player.pos, wall_pos));
-}
+// 		wall_pos = touch_wall(game, nearest, diff_vec, flag);
+// 	return (ft_distance_vec(game->player.pos, wall_pos));
+// }
 
-float find_nearest_grid_lines(t_player_info *player, t_point *nearest)
-{
-	float pos_to_vertical_line;
-	float y_diff;
+// float find_nearest_grid_lines(t_player_info *player, t_point *nearest)
+// {
+// 	float pos_to_vertical_line;
+// 	float y_diff;
 
-	pos_to_vertical_line = ceil(player->pos.x) - player->pos.x;
-	y_diff = player->dir.y * pos_to_vertical_line / player->dir.x; //FIXME:dir.xが0でない保証をしないといけない
-	nearest->y_pos = player->pos.y + y_diff;
-	player->dir;
+// 	pos_to_vertical_line = ceil(player->pos.x) - player->pos.x;
+// 	y_diff = player->dir.y * pos_to_vertical_line / player->dir.x; //FIXME:dir.xが0でない保証をしないといけない
+// 	nearest->y_pos = player->pos.y + y_diff;
+// 	player->dir;
 
-	find_nearest_x_pos(nearest_x_pos);
-	find_nearest_y_pos(nearest_y_pos);
-}
+// 	find_nearest_x_pos(nearest_x_pos);
+// 	find_nearest_y_pos(nearest_y_pos);
+// }
 
 void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
 {
@@ -207,18 +207,17 @@ void	walk_to_wall(char **map, t_player_info *player, t_raycasting *ray_info)
 	}
 }
 
-void	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
+float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
 {
 	float	angle;
 
 	angle = atan(player->dir.y / player->dir.x);
-	player->distance_to_wall = (wall_vec.x - player->pos.x) * cos(angle) + (wall_vec.y - player->pos.y) * sin(angle);
+	return ((wall_vec.x - player->pos.x) * cos(angle) + (wall_vec.y - player->pos.y) * sin(angle));
 }
 
-void	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
+float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
 {
-	
-	if (ft_distance_vec(ray_info->x_pos_on_grid) < ft_distance_vec(ray_info->y_pos_on_grid))
+	if (ft_distance_vec(ray_info->x_pos_on_grid, player->pos) < ft_distance_vec(ray_info->y_pos_on_grid, player->pos))
 		return (calc_distance_to_wall(player, ray_info->x_pos_on_grid));
 	else
 		return (calc_distance_to_wall(player, ray_info->y_pos_on_grid));
@@ -234,24 +233,26 @@ void	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
  */
 float	measure_distance_to_wall(t_game *game, float theta)
 {
-	t_point			nearest;
 	t_raycasting	ray_info;
+	float			distance_to_wall;
 
 	find_nearest_grid_on_line(&game->player, &ray_info, theta);
 	calc_digital_difference(&ray_info, theta);
 	calc_tile_step(&game->player, &ray_info);
 	walk_to_wall(&game->map, &game->player, &ray_info);
-	choose_distance_to_wall(&game->player, &ray_info);
-	if (ray_info.x_distance_to_wall < ray_info.y_distance_to_wall)
-		return (ray_info.x_distance_to_wall);
-	else
-		return (ray_info.y_distance_to_wall);
+	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
+	return (distance_to_wall);
 }
 
-float	get_wall_hight(t_game *game)
+float calculate_wall_height(float distance_to_wall)
+{
+	return (WALL_HEIGHT/distance_to_wall); //TODO:コンストの値を距離で割る
+}
+
+void	get_wall_height(t_game *game, float theta)
 {
 	float	distance_to_wall;
 
-	distance_to_wall = measure_distance_to_wall(game);
-	calculate_wall_hight();
+	distance_to_wall = measure_distance_to_wall(game, theta);
+	game->player.wall_height = calculate_wall_height(distance_to_wall);
 }

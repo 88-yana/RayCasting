@@ -20,6 +20,7 @@
 # define SP 2
 
 # define FILE_HEADER_SIZE 6
+# define WALL_HEIGHT 3
 
 /** Screen settings */
 # define WIN_WIDTH 1280
