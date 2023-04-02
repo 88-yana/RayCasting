@@ -14,7 +14,6 @@ void	move_player(t_game *game)
 
 	pos = game->player.pos;
 	dir = game->player.dir;
-	printf("{%f, %f}\n", dir.x, dir.y);
 	if (game->key_code & MOVE_FORWARD)
 		dir = ft_rotate_vec(dir, M_PI);
 	else if (game->key_code & MOVE_BACKWARD)
@@ -23,7 +22,6 @@ void	move_player(t_game *game)
 		dir = ft_rotate_vec(dir, M_PI_2);
 	else if (game->key_code & MOVE_RIGHT)
 		dir = ft_rotate_vec(dir, -M_PI_2);
-	printf("{%f, %f}\n", dir.x, dir.y);
 	game->player.pos = ft_add_vec(pos, (ft_mul_vec(dir, MOVE_COEF)));
 
 }
