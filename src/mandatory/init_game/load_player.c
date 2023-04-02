@@ -7,7 +7,7 @@
  * @return true
  * @return false
  */
-static bool	is_start_position(char tile)
+bool	is_start_position(char tile)
 {
 	if (ft_strchr("NEWS", tile))
 		return (true);
