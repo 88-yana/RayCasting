@@ -122,9 +122,14 @@ float	dir_to_angle(t_vec dir)
 void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
 {
 	ray_info->x_pos_on_grid.x = player->pos.x + ray_info->dx;
-	ray_info->x_pos_on_grid.y = player->pos.y - ray_info->dx * tan(theta);
+	if (ray_info->dx != 0)
+		ray_info->x_pos_on_grid.y = player->pos.y - ray_info->dx * tan(theta);
+	else
+		ray_info->x_pos_on_grid.y = player->pos.y;
 	if (tan(theta) != 0)
 		ray_info->y_pos_on_grid.x = player->pos.x - ray_info->dy / tan(theta);
+	else
+		ray_info->y_pos_on_grid.x = player->pos.x - INF;
 	ray_info->y_pos_on_grid.y = player->pos.y + ray_info->dy;
 }
 
@@ -181,10 +186,6 @@ void	calc_digital_difference(t_player_info *player, t_raycasting *ray_info, floa
 	else if (player->dir.y == 0)
 		ray_info->y_step_on_x_axis = 0;
 }
-
-
-
-
 
 float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
 {
