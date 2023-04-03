@@ -40,7 +40,7 @@ void	draw_minimap(t_game *game)
 		{
 			if (game->map[i][j] == '1')
 				draw_rectangle(&game->img, &(t_vec){i * 10, j * 10}, 10, COLOR_LGRAY);
-			else if (game->map[i][j] == '0' || !is_start_position(game->map[i][j]))
+			else if (game->map[i][j] == '0' /* || !is_start_position(game->map[i][j]) */) //FIXME:implicitだったので，コメントアウトした
 				draw_rectangle(&game->img, &(t_vec){i * 10, j * 10}, 10, COLOR_GRAY);
 			j++;
 		}

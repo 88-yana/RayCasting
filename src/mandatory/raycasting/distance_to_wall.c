@@ -117,9 +117,9 @@ float	dir_to_angle(t_vec dir)
 	if (dir.x == 0)
 	{
 		if (dir.y == 1)
-			return (M_PI / 2);
+			return (M_PI_2);
 		else if (dir.y == -1)
-			return (3 * M_PI / 2);
+			return (3 * M_PI_2);
 	}
 	if (dir.y == 0)
 	{
@@ -170,16 +170,20 @@ void	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, fl
 	set_nearest_pos(player, ray_info, theta);
 }
 
-void	calc_digital_difference(t_raycasting *ray_info, float theta)
+void	calc_digital_difference(t_player_info *player, t_raycasting *ray_info, float theta)
 {
-	if (M_PI < theta && theta < 2 * M_PI)
-		ray_info->x_step = - 1 / tan(theta);
-	else
+	if (player->dir.x > 0)
 		ray_info->x_step = 1 / tan(theta);
-	if (M_PI / 2 < theta && theta < 3 * M_PI / 2)
-		ray_info->y_step = tan(theta);
-	else
+	else if (player->dir.x < 0)
+		ray_info->x_step = - 1 / tan(theta);
+	else if (player->dir.x == 0)
+		ray_info->x_step = 0;
+	if (player->dir.y > 0)
 		ray_info->y_step = - tan(theta);
+	else if (player->dir.y < 0)
+		ray_info->y_step = tan(theta);
+	else if (player->dir.y == 0)
+		ray_info->y_step = 0;
 }
 
 bool	is_out_of_map_height(t_game *game, double y)
@@ -276,6 +280,7 @@ float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
 	angle = dir_to_angle(player->dir);
 	player->x_wall_on_minimap = (int) floor(10 * wall_vec.x);
 	player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y);
+	printf("answer pos %f, %f\n", floor(10 * wall_vec.x), ceil(10 * wall_vec.y));
 	return ((wall_vec.x - player->pos.x) * cos(angle) + (wall_vec.y - player->pos.y) * sin(angle));
 }
 
@@ -301,7 +306,7 @@ float	measure_distance_to_wall(t_game *game, float theta)
 	float			distance_to_wall;
 
 	find_nearest_grid_on_line(&game->player, &ray_info, theta);
-	calc_digital_difference(&ray_info, theta);
+	calc_digital_difference(&game->player, &ray_info, theta);
 	calc_tile_step(&game->player, &ray_info);
 	walk_to_wall(game, &game->player, &ray_info);
 	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
@@ -336,7 +341,7 @@ void	emit_ray(t_game *game)
 	left_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
 	right_angle = dir_to_angle(right_vec);
 	left_angle = dir_to_angle(left_vec);
-	theta = dir_to_angle(game->player.dir) - 1;
+	theta = dir_to_angle(game->player.dir);
 	printf("theta is %f\n", theta);
 	get_wall_height(game, theta);
 	printf("%d, %s\n", __LINE__, __FILE__);
