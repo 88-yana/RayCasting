@@ -39,7 +39,7 @@ typedef struct s_map_info {
 	size_t				n;
 	size_t				s;
 	size_t				w;
-	size_t				t;
+	size_t				e;
 }	t_map_info;
 
 typedef struct s_player_info {
