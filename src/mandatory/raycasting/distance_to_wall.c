@@ -193,8 +193,9 @@ float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
 
 	angle = dir_to_angle(player->dir);
 	player->x_wall_on_minimap = (int) floor(10 * wall_vec.x);
+	// player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y) + 10;
 	player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y) + 10;
-	printf("answer pos %f, %f\n", floor(10 * wall_vec.x), ceil(10 * wall_vec.y));
+	printf("answer pos %f, %f\n", floor(10 * wall_vec.x), ceil(10 * wall_vec.y) + 10);
 	return ((wall_vec.x - player->pos.x) * cos(angle) + (wall_vec.y - player->pos.y) * sin(angle));
 }
 
@@ -245,19 +246,18 @@ void	get_wall_height(t_game *game, float theta)
 void	emit_ray(t_game *game)
 {
 	float	theta;
-	float	right_angle;
-	float	left_angle;
-	t_vec	right_vec;
-	t_vec	left_vec;
+	// float	right_angle;
+	// float	left_angle;
+	// t_vec	right_vec;
+	// t_vec	left_vec;
 
-	right_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(-VIEWING_ANGLE));
-	left_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
-	right_angle = dir_to_angle(right_vec);
-	left_angle = dir_to_angle(left_vec);
+	// right_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(-VIEWING_ANGLE));
+	// left_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
+	// right_angle = dir_to_angle(right_vec);
+	// left_angle = dir_to_angle(left_vec);
 	theta = dir_to_angle(game->player.dir);
 	printf("theta is %f\n", theta);
 	get_wall_height(game, theta);
-	printf("%d, %s\n", __LINE__, __FILE__);
 	// if (left_angle < right_angle)
 	// {
 	// 	while (theta <= 2 * M_PI)
