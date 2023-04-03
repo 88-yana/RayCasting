@@ -46,6 +46,7 @@ void	draw_player_pos(t_game *game);
 void 	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 
 //raycasting
+void	walk_to_wall(t_game *game, t_player_info *player, t_raycasting *ray_info);
 void	emit_ray(t_game *game);
 
 //debug

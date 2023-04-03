@@ -22,6 +22,7 @@
 # define FILE_HEADER_SIZE 6
 # define WALL_HEIGHT 3
 # define VIEWING_ANGLE 30
+# define INF 3000
 
 /** Color Settings */
 # define COLOR_RED  0x0f15b5b

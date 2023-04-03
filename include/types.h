@@ -89,4 +89,18 @@ typedef enum e_input_key {
 	ALL = ~0,
 }	t_input_key;
 
+typedef struct s_raycasting {
+	float	dx;
+	float	dy;
+	t_vec	x_pos_on_grid;
+	t_vec	y_pos_on_grid;
+	float	x_step_on_y_axis;
+	float	y_step_on_x_axis;
+	float	x_tile_step;
+	float	y_tile_step;
+	float	x_distance_to_wall;
+	float	y_distance_to_wall;
+
+}	t_raycasting;
+
 #endif
