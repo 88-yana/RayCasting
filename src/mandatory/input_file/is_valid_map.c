@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:22:20 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 15:49:39 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:57:33 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static void	cnt_start(t_map_info *map_info, char c)
 		map_info->s++;
 	if (c == 'W')
 		map_info->w++;
-	if (c == 'T')
-		map_info->t++;
+	if (c == 'E')
+		map_info->e++;
 }
 
 /**
@@ -58,7 +58,7 @@ static void	cnt_start(t_map_info *map_info, char c)
  */
 static bool	is_valid_start_num(t_map_info *map_info)
 {
-	if (map_info->n + map_info->s + map_info->w + map_info->t == 1)
+	if (map_info->n + map_info->s + map_info->w + map_info->e == 1)
 		return (true);
 	return (false);
 }
@@ -79,7 +79,7 @@ static void	check_valid_map_contents(t_game *game)
 	game->map_info.n = 0;
 	game->map_info.s = 0;
 	game->map_info.w = 0;
-	game->map_info.t = 0;
+	game->map_info.e = 0;
 	i = 0;
 	while (i < game->map_info.height + SP)
 	{
