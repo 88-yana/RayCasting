@@ -115,7 +115,6 @@ float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
 	player->x_wall_on_minimap = (int) floor(10 * wall_vec.x);
 	// player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y) + 10;
 	player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y);
-	printf("answer pos %f, %f\n", floor(10 * wall_vec.x), ceil(10 * wall_vec.y));
 	return ((wall_vec.x - player->pos.x) * cos(angle) + (wall_vec.y - player->pos.y) * sin(angle));
 }
 
