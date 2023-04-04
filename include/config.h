@@ -24,13 +24,15 @@
 # define VIEWING_ANGLE 30
 # define INF 3000
 
+# define TIP_SIZE 10
+
 /** Color Settings */
 # define COLOR_BLACK  0x0000000
 # define COLOR_RED  0x0f15b5b
 # define COLOR_GREEN 0x000FF00
 # define COLOR_GRAY 0x0eae8e1
 # define COLOR_LGRAY 0x0afafb0
-
+# define COLOR_YELLOW 0x0FFFF00
 /** Screen settings */
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 960

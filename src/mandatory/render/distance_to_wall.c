@@ -131,8 +131,8 @@ float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
  * 最初に一番近いグリッド線上の位置を見つける
  * その位置と次に近い位置から，差分(= digital difference)を計測
  * 一番近いグリッド線上から，差分を足していき，壁の位置を見つけ，playerの位置との差から,壁までの距離を求める
- * @param game 
- * @return float 
+ * @param game
+ * @return float
  */
 void	measure_distance_to_wall(t_game *game, t_raycasting *ray_info, float theta)
 {
@@ -162,7 +162,7 @@ void	draw_ray_on_near_grid(t_game *game)
 {
 	get_wall_height(game, game->player.dir, dir_to_angle(game->player.dir));
 	if (!is_out_of_map_width(game, game->player.near_x / 10) && !is_out_of_map_height(game, game->player.near_y / 10))
-		my_mlx_pixel_put(&game->img, game->player.near_x, game->player.near_y, COLOR_RED);
+		draw_pixel(&game->img, game->player.near_x, game->player.near_y, COLOR_RED);
 }
 
 
