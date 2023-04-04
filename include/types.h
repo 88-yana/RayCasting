@@ -49,6 +49,8 @@ typedef struct s_player_info {
 	float	wall_height;
 	int		x_wall_on_minimap;
 	int		y_wall_on_minimap;
+	int		near_x;
+	int		near_y;
 	bool	n_wall;
 	bool	s_wall;
 	bool	w_wall;

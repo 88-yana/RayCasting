@@ -49,6 +49,7 @@ void	draw_wall_intersection(t_game *game)
 	x = game->player.x_wall_on_minimap;
 	y = game->player.y_wall_on_minimap;
 	my_mlx_pixel_put(&game->img, x, y, COLOR_GREEN);
+	my_mlx_pixel_put(&game->img, game->player.near_x, game->player.near_y, COLOR_RED);
 }
 
 int	update_game(t_game *game)
