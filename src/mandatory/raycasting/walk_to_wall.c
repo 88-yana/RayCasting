@@ -80,15 +80,11 @@ void	walk_to_x_wall(t_game *game, t_raycasting *ray_info)
 	}
 	while (1)
 	{
-		// printf("x_tile_step, x_step_on_y_axis %f, %f\n", ray_info->x_tile_step, ray_info->x_step_on_y_axis);
-		// printf("x_pos %f, %f\n", ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
 		if (finish_x_wall(game, ray_info))
 			break ;
-		
 		ray_info->x_pos_on_grid.x += ray_info->x_tile_step;
 		ray_info->x_pos_on_grid.y += ray_info->x_step_on_y_axis;
 	}
-	// printf("result of x walk %d, %f, %f\n", __LINE__, ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
 }
 
 void	walk_to_y_wall(t_game *game, t_raycasting *ray_info)
@@ -100,14 +96,11 @@ void	walk_to_y_wall(t_game *game, t_raycasting *ray_info)
 	}
 	while (1)
 	{
-		// printf("y_tile_step, y_step_on_x_axis %f, %f\n", ray_info->y_tile_step, ray_info->y_step_on_x_axis);
-		// printf("y_pos %f, %f\n", ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
 		if (finish_y_wall(game, ray_info))
 			break ;
 		ray_info->y_pos_on_grid.x += ray_info->y_step_on_x_axis;
 		ray_info->y_pos_on_grid.y += ray_info->y_tile_step;
 	}
-	// printf("result of y walk %d, %f, %f\n", __LINE__, ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
 }
 
 void	walk_to_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
