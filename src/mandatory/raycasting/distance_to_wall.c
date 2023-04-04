@@ -161,42 +161,45 @@ void	get_wall_height(t_game *game, t_vec ray_dir, float theta)
 	// game->player.wall_height = calculate_wall_height(distance_to_wall);
 }
 
-
-
-void	emit_ray(t_game *game)
+void	draw_ray_on_near_grid(t_game *game)
 {
-	// float	theta;
-	float	right_angle;
-	float	left_angle;
-	t_vec	right_vec;
-	t_vec	left_vec;
-
-	right_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(-VIEWING_ANGLE));
-	left_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
-	right_angle = dir_to_angle(right_vec);
-	left_angle = dir_to_angle(left_vec);
-	// theta = dir_to_angle(game->player.dir);
-	// printf("\ntheta is %f\n", theta);
-	// printf("right_angle is %f\n", right_angle);
-	// printf("left_angle is %f\n", left_angle);
-	// get_wall_height(game, theta);
-	
-
 	get_wall_height(game, game->player.dir, dir_to_angle(game->player.dir));
 	if (!is_out_of_map_width(game, game->player.near_x / 10) && !is_out_of_map_height(game, game->player.near_y / 10))
 		my_mlx_pixel_put(&game->img, game->player.near_x, game->player.near_y, COLOR_RED);
+}
 
+
+bool	rotate_right_angle(t_vec *right_dir, float *right_angle)
+{
+	float	temp;
+
+	*right_dir = ft_rotate_vec(*right_dir, ft_deg_to_rad(1));
+	temp = *right_angle;
+	*right_angle = dir_to_angle(*right_dir);
+	if (temp > *right_angle)
+		return (false);
+	return (true);
+}
+
+void	emit_ray(t_game *game)
+{
+	float	right_angle;
+	float	left_angle;
+	t_vec	right_dir;
+	t_vec	left_dir;
+
+	right_dir = ft_rotate_vec(game->player.dir, ft_deg_to_rad(-VIEWING_ANGLE));
+	left_dir = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
+	right_angle = dir_to_angle(right_dir);
+	left_angle = dir_to_angle(left_dir);
+	draw_ray_on_near_grid(game);
 	if (left_angle > right_angle)
 	{
 		while (left_angle > right_angle)
 		{
-			printf("\033[0;92m right_angle is %f\033[0;39m\n", right_angle);
-			get_wall_height(game, right_vec, right_angle);
+			get_wall_height(game, right_dir, right_angle);
 			draw_wall_intersection(game);
-			right_vec = ft_rotate_vec(right_vec, ft_deg_to_rad(1));
-			float temp = right_angle;
-			right_angle = dir_to_angle(right_vec);
-			if (temp > right_angle)
+			if (!rotate_right_angle(&right_dir, &right_angle))
 				break ;
 		}
 	}
@@ -204,26 +207,17 @@ void	emit_ray(t_game *game)
 	{
 		while (right_angle < 2 * M_PI)
 		{
-			// printf("right_angle is %f\n", right_angle);
-			get_wall_height(game, right_vec, right_angle);
+			get_wall_height(game, right_dir, right_angle);
 			draw_wall_intersection(game);
-
-			right_vec = ft_rotate_vec(right_vec, ft_deg_to_rad(1));
-			float temp = right_angle;
-			right_angle = dir_to_angle(right_vec);
-			if (temp > right_angle)
+			if (!rotate_right_angle(&right_dir, &right_angle))
 				break ;
 		}
 		right_angle = 0;
 		while (right_angle < left_angle)
 		{
-			// printf("right_angle is %f\n", right_angle);
-			get_wall_height(game, right_vec, right_angle);
+			get_wall_height(game, right_dir, right_angle);
 			draw_wall_intersection(game);
-			right_vec = ft_rotate_vec(right_vec, ft_deg_to_rad(1));
-			float temp = right_angle;
-			right_angle = dir_to_angle(right_vec);
-			if (temp > right_angle)
+			if (!rotate_right_angle(&right_dir, &right_angle))
 				break ;
 		}
 	}
