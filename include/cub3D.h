@@ -54,7 +54,7 @@ void	emit_ray(t_game *game);
 bool	is_out_of_map_height(t_game *game, double y);
 bool	is_out_of_map_width(t_game *game, double x);
 void	ray_casting(t_game *game);
-void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
+void	draw_line(t_game *game, t_vec v0, t_vec v1, int color);
 
 //debug
 void	print_debug_info(t_game *game);
