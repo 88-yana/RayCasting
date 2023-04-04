@@ -254,36 +254,61 @@ void	get_wall_height(t_game *game, float theta)
 
 void	emit_ray(t_game *game)
 {
-	float	theta;
-	// float	right_angle;
-	// float	left_angle;
-	// t_vec	right_vec;
-	// t_vec	left_vec;
+	// float	theta;
+	float	right_angle;
+	float	left_angle;
+	t_vec	right_vec;
+	t_vec	left_vec;
 
-	// right_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(-VIEWING_ANGLE));
-	// left_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
-	// right_angle = dir_to_angle(right_vec);
-	// left_angle = dir_to_angle(left_vec);
-	theta = dir_to_angle(game->player.dir);
-	printf("theta is %f\n", theta);
-	get_wall_height(game, theta);
-	// if (left_angle < right_angle)
-	// {
-	// 	while (theta <= 2 * M_PI)
-	// 	{
-	// 		get_wall_height(game, theta);
-	// 		theta++;
-	// 	}
-	// 	theta = 0;
-	// 	while (theta <= left_angle)
-	// 	{
-	// 		get_wall_height(game, theta);
-	// 		theta++;
-	// 	}
-	// }
-	// while (theta <= left_angle)
-	// {
-	// 	get_wall_height(game, theta);
-	// 	theta++;
-	// }
+	right_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(-VIEWING_ANGLE));
+	left_vec = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
+	right_angle = dir_to_angle(right_vec);
+	left_angle = dir_to_angle(left_vec);
+	// theta = dir_to_angle(game->player.dir);
+	// printf("\ntheta is %f\n", theta);
+	// printf("right_angle is %f\n", right_angle);
+	// printf("left_angle is %f\n", left_angle);
+	// get_wall_height(game, theta);
+	
+	if (left_angle > right_angle)
+	{
+		while (left_angle > right_angle)
+		{
+			printf("\033[0;92m right_angle is %f\033[0;39m\n", right_angle);
+			get_wall_height(game, right_angle);
+			draw_wall_intersection(game);
+			right_vec = ft_rotate_vec(right_vec, ft_deg_to_rad(1));
+			float temp = right_angle;
+			right_angle = dir_to_angle(right_vec);
+			if (temp > right_angle)
+				break ;
+		}
+	}
+	else
+	{
+		while (right_angle < 2 * M_PI)
+		{
+			// printf("right_angle is %f\n", right_angle);
+			get_wall_height(game, right_angle);
+			draw_wall_intersection(game);
+
+			right_vec = ft_rotate_vec(right_vec, ft_deg_to_rad(1));
+			float temp = right_angle;
+			right_angle = dir_to_angle(right_vec);
+			if (temp > right_angle)
+				break ;
+		}
+		right_angle = 0;
+		while (right_angle < left_angle)
+		{
+			// printf("right_angle is %f\n", right_angle);
+			get_wall_height(game, right_angle);
+			draw_wall_intersection(game);
+			right_vec = ft_rotate_vec(right_vec, ft_deg_to_rad(1));
+			float temp = right_angle;
+			right_angle = dir_to_angle(right_vec);
+			if (temp > right_angle)
+				break ;
+		}
+	}
 }
