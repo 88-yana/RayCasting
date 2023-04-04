@@ -7,7 +7,7 @@
  * @return true
  * @return false
  */
-static bool	is_start_position(char tile)
+bool	is_start_position(char tile)
 {
 	if (ft_strchr("NEWS", tile))
 		return (true);
@@ -23,11 +23,10 @@ static bool	is_start_position(char tile)
  */
 static void	set_start_position(t_game *game, size_t x, size_t y)
 {
-	game->player.pos = (t_vec){x, y};
 	if (game->map[x][y] == 'N')
-		game->player.dir = (t_vec){0, -1};
-	if (game->map[x][y] == 'S')
 		game->player.dir = (t_vec){0, 1};
+	if (game->map[x][y] == 'S')
+		game->player.dir = (t_vec){0, -1};
 	if (game->map[x][y] == 'W')
 		game->player.dir = (t_vec){-1, 0};
 	if (game->map[x][y] == 'E')
@@ -52,11 +51,12 @@ void	load_player(t_game *game)
 		{
 			if (is_start_position(game->map[i][j]))
 			{
+				game->player.pos = (t_vec){j + 0.5, i + 0.5};
 				set_start_position(game, i, j);
 			}
 			j++;
 		}
 		i++;
 	}
+	game->key_code = 0;
 }
-

@@ -9,17 +9,23 @@
  */
 void	move_player(t_game *game)
 {
-	t_vec	*pos;
+	t_vec	pos;
+	t_vec	dir;
 
-	pos = &game->player.pos;
+	pos = game->player.pos;
+	dir = game->player.dir;
 	if (game->key_code & MOVE_FORWARD)
-		*pos = ft_add_vec(*pos, (ft_mul_vec((t_vec){0, -1}, MOVE_COEF)));
+		;
 	else if (game->key_code & MOVE_BACKWARD)
-		*pos = ft_add_vec(*pos, (ft_mul_vec((t_vec){0, 1}, MOVE_COEF)));
+		dir = ft_rotate_vec(dir, M_PI);
 	else if (game->key_code & MOVE_LEFT)
-		*pos = ft_add_vec(*pos, (ft_mul_vec((t_vec){-1, 0}, MOVE_COEF)));
+		dir = ft_rotate_vec(dir, M_PI_2);
 	else if (game->key_code & MOVE_RIGHT)
-		*pos = ft_add_vec(*pos, (ft_mul_vec((t_vec){1, 0}, MOVE_COEF)));
+		dir = ft_rotate_vec(dir, -M_PI_2);
+	dir = ft_mul_vec(dir, MOVE_COEF);
+	game->player.pos.x += dir.x;
+	game->player.pos.y -= dir.y;
+
 }
 
 /**

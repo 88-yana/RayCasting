@@ -20,6 +20,16 @@
 # define SP 2
 
 # define FILE_HEADER_SIZE 6
+# define WALL_HEIGHT 3
+# define VIEWING_ANGLE 30
+# define INF 3000
+
+/** Color Settings */
+# define COLOR_BLACK  0x0000000
+# define COLOR_RED  0x0f15b5b
+# define COLOR_GREEN 0x000FF00
+# define COLOR_GRAY 0x0eae8e1
+# define COLOR_LGRAY 0x0afafb0
 
 /** Screen settings */
 # define WIN_WIDTH 1280

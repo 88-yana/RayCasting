@@ -17,7 +17,7 @@ static void	putstr_to_window(t_game *game, char *str, size_t offset)
 	int	color;
 
 	color = create_trgb(0, 255, 255, 255);
-	mlx_string_put(game->mlx, game->win, 16, offset, color, str);
+	mlx_string_put(game->mlx, game->win, 16, offset, 0x00FF000, str);
 	return ;
 }
 
@@ -45,11 +45,9 @@ static void	putstr_to_console(t_game *game, char *str)
 void	print_debug_info(t_game *game)
 {
 	char			buff[100];
-	int				color;
 	t_player_info	*player;
 
 	player = &game->player;
-	color = create_trgb(0, 255, 255, 255);
 	snprintf(buff, 100, "pos:{%f, %f} dir:{%f, %f} ", \
 		player->pos.x, player->pos.y, player->dir.x, player->dir.y);
 	putstr_to_window(game, buff, 16);
@@ -58,6 +56,5 @@ void	print_debug_info(t_game *game)
 	{
 		ft_snprintf(buff, 100, "KEY: %d", game->key_code);
 		putstr_to_window(game, buff, 32);
-//		putstr_to_console(game, buff);
 	}
 }

@@ -6,87 +6,13 @@
 # include <fcntl.h> //O_RDONLY
 # include <stdbool.h>
 # include <errno.h>
+# include <math.h>
 # include "get_next_line.h"
 # include "ft_printf.h"
-# include "libft.h"
 # include "mlx.h"
 # include "message.h"
 # include "config.h"
-
-typedef struct s_dictionary
-{
-	char	**key;
-	char	**value;
-}	t_dictionary;
-
-typedef struct s_rgb {
-	int	r;
-	int	g;
-	int	b;
-}	t_rgb;
-
-typedef struct s_path_to_texture {
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-}	t_path_to_texture;
-
-typedef struct s_image {
-	void	*north;
-	void	*south;
-	void	*west;
-	void	*east;
-}	t_image;
-
-typedef struct s_map_info {
-	t_path_to_texture	path;
-	t_rgb				floor;
-	t_rgb				ceiling;
-	size_t				height;
-	size_t				width;
-	size_t				nswt[4];
-	size_t				n;
-	size_t				s;
-	size_t				w;
-	size_t				e;
-}	t_map_info;
-
-typedef struct s_player_info {
-	t_vec	pos;
-	t_vec	dir;
-	float	distance_to_wall;
-	float	wall_height;
-	bool	n_wall;
-	bool	s_wall;
-	bool	w_wall;
-	bool	e_wall;
-}	t_player_info;
-
-typedef struct s_game {
-	char			**map;
-	t_map_info		map_info;
-	t_image			images;
-	t_player_info	player;
-	int				key_code;
-	void			*mlx;
-	void			*win;
-}	t_game;
-
-typedef enum e_input_key {
-	MOVE_NONE = 0,
-	MOVE_FORWARD = 1 << 0,
-	MOVE_BACKWARD = 1 << 1,
-	MOVE_RIGHT = 1 << 2,
-	MOVE_LEFT = 1 << 3,
-	ROTATE_RIGHT = 1 << 4,
-	ROTATE_LEFT = 1 << 5,
-	GAME_EXIT = 1 << 6,
-	MOVE = MOVE_FORWARD | MOVE_BACKWARD | MOVE_RIGHT | MOVE_LEFT,
-	ROTATE = ROTATE_RIGHT | ROTATE_LEFT,
-	CONFIG = GAME_EXIT,
-	ALL = ~0,
-}	t_input_key;
+# include "types.h"
 
 //check
 void	check_arg(int argc, char **argv);
@@ -108,6 +34,10 @@ void	load_images(t_game *game);
 void	set_event_hooks(t_game *game);
 int		exit_game(char *msg);
 void	load_player(t_game *game);
+void	draw_wall_collision_point(t_game *game);
+void	draw_minimap(t_game *game);
+bool	is_start_position(char tile);
+void	draw_wall_intersection(t_game *game);
 
 //key_input
 void	fetch_key_input(t_game *game);
@@ -115,8 +45,16 @@ void	fetch_key_input(t_game *game);
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);
 int		create_trgb(int t, int r, int g, int b);
+void	draw_player_pos(t_game *game);
+void 	my_mlx_pixel_put(t_image *img, int x, int y, int color);
+
+//raycasting
+void	walk_to_wall(t_game *game, t_player_info *player, t_raycasting *ray_info);
+void	emit_ray(t_game *game);
+bool	is_out_of_map_height(t_game *game, double y);
+bool	is_out_of_map_width(t_game *game, double x);
+void	ray_casting(t_game *game);
 
 //debug
 void	print_debug_info(t_game *game);
-
 #endif
