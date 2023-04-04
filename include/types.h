@@ -94,6 +94,7 @@ typedef enum e_input_key {
 typedef struct s_raycasting {
 	float	dx;
 	float	dy;
+	t_vec	ray_dir;
 	t_vec	x_pos_on_grid;
 	t_vec	y_pos_on_grid;
 	float	x_step_on_y_axis;

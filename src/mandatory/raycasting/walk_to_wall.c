@@ -30,18 +30,19 @@ bool	finish_x_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 	int		map_x = *x;
 	int		map_y = floor(*y);
 
+	(void) player;
 	if (is_out_of_map_height(game, map_y))
 			return (set_inf(x, y));
-	if (player->dir.x > 0 && is_out_of_map_width(game, map_x))
+	if (ray_info->ray_dir.x > 0 && is_out_of_map_width(game, map_x))
 			return (set_inf(x, y));
-	if (player->dir.x < 0 && is_out_of_map_width(game, map_x - 1))
+	if (ray_info->ray_dir.x < 0 && is_out_of_map_width(game, map_x - 1))
 			return (set_inf(x, y));
-	if (player->dir.x == 0)
+	if (ray_info->ray_dir.x == 0)
 		return (set_inf(x, y));
-	if (player->dir.x > 0)
+	if (ray_info->ray_dir.x > 0)
 		if (game->map[map_y][map_x] == '1')
 			return (true);
-	if (player->dir.x < 0)
+	if (ray_info->ray_dir.x < 0)
 		if (game->map[map_y][map_x - 1] == '1')
 			return (true);
 	return (false);
@@ -54,18 +55,19 @@ bool	finish_y_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 	int		map_x = floor(*x);
 	int		map_y = *y;
 
-	if (player->dir.y > 0 && is_out_of_map_height(game, map_y - 1))
+	(void) player;
+	if (ray_info->ray_dir.y > 0 && is_out_of_map_height(game, map_y - 1))
 		return (set_inf(x, y));
-	if (player->dir.y < 0 && is_out_of_map_height(game, map_y))
+	if (ray_info->ray_dir.y < 0 && is_out_of_map_height(game, map_y))
 		return (set_inf(x, y));
 	if (is_out_of_map_width(game, map_x))
 		return (set_inf(x, y));
-	if (player->dir.y == 0)
+	if (ray_info->ray_dir.y == 0)
 		return (set_inf(x, y));
-	if (player->dir.y > 0)
+	if (ray_info->ray_dir.y > 0)
 		if (game->map[map_y - 1][map_x] == '1')
 			return (true);
-	if (player->dir.y < 0)
+	if (ray_info->ray_dir.y < 0)
 		if (game->map[map_y][map_x] == '1')
 			return (true);
 	return (false);
@@ -80,15 +82,15 @@ void	walk_to_x_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 	}
 	while (1)
 	{
-		printf("x_tile_step, x_step_on_y_axis %f, %f\n", ray_info->x_tile_step, ray_info->x_step_on_y_axis);
-		printf("x_pos %f, %f\n", ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
+		// printf("x_tile_step, x_step_on_y_axis %f, %f\n", ray_info->x_tile_step, ray_info->x_step_on_y_axis);
+		// printf("x_pos %f, %f\n", ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
 		if (finish_x_wall(game, player, ray_info))
 			break ;
 		
 		ray_info->x_pos_on_grid.x += ray_info->x_tile_step;
 		ray_info->x_pos_on_grid.y += ray_info->x_step_on_y_axis;
 	}
-	printf("result of x walk %d, %f, %f\n", __LINE__, ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
+	// printf("result of x walk %d, %f, %f\n", __LINE__, ray_info->x_pos_on_grid.x, ray_info->x_pos_on_grid.y);
 }
 
 void	walk_to_y_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
@@ -100,14 +102,14 @@ void	walk_to_y_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 	}
 	while (1)
 	{
-		printf("y_tile_step, y_step_on_x_axis %f, %f\n", ray_info->y_tile_step, ray_info->y_step_on_x_axis);
-		printf("y_pos %f, %f\n", ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
+		// printf("y_tile_step, y_step_on_x_axis %f, %f\n", ray_info->y_tile_step, ray_info->y_step_on_x_axis);
+		// printf("y_pos %f, %f\n", ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
 		if (finish_y_wall(game, player, ray_info))
 			break ;
 		ray_info->y_pos_on_grid.x += ray_info->y_step_on_x_axis;
 		ray_info->y_pos_on_grid.y += ray_info->y_tile_step;
 	}
-	printf("result of y walk %d, %f, %f\n", __LINE__, ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
+	// printf("result of y walk %d, %f, %f\n", __LINE__, ray_info->y_pos_on_grid.x, ray_info->y_pos_on_grid.y);
 }
 
 void	walk_to_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)

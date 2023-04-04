@@ -84,9 +84,9 @@
 // 	float y_diff;
 
 // 	pos_to_vertical_line = ceil(player->pos.x) - player->pos.x;
-// 	y_diff = player->dir.y * pos_to_vertical_line / player->dir.x; //FIXME:dir.xが0でない保証をしないといけない
+// 	y_diff = ray_info->ray_dir.y * pos_to_vertical_line / ray_info->ray_dir.x; //FIXME:dir.xが0でない保証をしないといけない
 // 	nearest->y_pos = player->pos.y + y_diff;
-// 	player->dir;
+// 	ray_info->ray_dir;
 
 // 	find_nearest_x_pos(nearest_x_pos);
 // 	find_nearest_y_pos(nearest_y_pos);
@@ -146,33 +146,34 @@ void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
 
 void	calc_dx_dy(t_player_info *player, t_raycasting *ray_info)
 {
-	if (player->dir.x > 0)
+	if (ray_info->ray_dir.x > 0)
 		ray_info->dx = ceil(player->pos.x) - player->pos.x;
-	else if (player->dir.x < 0)
+	else if (ray_info->ray_dir.x < 0)
 		ray_info->dx = floor(player->pos.x) - player->pos.x;
-	else if (player->dir.x == 0)
+	else if (ray_info->ray_dir.x == 0)
 		ray_info->dx = 0;
-	if (player->dir.y > 0)
+	if (ray_info->ray_dir.y > 0)
 		ray_info->dy = floor(player->pos.y) - player->pos.y;
-	else if (player->dir.y < 0)
+	else if (ray_info->ray_dir.y < 0)
 		ray_info->dy = ceil(player->pos.y) - player->pos.y;
-	else if (player->dir.y == 0)
+	else if (ray_info->ray_dir.y == 0)
 		ray_info->dy = 0;
 }
 
 void	calc_tile_step(t_player_info *player, t_raycasting *ray_info)
 {
-	if (player->dir.x > 0)
+	(void) player;
+	if (ray_info->ray_dir.x > 0)
 		ray_info->x_tile_step = 1;
-	else if (player->dir.x < 0)
+	else if (ray_info->ray_dir.x < 0)
 		ray_info->x_tile_step = -1;
-	else if (player->dir.x == 0)
+	else if (ray_info->ray_dir.x == 0)
 		ray_info->x_tile_step = 0;
-	if (player->dir.y > 0)
+	if (ray_info->ray_dir.y > 0)
 		ray_info->y_tile_step = -1;
-	else if (player->dir.y < 0)
+	else if (ray_info->ray_dir.y < 0)
 		ray_info->y_tile_step = 1;
-	else if (player->dir.y == 0)
+	else if (ray_info->ray_dir.y == 0)
 		ray_info->y_tile_step = 0;
 }
 
@@ -184,17 +185,18 @@ void	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, fl
 
 void	calc_digital_difference(t_player_info *player, t_raycasting *ray_info, float theta)
 {
-	if (player->dir.x > 0)
+	(void) player;
+	if (ray_info->ray_dir.x > 0)
 		ray_info->x_step_on_y_axis = - tan(theta);
-	else if (player->dir.x < 0)
+	else if (ray_info->ray_dir.x < 0)
 		ray_info->x_step_on_y_axis = tan(theta);
-	else if (player->dir.x == 0)
+	else if (ray_info->ray_dir.x == 0)
 		ray_info->x_step_on_y_axis = 0;
-	if (player->dir.y > 0)
+	if (ray_info->ray_dir.y > 0)
 		ray_info->y_step_on_x_axis = 1 / tan(theta);
-	else if (player->dir.y < 0)
+	else if (ray_info->ray_dir.y < 0)
 		ray_info->y_step_on_x_axis = - 1 / tan(theta);
-	else if (player->dir.y == 0)
+	else if (ray_info->ray_dir.y == 0)
 		ray_info->y_step_on_x_axis = 0;
 
 }
@@ -240,11 +242,12 @@ float calculate_wall_height(float distance_to_wall)
 	return (WALL_HEIGHT/distance_to_wall); //TODO:0で割るのを除外
 }
 
-void	get_wall_height(t_game *game, float theta)
+void	get_wall_height(t_game *game, t_vec ray_dir, float theta)
 {
 	float			distance_to_wall;
 	t_raycasting	ray_info;
 
+	ray_info.ray_dir = ray_dir;
 	measure_distance_to_wall(game, &ray_info, theta);
 	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
 	// game->player.wall_height = calculate_wall_height(distance_to_wall);
@@ -270,12 +273,17 @@ void	emit_ray(t_game *game)
 	// printf("left_angle is %f\n", left_angle);
 	// get_wall_height(game, theta);
 	
+
+	get_wall_height(game, game->player.dir, dir_to_angle(game->player.dir));
+	if (!is_out_of_map_width(game, game->player.near_x / 10) && !is_out_of_map_height(game, game->player.near_y / 10))
+		my_mlx_pixel_put(&game->img, game->player.near_x, game->player.near_y, COLOR_RED);
+
 	if (left_angle > right_angle)
 	{
 		while (left_angle > right_angle)
 		{
 			printf("\033[0;92m right_angle is %f\033[0;39m\n", right_angle);
-			get_wall_height(game, right_angle);
+			get_wall_height(game, right_vec, right_angle);
 			draw_wall_intersection(game);
 			right_vec = ft_rotate_vec(right_vec, ft_deg_to_rad(1));
 			float temp = right_angle;
@@ -289,7 +297,7 @@ void	emit_ray(t_game *game)
 		while (right_angle < 2 * M_PI)
 		{
 			// printf("right_angle is %f\n", right_angle);
-			get_wall_height(game, right_angle);
+			get_wall_height(game, right_vec, right_angle);
 			draw_wall_intersection(game);
 
 			right_vec = ft_rotate_vec(right_vec, ft_deg_to_rad(1));
@@ -302,7 +310,7 @@ void	emit_ray(t_game *game)
 		while (right_angle < left_angle)
 		{
 			// printf("right_angle is %f\n", right_angle);
-			get_wall_height(game, right_angle);
+			get_wall_height(game, right_vec, right_angle);
 			draw_wall_intersection(game);
 			right_vec = ft_rotate_vec(right_vec, ft_deg_to_rad(1));
 			float temp = right_angle;
