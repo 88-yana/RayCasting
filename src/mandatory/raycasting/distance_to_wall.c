@@ -68,9 +68,8 @@ void	calc_dx_dy(t_player_info *player, t_raycasting *ray_info)
 		ray_info->dy = 0;
 }
 
-void	calc_tile_step(t_player_info *player, t_raycasting *ray_info)
+void	calc_tile_step(t_raycasting *ray_info)
 {
-	(void) player;
 	if (ray_info->ray_dir.x > 0)
 		ray_info->x_tile_step = 1;
 	else if (ray_info->ray_dir.x < 0)
@@ -91,9 +90,8 @@ void	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, fl
 	set_nearest_pos(player, ray_info, theta);
 }
 
-void	calc_digital_difference(t_player_info *player, t_raycasting *ray_info, float theta)
+void	calc_digital_difference(t_raycasting *ray_info, float theta)
 {
-	(void) player;
 	if (ray_info->ray_dir.x > 0)
 		ray_info->x_step_on_y_axis = - tan(theta);
 	else if (ray_info->ray_dir.x < 0)
@@ -140,8 +138,8 @@ float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
 void	measure_distance_to_wall(t_game *game, t_raycasting *ray_info, float theta)
 {
 	find_nearest_grid_on_line(&game->player, ray_info, theta);
-	calc_digital_difference(&game->player, ray_info, theta);
-	calc_tile_step(&game->player, ray_info);
+	calc_digital_difference(ray_info, theta);
+	calc_tile_step(ray_info);
 	walk_to_wall(game, &game->player, ray_info);
 }
 
