@@ -25,7 +25,6 @@ void	move_player(t_game *game)
 	dir = ft_mul_vec(dir, MOVE_COEF);
 	game->player.pos.x += dir.x;
 	game->player.pos.y -= dir.y;
-
 }
 
 /**

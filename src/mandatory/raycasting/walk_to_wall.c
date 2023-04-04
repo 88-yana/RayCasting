@@ -21,15 +21,17 @@ bool	is_out_of_map_width(t_game *game, double x)
 	return (false);
 }
 
-
-
 bool	finish_x_wall(t_game *game, t_raycasting *ray_info)
 {
-	float	*x = &ray_info->x_pos_on_grid.x;
-	float	*y = &ray_info->x_pos_on_grid.y;
-	int		map_x = *x;
-	int		map_y = floor(*y);
+	float	*x;
+	float	*y;
+	int		map_x;
+	int		map_y;
 
+	x = &ray_info->x_pos_on_grid.x;
+	y = &ray_info->x_pos_on_grid.y;
+	map_x = *x;
+	map_y = floor(*y);
 	if (is_out_of_map_height(game, map_y))
 			return (set_inf(x, y));
 	if (ray_info->ray_dir.x > 0 && is_out_of_map_width(game, map_x))
@@ -49,11 +51,15 @@ bool	finish_x_wall(t_game *game, t_raycasting *ray_info)
 
 bool	finish_y_wall(t_game *game, t_raycasting *ray_info)
 {
-	float	*x = &ray_info->y_pos_on_grid.x;
-	float	*y = &ray_info->y_pos_on_grid.y;
-	int		map_x = floor(*x);
-	int		map_y = *y;
+	float	*x;
+	float	*y;
+	int		map_x;
+	int		map_y;
 
+	x = &ray_info->y_pos_on_grid.x;
+	y = &ray_info->y_pos_on_grid.y;
+	map_x = floor(*x);
+	map_y = *y;
 	if (ray_info->ray_dir.y > 0 && is_out_of_map_height(game, map_y - 1))
 		return (set_inf(x, y));
 	if (ray_info->ray_dir.y < 0 && is_out_of_map_height(game, map_y))
