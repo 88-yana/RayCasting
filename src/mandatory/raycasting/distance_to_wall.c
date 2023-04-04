@@ -181,7 +181,18 @@ bool	rotate_right_angle(t_vec *right_dir, float *right_angle)
 	return (true);
 }
 
-void	emit_ray(t_game *game)
+void	emit_rays(t_game *game, t_vec *right_dir, float left_angle, float right_angle)
+{
+	while (left_angle > right_angle)
+	{
+		get_wall_height(game, *right_dir, right_angle);
+		draw_wall_intersection(game);
+		if (!rotate_right_angle(right_dir, &right_angle))
+			break ;
+	}
+}
+
+void	ray_casting(t_game *game)
 {
 	float	right_angle;
 	float	left_angle;
@@ -194,31 +205,10 @@ void	emit_ray(t_game *game)
 	left_angle = dir_to_angle(left_dir);
 	draw_ray_on_near_grid(game);
 	if (left_angle > right_angle)
-	{
-		while (left_angle > right_angle)
-		{
-			get_wall_height(game, right_dir, right_angle);
-			draw_wall_intersection(game);
-			if (!rotate_right_angle(&right_dir, &right_angle))
-				break ;
-		}
-	}
+		emit_rays(game, &right_dir, left_angle, right_angle);
 	else
 	{
-		while (right_angle < 2 * M_PI)
-		{
-			get_wall_height(game, right_dir, right_angle);
-			draw_wall_intersection(game);
-			if (!rotate_right_angle(&right_dir, &right_angle))
-				break ;
-		}
-		right_angle = 0;
-		while (right_angle < left_angle)
-		{
-			get_wall_height(game, right_dir, right_angle);
-			draw_wall_intersection(game);
-			if (!rotate_right_angle(&right_dir, &right_angle))
-				break ;
-		}
+		emit_rays(game, &right_dir, 2 * M_PI, right_angle);
+		emit_rays(game, &right_dir, left_angle, 0);
 	}
 }
