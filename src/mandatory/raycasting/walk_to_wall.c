@@ -54,19 +54,19 @@ bool	finish_y_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 	int		map_x = floor(*x);
 	int		map_y = *y;
 
-	if (player->dir.y > 0 && is_out_of_map_height(game, map_y))
+	if (player->dir.y > 0 && is_out_of_map_height(game, map_y - 1))
 		return (set_inf(x, y));
-	if (player->dir.y < 0 && is_out_of_map_height(game, map_y + 1))
+	if (player->dir.y < 0 && is_out_of_map_height(game, map_y))
 		return (set_inf(x, y));
 	if (is_out_of_map_width(game, map_x))
 		return (set_inf(x, y));
 	if (player->dir.y == 0)
 		return (set_inf(x, y));
 	if (player->dir.y > 0)
-		if (game->map[map_y][map_x] == '1')
+		if (game->map[map_y - 1][map_x] == '1')
 			return (true);
 	if (player->dir.y < 0)
-		if (game->map[map_y + 1][map_x] == '1')
+		if (game->map[map_y][map_x] == '1')
 			return (true);
 	return (false);
 }
