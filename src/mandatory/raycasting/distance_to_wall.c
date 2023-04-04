@@ -215,17 +215,12 @@ float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
  * @param game 
  * @return float 
  */
-float	measure_distance_to_wall(t_game *game, float theta)
+void	measure_distance_to_wall(t_game *game, t_raycasting *ray_info, float theta)
 {
-	t_raycasting	ray_info;
-	float			distance_to_wall;
-
-	find_nearest_grid_on_line(&game->player, &ray_info, theta);
-	calc_digital_difference(&game->player, &ray_info, theta);
-	calc_tile_step(&game->player, &ray_info);
-	walk_to_wall(game, &game->player, &ray_info);
-	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
-	return (distance_to_wall);
+	find_nearest_grid_on_line(&game->player, ray_info, theta);
+	calc_digital_difference(&game->player, ray_info, theta);
+	calc_tile_step(&game->player, ray_info);
+	walk_to_wall(game, &game->player, ray_info);
 }
 
 float calculate_wall_height(float distance_to_wall)
@@ -235,9 +230,11 @@ float calculate_wall_height(float distance_to_wall)
 
 void	get_wall_height(t_game *game, float theta)
 {
-	float	distance_to_wall;
+	float			distance_to_wall;
+	t_raycasting	ray_info;
 
-	distance_to_wall = measure_distance_to_wall(game, theta);
+	measure_distance_to_wall(game, &ray_info, theta);
+	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
 	// game->player.wall_height = calculate_wall_height(distance_to_wall);
 }
 
