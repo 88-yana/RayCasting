@@ -131,6 +131,17 @@ void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
 	else
 		ray_info->y_pos_on_grid.x = player->pos.x - INF;
 	ray_info->y_pos_on_grid.y = player->pos.y + ray_info->dy;
+
+	if (ft_distance_vec(ray_info->x_pos_on_grid, player->pos) < ft_distance_vec(ray_info->y_pos_on_grid, player->pos))
+	{
+		player->near_x = 10 * ray_info->x_pos_on_grid.x;
+		player->near_y = 10 * ray_info->x_pos_on_grid.y;
+	}
+	else
+	{
+		player->near_x = 10 * ray_info->y_pos_on_grid.x;
+		player->near_y = 10 * ray_info->y_pos_on_grid.y;
+	}
 }
 
 void	calc_dx_dy(t_player_info *player, t_raycasting *ray_info)
@@ -185,6 +196,7 @@ void	calc_digital_difference(t_player_info *player, t_raycasting *ray_info, floa
 		ray_info->y_step_on_x_axis = - 1 / tan(theta);
 	else if (player->dir.y == 0)
 		ray_info->y_step_on_x_axis = 0;
+
 }
 
 float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
@@ -194,8 +206,8 @@ float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
 	angle = dir_to_angle(player->dir);
 	player->x_wall_on_minimap = (int) floor(10 * wall_vec.x);
 	// player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y) + 10;
-	player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y) + 10;
-	printf("answer pos %f, %f\n", floor(10 * wall_vec.x), ceil(10 * wall_vec.y) + 10);
+	player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y);
+	printf("answer pos %f, %f\n", floor(10 * wall_vec.x), ceil(10 * wall_vec.y));
 	return ((wall_vec.x - player->pos.x) * cos(angle) + (wall_vec.y - player->pos.y) * sin(angle));
 }
 
