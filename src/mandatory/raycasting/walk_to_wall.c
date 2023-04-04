@@ -28,7 +28,7 @@ bool	finish_x_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
 	float	*x = &ray_info->x_pos_on_grid.x;
 	float	*y = &ray_info->x_pos_on_grid.y;
 	int		map_x = *x;
-	int		map_y = ceil(*y);
+	int		map_y = floor(*y);
 
 	if (is_out_of_map_height(game, map_y))
 			return (set_inf(x, y));
