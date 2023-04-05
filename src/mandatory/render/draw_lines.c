@@ -39,8 +39,3 @@ void	draw_line(t_game *game, t_vec v0, t_vec v1, int color)
 		}
 	}
 }
-
-void	draw_player_pos(t_game *game)
-{
-	draw_pixel(&game->img, game->player.pos.x * 10, game->player.pos.y * 10, COLOR_RED);
-}
