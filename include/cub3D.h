@@ -46,7 +46,7 @@ void	fetch_key_input(t_game *game);
 ssize_t	gnl_wrapper(int fd, char **line);
 int		create_trgb(int t, int r, int g, int b);
 void	draw_player_pos(t_game *game);
-void 	my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 
 //raycasting
 void	walk_to_wall(t_game *game, t_raycasting *ray_info);
@@ -56,6 +56,10 @@ bool	is_out_of_map_width(t_game *game, double x);
 void	ray_casting(t_game *game);
 float	dir_to_angle(t_vec dir);
 void	get_wall_height(t_game *game, t_vec ray_dir, float theta);
+void	calc_dx_dy(t_player_info *player, t_raycasting *ray_info);
+void	calc_tile_step(t_raycasting *ray_info);
+void	calc_digital_difference(t_raycasting *ray_info, float theta);
+float	calc_distance_to_wall(t_player_info *player, t_raycasting *ray_info, t_vec wall_vec);
 
 //debug
 void	print_debug_info(t_game *game);

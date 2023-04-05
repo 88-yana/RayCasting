@@ -7,8 +7,6 @@ bool	set_inf(float *x, float *y)
 	return (true);
 }
 
-
-
 bool	except_x_error(t_game *game, t_raycasting *ray_info)
 {
 	float	*x;
