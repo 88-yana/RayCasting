@@ -49,12 +49,15 @@ void	draw_player_pos(t_game *game);
 void 	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 
 //raycasting
-void	walk_to_wall(t_game *game, t_player_info *player, t_raycasting *ray_info);
+void	walk_to_wall(t_game *game, t_raycasting *ray_info);
 void	emit_ray(t_game *game);
 bool	is_out_of_map_height(t_game *game, double y);
 bool	is_out_of_map_width(t_game *game, double x);
 void	ray_casting(t_game *game);
+float	dir_to_angle(t_vec dir);
+void	get_wall_height(t_game *game, t_vec ray_dir, float theta);
 
 //debug
 void	print_debug_info(t_game *game);
+void	draw_ray_on_near_grid(t_game *game);
 #endif

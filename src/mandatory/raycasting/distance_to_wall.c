@@ -1,32 +1,5 @@
 #include "cub3D.h"
 
-float	dir_to_angle(t_vec dir)
-{
-	if (dir.x > 0 && dir.y > 0)
-		return (atan(dir.y / dir.x));
-	if (dir.x < 0 && dir.y > 0)
-		return (atan(-dir.x / dir.y) + M_PI_2);
-	if (dir.x < 0 && dir.y < 0)
-		return (atan(dir.y / dir.x) + M_PI);
-	if (dir.x > 0 && dir.y < 0)
-		return (atan(dir.x / -dir.y) + 3 * M_PI_2);
-	if (dir.x == 0)
-	{
-		if (dir.y == 1)
-			return (M_PI_2);
-		else if (dir.y == -1)
-			return (3 * M_PI_2);
-	}
-	if (dir.y == 0)
-	{
-		if (dir.x == 1)
-			return (0);
-		else if (dir.x == -1)
-			return (M_PI);
-	}
-	return (0);
-}
-
 void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
 {
 	ray_info->x_pos_on_grid.x = player->pos.x + ray_info->dx;
@@ -93,7 +66,7 @@ void	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, fl
 void	calc_digital_difference(t_raycasting *ray_info, float theta)
 {
 	if (ray_info->ray_dir.x > 0)
-		ray_info->x_step_on_y_axis = - tan(theta);
+		ray_info->x_step_on_y_axis = -tan(theta);
 	else if (ray_info->ray_dir.x < 0)
 		ray_info->x_step_on_y_axis = tan(theta);
 	else if (ray_info->ray_dir.x == 0)
@@ -101,7 +74,7 @@ void	calc_digital_difference(t_raycasting *ray_info, float theta)
 	if (ray_info->ray_dir.y > 0)
 		ray_info->y_step_on_x_axis = 1 / tan(theta);
 	else if (ray_info->ray_dir.y < 0)
-		ray_info->y_step_on_x_axis = - 1 / tan(theta);
+		ray_info->y_step_on_x_axis = -1 / tan(theta);
 	else if (ray_info->ray_dir.y == 0)
 		ray_info->y_step_on_x_axis = 0;
 }
@@ -122,7 +95,8 @@ float	calc_distance_to_wall(t_player_info *player, t_raycasting *ray_info, t_vec
 
 float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
 {
-	if (ft_distance_vec(ray_info->x_pos_on_grid, player->pos) < ft_distance_vec(ray_info->y_pos_on_grid, player->pos))
+	if (ft_distance_vec(ray_info->x_pos_on_grid, player->pos) 
+		< ft_distance_vec(ray_info->y_pos_on_grid, player->pos))
 		return (calc_distance_to_wall(player, ray_info, ray_info->x_pos_on_grid));
 	else
 		return (calc_distance_to_wall(player, ray_info, ray_info->y_pos_on_grid));
@@ -141,7 +115,7 @@ void	measure_distance_to_wall(t_game *game, t_raycasting *ray_info, float theta)
 	find_nearest_grid_on_line(&game->player, ray_info, theta);
 	calc_digital_difference(ray_info, theta);
 	calc_tile_step(ray_info);
-	walk_to_wall(game, &game->player, ray_info);
+	walk_to_wall(game, ray_info);
 }
 
 float calculate_wall_height(float distance_to_wall)
@@ -159,14 +133,6 @@ void	get_wall_height(t_game *game, t_vec ray_dir, float theta)
 	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
 	game->player.wall_height = calculate_wall_height(distance_to_wall);
 }
-
-void	draw_ray_on_near_grid(t_game *game)
-{
-	get_wall_height(game, game->player.dir, dir_to_angle(game->player.dir));
-	if (!is_out_of_map_width(game, game->player.near_x / 10) && !is_out_of_map_height(game, game->player.near_y / 10))
-		my_mlx_pixel_put(&game->img, game->player.near_x, game->player.near_y, COLOR_RED);
-}
-
 
 bool	rotate_right_angle(t_vec *right_dir, float *right_angle)
 {

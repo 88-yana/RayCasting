@@ -7,19 +7,7 @@ bool	set_inf(float *x, float *y)
 	return (true);
 }
 
-bool	is_out_of_map_height(t_game *game, double y)
-{
-	if (y < 0 || game->map_info.height + SP <= y)
-		return (true);
-	return (false);
-}
 
-bool	is_out_of_map_width(t_game *game, double x)
-{
-	if (x < 0 || game->map_info.width + SP <= x)
-		return (true);
-	return (false);
-}
 
 bool	except_x_error(t_game *game, t_raycasting *ray_info)
 {
@@ -125,9 +113,8 @@ void	walk_to_y_wall(t_game *game, t_raycasting *ray_info)
 	}
 }
 
-void	walk_to_wall(t_game *game, t_player_info *player, t_raycasting *ray_info)
+void	walk_to_wall(t_game *game, t_raycasting *ray_info)
 {
-	(void) player;
 	walk_to_x_wall(game, ray_info);
 	walk_to_y_wall(game, ray_info);
 }
