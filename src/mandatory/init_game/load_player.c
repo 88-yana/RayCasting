@@ -58,5 +58,5 @@ void	load_player(t_game *game)
 		}
 		i++;
 	}
-	game->key_code = 0;
+	game->key_store = 0;
 }
