@@ -25,8 +25,6 @@ void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
 	}
 }
 
-
-
 float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
 {
 	if (ft_distance_vec(ray_info->x_pos_on_grid, player->pos) 
@@ -56,11 +54,6 @@ void	measure_distance_to_wall(t_game *game, t_raycasting *ray_info, float theta)
 	calc_digital_difference(ray_info, theta);
 	calc_tile_step(ray_info);
 	walk_to_wall(game, ray_info);
-}
-
-float calculate_wall_height(float distance_to_wall)
-{
-	return (WALL_HEIGHT/distance_to_wall); //TODO:0で割るのを除外
 }
 
 void	get_wall_height(t_game *game, t_vec ray_dir, float theta)

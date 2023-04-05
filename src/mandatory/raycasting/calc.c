@@ -48,7 +48,8 @@ void	calc_digital_difference(t_raycasting *ray_info, float theta)
 		ray_info->y_step_on_x_axis = 0;
 }
 
-float	calc_distance_to_wall(t_player_info *player, t_raycasting *ray_info, t_vec wall_vec)
+float	calc_distance_to_wall(
+		t_player_info *player, t_raycasting *ray_info, t_vec wall_vec)
 {
 	float	player_angle;
 	float	ray_angle;
@@ -60,4 +61,9 @@ float	calc_distance_to_wall(t_player_info *player, t_raycasting *ray_info, t_vec
 	ray_angle = dir_to_angle(ray_info->ray_dir);
 	angle_difference = fabs(ray_angle - player_angle);
 	return (ft_distance_vec(wall_vec, player->pos) * cos(angle_difference));
+}
+
+float	calculate_wall_height(float distance_to_wall)
+{
+	return (WALL_HEIGHT/distance_to_wall); //TODO:0で割るのを除外
 }

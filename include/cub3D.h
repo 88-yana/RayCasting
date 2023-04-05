@@ -59,7 +59,12 @@ void	get_wall_height(t_game *game, t_vec ray_dir, float theta);
 void	calc_dx_dy(t_player_info *player, t_raycasting *ray_info);
 void	calc_tile_step(t_raycasting *ray_info);
 void	calc_digital_difference(t_raycasting *ray_info, float theta);
-float	calc_distance_to_wall(t_player_info *player, t_raycasting *ray_info, t_vec wall_vec);
+float	calc_distance_to_wall(
+			t_player_info *player, t_raycasting *ray_info, t_vec wall_vec);
+float	calculate_wall_height(float distance_to_wall);
+bool	set_inf(float *x, float *y);
+bool	except_x_error(t_game *game, t_raycasting *ray_info);
+bool	except_y_error(t_game *game, t_raycasting *ray_info);
 
 //debug
 void	print_debug_info(t_game *game);
