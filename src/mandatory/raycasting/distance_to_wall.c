@@ -155,7 +155,7 @@ void	get_wall_height(t_game *game, t_vec ray_dir, float theta)
 	ray_info.ray_dir = ray_dir;
 	measure_distance_to_wall(game, &ray_info, theta);
 	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
-	// game->player.wall_height = calculate_wall_height(distance_to_wall);
+	game->player.wall_height = calculate_wall_height(distance_to_wall);
 }
 
 void	draw_ray_on_near_grid(t_game *game)
@@ -201,6 +201,7 @@ void	ray_casting(t_game *game)
 	right_angle = dir_to_angle(right_dir);
 	left_angle = dir_to_angle(left_dir);
 	draw_ray_on_near_grid(game);
+	printf("wall height is %f\n", game->player.wall_height);
 	if (left_angle > right_angle)
 		emit_rays(game, &right_dir, left_angle, right_angle);
 	else
