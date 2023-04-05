@@ -46,7 +46,7 @@ void	fetch_key_input(t_game *game);
 ssize_t	gnl_wrapper(int fd, char **line);
 int		create_trgb(int t, int r, int g, int b);
 void	draw_player_pos(t_game *game);
-void 	my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void 	draw_pixel(t_image *img, int x, int y, int color);
 
 //raycasting
 void	walk_to_wall(t_game *game, t_player_info *player, t_raycasting *ray_info);
@@ -54,6 +54,7 @@ void	emit_ray(t_game *game);
 bool	is_out_of_map_height(t_game *game, double y);
 bool	is_out_of_map_width(t_game *game, double x);
 void	ray_casting(t_game *game);
+void	draw_line(t_game *game, t_vec v0, t_vec v1, int color);
 
 //debug
 void	print_debug_info(t_game *game);

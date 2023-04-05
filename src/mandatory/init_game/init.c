@@ -1,59 +1,6 @@
 #include "cub3D.h"
 #include "math.h"
 
-void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
-}
-
-void	draw_rectangle(t_image *img, t_vec *p, int size, int color)
-{
-	size_t	i;
-	size_t	j;
-
-	i = p->y;
-	while (i < p->y + size)
-	{
-		j = p->x;
-		while (j < p->x + size)
-		{
-			my_mlx_pixel_put(img, i, j, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_minimap(t_game *game)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (i < game->map_info.height + 2)
-	{
-		j = 0;
-		while (j < game->map_info.width + 2)
-		{
-			if (game->map[i][j] == '1')
-				draw_rectangle(&game->img, &(t_vec){i * 10, j * 10}, 10, COLOR_LGRAY);
-			else if (game->map[i][j] == '0' || is_start_position(game->map[i][j])) //FIXME:implicitだったので，コメントアウトした
-				draw_rectangle(&game->img, &(t_vec){i * 10, j * 10}, 10, COLOR_GRAY);
-			j++;
-		}
-		i++;
-	}
-}
-
-
-void	draw_player_pos(t_game *game)
-{
-	my_mlx_pixel_put(&game->img, game->player.pos.x * 10, game->player.pos.y * 10, COLOR_RED);
-}
-
 void	init_image(t_game *game)
 {
 	t_image	*img;
