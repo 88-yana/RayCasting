@@ -104,26 +104,28 @@ void	calc_digital_difference(t_raycasting *ray_info, float theta)
 		ray_info->y_step_on_x_axis = - 1 / tan(theta);
 	else if (ray_info->ray_dir.y == 0)
 		ray_info->y_step_on_x_axis = 0;
-
 }
 
-float	calc_distance_to_wall(t_player_info *player, t_vec wall_vec)
+float	calc_distance_to_wall(t_player_info *player, t_raycasting *ray_info, t_vec wall_vec)
 {
-	float	angle;
+	float	player_angle;
+	float	ray_angle;
+	float	angle_difference;
 
-	angle = dir_to_angle(player->dir);
 	player->x_wall_on_minimap = (int) floor(10 * wall_vec.x);
-	// player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y) + 10;
 	player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y);
-	return ((wall_vec.x - player->pos.x) * cos(angle) + (wall_vec.y - player->pos.y) * sin(angle));
+	player_angle = dir_to_angle(player->dir);
+	ray_angle = dir_to_angle(ray_info->ray_dir);
+	angle_difference = fabs(ray_angle - player_angle);
+	return (ft_distance_vec(wall_vec, player->pos) * cos(angle_difference));
 }
 
 float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
 {
 	if (ft_distance_vec(ray_info->x_pos_on_grid, player->pos) < ft_distance_vec(ray_info->y_pos_on_grid, player->pos))
-		return (calc_distance_to_wall(player, ray_info->x_pos_on_grid));
+		return (calc_distance_to_wall(player, ray_info, ray_info->x_pos_on_grid));
 	else
-		return (calc_distance_to_wall(player, ray_info->y_pos_on_grid));
+		return (calc_distance_to_wall(player, ray_info, ray_info->y_pos_on_grid));
 }
 
 /**
@@ -201,7 +203,6 @@ void	ray_casting(t_game *game)
 	right_angle = dir_to_angle(right_dir);
 	left_angle = dir_to_angle(left_dir);
 	draw_ray_on_near_grid(game);
-	printf("wall height is %f\n", game->player.wall_height);
 	if (left_angle > right_angle)
 		emit_rays(game, &right_dir, left_angle, right_angle);
 	else
