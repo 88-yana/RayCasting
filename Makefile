@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -MMD -MP -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -MMD -MP
 INCLUDE = -I ./include/ -I $(LIBFTDIR)/incs/ -I $(MINILIBXDIR)/
 
 SRCDIR = src
@@ -23,7 +23,7 @@ NAME = cub3D
 all: $(OBJDIR) $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_A) $(MINILIBX)
-	$(CC) -fsanitize=address $(OBJ) $(LIBFT_A) $(MINILIBX) -o $(NAME)
+	$(CC) $(OBJ) $(LIBFT_A) $(MINILIBX) -o $(NAME)
 
 $(OBJDIR):
 	mkdir $(shell find $(SRCDIR) -type d | sed 's/^$(SRCDIR)/$(OBJDIR)/g')

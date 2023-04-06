@@ -47,6 +47,7 @@ ssize_t	gnl_wrapper(int fd, char **line);
 int		create_trgb(int t, int r, int g, int b);
 void	draw_player_pos(t_game *game);
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void 	draw_pixel(t_image *img, int x, int y, int color);
 
 //raycasting
 void	walk_to_wall(t_game *game, t_raycasting *ray_info);
@@ -65,6 +66,11 @@ float	calculate_wall_height(float distance_to_wall);
 bool	set_inf(float *x, float *y);
 bool	except_x_error(t_game *game, t_raycasting *ray_info);
 bool	except_y_error(t_game *game, t_raycasting *ray_info);
+
+//minimap
+void	draw_line(t_game *game, t_vec v0, t_vec v1, int color);
+void	draw_player_position(t_game *game);
+void	draw_player_pos(t_game *game);
 
 //debug
 void	print_debug_info(t_game *game);

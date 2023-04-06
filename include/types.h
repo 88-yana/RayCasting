@@ -70,7 +70,7 @@ typedef struct s_game {
 	t_map_info		map_info;
 	t_texture		images;
 	t_player_info	player;
-	int				key_code;
+	int				key_store;
 	void			*mlx;
 	void			*win;
 	t_image			img;

@@ -14,13 +14,13 @@ void	move_player(t_game *game)
 
 	pos = game->player.pos;
 	dir = game->player.dir;
-	if (game->key_code & MOVE_FORWARD)
+	if (game->key_store & MOVE_FORWARD)
 		;
-	else if (game->key_code & MOVE_BACKWARD)
+	else if (game->key_store & MOVE_BACKWARD)
 		dir = ft_rotate_vec(dir, M_PI);
-	else if (game->key_code & MOVE_LEFT)
+	else if (game->key_store & MOVE_LEFT)
 		dir = ft_rotate_vec(dir, M_PI_2);
-	else if (game->key_code & MOVE_RIGHT)
+	else if (game->key_store & MOVE_RIGHT)
 		dir = ft_rotate_vec(dir, -M_PI_2);
 	dir = ft_mul_vec(dir, MOVE_COEF);
 	game->player.pos.x += dir.x;
@@ -37,9 +37,9 @@ void	rotate_player(t_game *game)
 	t_vec	*dir;
 
 	dir = &game->player.dir;
-	if (game->key_code & ROTATE_LEFT)
+	if (game->key_store & ROTATE_LEFT)
 		*dir = ft_rotate_vec(*dir, ft_deg_to_rad(1));
-	if (game->key_code & ROTATE_RIGHT)
+	if (game->key_store & ROTATE_RIGHT)
 		*dir = ft_rotate_vec(*dir, ft_deg_to_rad(-1));
 }
 
@@ -51,7 +51,7 @@ void	rotate_player(t_game *game)
  */
 void	config_game(t_game *game)
 {
-	if (game->key_code & GAME_EXIT)
+	if (game->key_store & GAME_EXIT)
 		exit_game(MSG_EXIT_GAME);
 }
 
@@ -62,10 +62,10 @@ void	config_game(t_game *game)
  */
 void	fetch_key_input(t_game *game)
 {
-	if (game->key_code & MOVE)
+	if (game->key_store & MOVE)
 		move_player(game);
-	else if (game->key_code & ROTATE)
+	else if (game->key_store & ROTATE)
 		rotate_player(game);
-	else if (game->key_code & CONFIG)
+	else if (game->key_store & CONFIG)
 		config_game(game);
 }

@@ -34,7 +34,6 @@ void	ray_casting(t_game *game)
 	left_dir = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
 	right_angle = dir_to_angle(right_dir);
 	left_angle = dir_to_angle(left_dir);
-	draw_ray_on_near_grid(game);
 	if (left_angle > right_angle)
 		emit_rays(game, &right_dir, left_angle, right_angle);
 	else

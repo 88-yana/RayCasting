@@ -45,8 +45,8 @@ void	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, fl
  * 最初に一番近いグリッド線上の位置を見つける
  * その位置と次に近い位置から，差分(= digital difference)を計測
  * 一番近いグリッド線上から，差分を足していき，壁の位置を見つけ，playerの位置との差から,壁までの距離を求める
- * @param game 
- * @return float 
+ * @param game
+ * @return float
  */
 void	measure_distance_to_wall(t_game *game, t_raycasting *ray_info, float theta)
 {
@@ -65,4 +65,5 @@ void	get_wall_height(t_game *game, t_vec ray_dir, float theta)
 	measure_distance_to_wall(game, &ray_info, theta);
 	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
 	game->player.wall_height = calculate_wall_height(distance_to_wall);
+	// game->player.wall_height = calculate_wall_height(distance_to_wall);
 }
