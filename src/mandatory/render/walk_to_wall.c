@@ -21,8 +21,6 @@ bool	is_out_of_map_width(t_game *game, double x)
 	return (false);
 }
 
-
-
 bool	finish_x_wall(t_game *game, t_raycasting *ray_info)
 {
 	float	*x = &ray_info->x_pos_on_grid.x;
