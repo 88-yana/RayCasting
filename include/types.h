@@ -103,7 +103,6 @@ typedef struct s_raycasting {
 	float	y_tile_step;
 	float	x_distance_to_wall;
 	float	y_distance_to_wall;
-
 }	t_raycasting;
 
 #endif

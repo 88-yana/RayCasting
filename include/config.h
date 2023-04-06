@@ -25,6 +25,7 @@
 # define INF 3000
 
 # define TIP_SIZE 10
+# define MOVE_COEF 0.1f
 
 /** Color Settings */
 # define COLOR_BLACK  0x0000000
