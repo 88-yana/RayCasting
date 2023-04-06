@@ -10,17 +10,17 @@
 int	store_key_press(int keycode, t_game *game)
 {
 	if (keycode == KEY_W || keycode == KEY_UP)
-		game->key_code = MOVE_FORWARD;
+		game->key_store |= MOVE_FORWARD;
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
-		game->key_code = MOVE_BACKWARD;
+		game->key_store |= MOVE_BACKWARD;
 	else if (keycode == KEY_A)
-		game->key_code = MOVE_LEFT;
+		game->key_store |= MOVE_LEFT;
 	else if (keycode == KEY_D)
-		game->key_code = MOVE_RIGHT;
+		game->key_store |= MOVE_RIGHT;
 	else if (keycode == KEY_LEFT)
-		game->key_code = ROTATE_LEFT;
+		game->key_store |= ROTATE_LEFT;
 	else if (keycode == KEY_RIGHT)
-		game->key_code = ROTATE_RIGHT;
+		game->key_store |= ROTATE_RIGHT;
 	return (0);
 }
 
@@ -35,9 +35,19 @@ int	store_key_release(int keycode, t_game *game)
 {
 	(void)keycode;
 	if (keycode == KEY_Q || keycode == KEY_ESC)
-		game->key_code = GAME_EXIT;
-	else
-		game->key_code = 0;
+		game->key_store = GAME_EXIT;
+	else if (keycode == KEY_W || keycode == KEY_UP)
+		game->key_store &= ~MOVE_FORWARD;
+	else if (keycode == KEY_S || keycode == KEY_DOWN)
+		game->key_store &= ~MOVE_BACKWARD;
+	else if (keycode == KEY_A)
+		game->key_store &= ~MOVE_LEFT;
+	else if (keycode == KEY_D)
+		game->key_store &= ~MOVE_RIGHT;
+	else if (keycode == KEY_LEFT)
+		game->key_store &= ~ROTATE_LEFT;
+	else if (keycode == KEY_RIGHT)
+		game->key_store &= ~ROTATE_RIGHT;
 	return (0);
 }
 
