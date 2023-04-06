@@ -53,6 +53,7 @@ int	store_key_release(int keycode, t_game *game)
 
 int	update_game(t_game *game)
 {
+	check_collision(game);
 	fetch_key_input(game);
 	print_debug_info(game);
 	draw_minimap(game);
