@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-#define COLLISION_MARGIN 0.5
+#define COLLISION_MARGIN 0.2
 
 bool	is_collided_with_wall(t_vec p, char **map)
 {
