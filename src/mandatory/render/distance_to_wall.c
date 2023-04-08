@@ -27,11 +27,23 @@ void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
 
 float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
 {
-	if (ft_distance_vec(ray_info->x_pos_on_grid, player->pos) 
+	if (ft_distance_vec(ray_info->x_pos_on_grid, player->pos)
 		< ft_distance_vec(ray_info->y_pos_on_grid, player->pos))
+	{
+		if (ray_info->ray_dir.x > 0)
+			player->news = EAST;
+		else
+			player->news = WEST;
 		return (calc_distance_to_wall(player, ray_info, ray_info->x_pos_on_grid));
+	}
 	else
+	{
+		if (ray_info->ray_dir.y < 0)
+			player->news = NORTH;
+		else
+			player->news = SOUTH;
 		return (calc_distance_to_wall(player, ray_info, ray_info->y_pos_on_grid));
+	}
 }
 
 void	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, float theta)
