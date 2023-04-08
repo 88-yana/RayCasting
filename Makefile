@@ -13,7 +13,7 @@ LIBFT_A = $(LIBFTDIR)/libft.a
 MINILIBXDIR = ./lib/minilibx
 MINILIBX = libmlx.dylib
 
-TEST_MAPS = $(shell find test
+TEST_MAPS = $(shell find test)
 DEFAULT := \033[0;39m
 BLUE := \033[0;94m
 GREEN := \033[0;92m
