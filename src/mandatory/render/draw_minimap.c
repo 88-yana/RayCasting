@@ -46,4 +46,3 @@ void	draw_minimap(t_game *game)
 		i++;
 	}
 }
-

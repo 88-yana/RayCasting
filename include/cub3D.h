@@ -67,6 +67,9 @@ float	calculate_wall_height(float distance_to_wall);
 bool	set_inf(float *x, float *y);
 bool	except_x_error(t_game *game, t_raycasting *ray_info);
 bool	except_y_error(t_game *game, t_raycasting *ray_info);
+void	draw_pixel(t_image *img, int x, int y, int color);
+void	draw_rectangle(t_image *img, t_vec *p, int size, int color);
+void	draw_map(t_game *game, int x_axis);
 
 //minimap
 void	draw_line(t_game *game, t_vec v0, t_vec v1, int color);

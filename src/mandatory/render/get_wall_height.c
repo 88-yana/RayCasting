@@ -77,5 +77,4 @@ void	get_wall_height(t_game *game, t_vec ray_dir, float theta)
 	measure_distance_to_wall(game, &ray_info, theta);
 	distance_to_wall = choose_distance_to_wall(&game->player, &ray_info);
 	game->player.wall_height = calculate_wall_height(distance_to_wall);
-	// game->player.wall_height = calculate_wall_height(distance_to_wall);
 }

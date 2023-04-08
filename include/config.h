@@ -35,8 +35,8 @@
 # define COLOR_LGRAY 0x0afafb0
 # define COLOR_YELLOW 0x0FFFF00
 /** Screen settings */
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 960
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
 # define WIN_TITLE "Cub3D -- Mandatory"
 
 /***** Key settings for Mac. *****/

@@ -16,16 +16,5 @@ void	draw_wall_intersection(t_game *game)
 	{
 		draw_pixel(&game->img, x, y, COLOR_GREEN);
 		draw_line(game, (t_vec){player_x, player_y}, (t_vec){x, y}, COLOR_YELLOW);
-		// draw_pixel(&game->img, x - 1, y, COLOR_GREEN);
-		// draw_pixel(&game->img, x - 2, y, COLOR_GREEN);
-		// draw_pixel(&game->img, x + 1, y, COLOR_GREEN);
-		// draw_pixel(&game->img, x + 2, y, COLOR_GREEN);
-		// draw_pixel(&game->img, x, y - 1, COLOR_GREEN);
-		// draw_pixel(&game->img, x, y - 2, COLOR_GREEN);
-		// draw_pixel(&game->img, x, y + 1, COLOR_GREEN);
-		// draw_pixel(&game->img, x, y + 2, COLOR_GREEN);
 	}
-	// if (!is_out_of_map_width(game, game->player.near_x / 10) && !is_out_of_map_height(game, game->player.near_y / 10))
-	// 	draw_pixel(&game->img, game->player.near_x, game->player.near_y, COLOR_RED);
 }
-
