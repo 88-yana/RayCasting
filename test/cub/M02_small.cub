@@ -1,15 +1,11 @@
 NO ./img/north_mock.xpm
-SO ./img/south_mock.xpm
 WE ./img/west_mock.xpm
-
+SO ./img/south_mock.xpm
 EA ./img/east_mock.xpm
-
 
 F 220,100,0
 C 225,30,0
 
-1111
-10001
-101111
-1N01 1
- 11111
+ 1
+1E1
+ 1

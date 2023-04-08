@@ -54,4 +54,7 @@ t: all
 	do echo $$map ; ./${NAME} $$map ; echo "$?"; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 
+p: all
+	./${NAME} test/cub/M00_normal.cub
+
 .PHONY : all clean fclean re t test
