@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:22:20 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/04/03 23:05:13 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/04/08 20:55:03 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static bool	is_valid_identifier(char c)
 static void	cnt_start(t_map_info *map_info, char c)
 {
 	if (c == 'N')
-		map_info->n++;
+		map_info->cnt_n++;
 	if (c == 'S')
-		map_info->s++;
+		map_info->cnt_s++;
 	if (c == 'W')
-		map_info->w++;
+		map_info->cnt_w++;
 	if (c == 'E')
-		map_info->e++;
+		map_info->cnt_e++;
 }
 
 /**
@@ -58,7 +58,7 @@ static void	cnt_start(t_map_info *map_info, char c)
  */
 static bool	is_valid_start_num(t_map_info *map_info)
 {
-	if (map_info->n + map_info->s + map_info->w + map_info->e == 1)
+	if (map_info->cnt_n + map_info->cnt_s + map_info->cnt_w + map_info->cnt_e == 1)
 		return (true);
 	return (false);
 }
@@ -76,10 +76,10 @@ static void	check_valid_map_contents(t_game *game)
 	size_t	i;
 	size_t	j;
 
-	game->map_info.n = 0;
-	game->map_info.s = 0;
-	game->map_info.w = 0;
-	game->map_info.e = 0;
+	game->map_info.cnt_n = 0;
+	game->map_info.cnt_s = 0;
+	game->map_info.cnt_w = 0;
+	game->map_info.cnt_e = 0;
 	i = 0;
 	while (i < game->map_info.height + SP)
 	{
@@ -103,4 +103,3 @@ bool	check_valid_map(t_game *game)
 	check_map_surrounded(game);
 	return (true);
 }
-

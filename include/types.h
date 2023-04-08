@@ -36,11 +36,19 @@ typedef struct s_map_info {
 	size_t				height;
 	size_t				width;
 	size_t				nswt[4];
-	size_t				n;
-	size_t				s;
-	size_t				w;
-	size_t				e;
+	size_t				cnt_n;
+	size_t				cnt_s;
+	size_t				cnt_w;
+	size_t				cnt_e;
 }	t_map_info;
+
+typedef enum e_news
+{
+	SOUTH = 1,
+	WEST = 2,
+	EAST = 4,
+	NORTH = 8,
+}	t_news;
 
 typedef struct s_player_info {
 	t_vec	pos;
@@ -51,10 +59,7 @@ typedef struct s_player_info {
 	int		y_wall_on_minimap;
 	int		near_x;
 	int		near_y;
-	bool	n_wall;
-	bool	s_wall;
-	bool	w_wall;
-	bool	e_wall;
+	size_t	news;
 }	t_player_info;
 
 typedef struct s_image {
