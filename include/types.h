@@ -8,7 +8,7 @@ typedef struct s_dictionary
 	char	**key;
 	char	**value;
 }	t_dictionary;
-
+//
 typedef struct s_rgb {
 	int	r;
 	int	g;
