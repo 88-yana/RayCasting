@@ -13,7 +13,7 @@ LIBFT_A = $(LIBFTDIR)/libft.a
 MINILIBXDIR = ./lib/minilibx
 MINILIBX = libmlx.dylib
 
-TEST_MAPS = $(shell find test)
+TEST_MAPS = $(shell find test
 DEFAULT := \033[0;39m
 BLUE := \033[0;94m
 GREEN := \033[0;92m
@@ -53,5 +53,8 @@ t: all
 	@for map in ${TEST_MAPS} ; \
 	do echo $$map ; ./${NAME} $$map ; echo "$?"; done
 	@echo "${GREEN}----finish----${DEFAULT}"
+
+p: all
+	./${NAME} test/cub/M00_normal.cub
 
 .PHONY : all clean fclean re t test
