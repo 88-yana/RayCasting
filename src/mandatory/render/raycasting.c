@@ -21,8 +21,8 @@ void	emit_rays(t_game *game, t_vec *right_dir, float left_angle, float right_ang
 	while (left_angle > right_angle)
 	{
 		get_wall_height(game, *right_dir, right_angle);
+		draw_screen(game, x_axis);
 		draw_wall_intersection(game);
-		draw_map(game, x_axis);
 		if (!rotate_right_angle(right_dir, &right_angle))
 			break ;
 		x_axis--;
@@ -40,23 +40,6 @@ void	ray_casting(t_game *game)
 	left_dir = ft_rotate_vec(game->player.dir, ft_deg_to_rad(VIEWING_ANGLE));
 	right_angle = dir_to_angle(right_dir);
 	left_angle = dir_to_angle(left_dir);
-	get_wall_height(game, right_dir, right_angle);
-	printf("%f\n", game->player.wall_height);
-
-	int	x;
-	int y;
-
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		x = 0;
-		while (x < WIN_WIDTH)
-		{
-			draw_pixel(&game->img, x, y, COLOR_LGRAY);
-			x++;
-		}
-		y++;
-	}
 	if (left_angle > right_angle)
 		emit_rays(game, &right_dir, left_angle, right_angle);
 	else

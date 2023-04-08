@@ -48,7 +48,7 @@ ssize_t	gnl_wrapper(int fd, char **line);
 int		create_trgb(int t, int r, int g, int b);
 void	draw_player_pos(t_game *game);
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
-void 	draw_pixel(t_image *img, int x, int y, int color);
+void	draw_pixel(t_image *img, int x, int y, int color);
 
 //raycasting
 void	walk_to_wall(t_game *game, t_raycasting *ray_info);
@@ -69,7 +69,8 @@ bool	except_x_error(t_game *game, t_raycasting *ray_info);
 bool	except_y_error(t_game *game, t_raycasting *ray_info);
 void	draw_pixel(t_image *img, int x, int y, int color);
 void	draw_rectangle(t_image *img, t_vec *p, int size, int color);
-void	draw_map(t_game *game, int x_axis);
+void	draw_screen(t_game *game, int x_axis);
+void	draw_back(t_game *game);
 
 //minimap
 void	draw_line(t_game *game, t_vec v0, t_vec v1, int color);

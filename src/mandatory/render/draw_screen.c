@@ -26,7 +26,7 @@
 // 	}
 // }
 
-static bool	is_in_window(int x, int y)
+bool	is_in_window(int x, int y)
 {
 	if (x < 0 || WIN_WIDTH <= x)
 		return (false);
@@ -35,7 +35,7 @@ static bool	is_in_window(int x, int y)
 	return (true);
 }
 
-void	draw_map(t_game *game, int x_axis)
+void	draw_screen(t_game *game, int x_axis)
 {
 	int	y;
 
