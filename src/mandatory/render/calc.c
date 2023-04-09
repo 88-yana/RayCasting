@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-void	calc_dx_dy(t_player_info *player, t_raycasting *ray_info)
+void	calc_dx_dy(t_player_info *player, t_ray *ray_info)
 {
 	if (ray_info->ray_dir.x > 0)
 		ray_info->dx = ceil(player->pos.x) - player->pos.x;
@@ -16,7 +16,7 @@ void	calc_dx_dy(t_player_info *player, t_raycasting *ray_info)
 		ray_info->dy = 0;
 }
 
-void	calc_tile_step(t_raycasting *ray_info)
+void	calc_tile_step(t_ray *ray_info)
 {
 	if (ray_info->ray_dir.x > 0)
 		ray_info->x_tile_step = 1;
@@ -32,7 +32,7 @@ void	calc_tile_step(t_raycasting *ray_info)
 		ray_info->y_tile_step = 0;
 }
 
-void	calc_digital_difference(t_raycasting *ray_info, float theta)
+void	calc_digital_difference(t_ray *ray_info, float theta)
 {
 	if (ray_info->ray_dir.x > 0)
 		ray_info->x_step_on_y_axis = -tan(theta);
@@ -49,7 +49,7 @@ void	calc_digital_difference(t_raycasting *ray_info, float theta)
 }
 
 float	calc_distance_to_wall(
-		t_player_info *player, t_raycasting *ray_info, t_vec wall_vec)
+		t_player_info *player, t_ray *ray_info, t_vec wall_vec)
 {
 	float	player_angle;
 	float	ray_angle;

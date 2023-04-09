@@ -7,7 +7,7 @@ bool	set_inf(float *x, float *y)
 	return (true);
 }
 
-bool	except_x_error(t_game *game, t_raycasting *ray_info)
+bool	except_x_error(t_game *game, t_ray *ray_info)
 {
 	float	*x;
 	float	*y;
@@ -25,7 +25,7 @@ bool	except_x_error(t_game *game, t_raycasting *ray_info)
 	return (false);
 }
 
-bool	except_y_error(t_game *game, t_raycasting *ray_info)
+bool	except_y_error(t_game *game, t_ray *ray_info)
 {
 	float	*x;
 	float	*y;

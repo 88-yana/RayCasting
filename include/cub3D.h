@@ -51,22 +51,22 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void	draw_pixel(t_image *img, int x, int y, int color);
 
 //raycasting
-void	walk_to_wall(t_game *game, t_raycasting *ray_info);
+void	walk_to_wall(t_game *game, t_ray *ray_info);
 void	emit_ray(t_game *game);
 bool	is_out_of_map_height(t_game *game, double y);
 bool	is_out_of_map_width(t_game *game, double x);
 void	ray_casting(t_game *game);
 float	dir_to_angle(t_vec dir);
 void	get_wall_height(t_game *game, t_vec ray_dir, float theta);
-void	calc_dx_dy(t_player_info *player, t_raycasting *ray_info);
-void	calc_tile_step(t_raycasting *ray_info);
-void	calc_digital_difference(t_raycasting *ray_info, float theta);
+void	calc_dx_dy(t_player_info *player, t_ray *ray_info);
+void	calc_tile_step(t_ray *ray_info);
+void	calc_digital_difference(t_ray *ray_info, float theta);
 float	calc_distance_to_wall(
-			t_player_info *player, t_raycasting *ray_info, t_vec wall_vec);
+			t_player_info *player, t_ray *ray_info, t_vec wall_vec);
 float	calculate_wall_height(float distance_to_wall);
 bool	set_inf(float *x, float *y);
-bool	except_x_error(t_game *game, t_raycasting *ray_info);
-bool	except_y_error(t_game *game, t_raycasting *ray_info);
+bool	except_x_error(t_game *game, t_ray *ray_info);
+bool	except_y_error(t_game *game, t_ray *ray_info);
 void	draw_pixel(t_image *img, int x, int y, int color);
 void	draw_rectangle(t_image *img, t_vec *p, int size, int color);
 void	draw_screen(t_game *game, int x_axis);

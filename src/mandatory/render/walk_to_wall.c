@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-bool	finish_x_wall(t_game *game, t_raycasting *ray_info)
+bool	finish_x_wall(t_game *game, t_ray *ray_info)
 {
 	int		map_x;
 	int		map_y;
@@ -18,7 +18,7 @@ bool	finish_x_wall(t_game *game, t_raycasting *ray_info)
 	return (false);
 }
 
-bool	finish_y_wall(t_game *game, t_raycasting *ray_info)
+bool	finish_y_wall(t_game *game, t_ray *ray_info)
 {
 	int		map_x;
 	int		map_y;
@@ -36,7 +36,7 @@ bool	finish_y_wall(t_game *game, t_raycasting *ray_info)
 	return (false);
 }
 
-void	walk_to_x_wall(t_game *game, t_raycasting *ray_info)
+void	walk_to_x_wall(t_game *game, t_ray *ray_info)
 {
 	if (ray_info->x_tile_step == 0 && ray_info->x_step_on_y_axis == 0)
 	{
@@ -52,7 +52,7 @@ void	walk_to_x_wall(t_game *game, t_raycasting *ray_info)
 	}
 }
 
-void	walk_to_y_wall(t_game *game, t_raycasting *ray_info)
+void	walk_to_y_wall(t_game *game, t_ray *ray_info)
 {
 	if (ray_info->y_tile_step == 0 && ray_info->y_step_on_x_axis == 0)
 	{
@@ -68,7 +68,7 @@ void	walk_to_y_wall(t_game *game, t_raycasting *ray_info)
 	}
 }
 
-void	walk_to_wall(t_game *game, t_raycasting *ray_info)
+void	walk_to_wall(t_game *game, t_ray *ray_info)
 {
 	walk_to_x_wall(game, ray_info);
 	walk_to_y_wall(game, ray_info);

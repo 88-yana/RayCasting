@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
+void	set_nearest_pos(t_player_info *player, t_ray *ray_info, float theta)
 {
 	ray_info->x_pos_on_grid.x = player->pos.x + ray_info->dx;
 	if (ray_info->dx != 0)
@@ -12,20 +12,9 @@ void	set_nearest_pos(t_player_info *player, t_raycasting *ray_info, float theta)
 	else
 		ray_info->y_pos_on_grid.x = player->pos.x - INF;
 	ray_info->y_pos_on_grid.y = player->pos.y + ray_info->dy;
-
-	if (ft_distance_vec(ray_info->x_pos_on_grid, player->pos) < ft_distance_vec(ray_info->y_pos_on_grid, player->pos))
-	{
-		player->near_x = 10 * ray_info->x_pos_on_grid.x;
-		player->near_y = 10 * ray_info->x_pos_on_grid.y;
-	}
-	else
-	{
-		player->near_x = 10 * ray_info->y_pos_on_grid.x;
-		player->near_y = 10 * ray_info->y_pos_on_grid.y;
-	}
 }
 
-float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
+float	choose_distance_to_wall(t_player_info *player, t_ray *ray_info)
 {
 	if (ft_distance_vec(ray_info->x_pos_on_grid, player->pos)
 		< ft_distance_vec(ray_info->y_pos_on_grid, player->pos))
@@ -34,7 +23,8 @@ float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
 			player->news = EAST;
 		else
 			player->news = WEST;
-		return (calc_distance_to_wall(player, ray_info, ray_info->x_pos_on_grid));
+		return (
+			calc_distance_to_wall(player, ray_info, ray_info->x_pos_on_grid));
 	}
 	else
 	{
@@ -42,11 +32,12 @@ float	choose_distance_to_wall(t_player_info *player, t_raycasting *ray_info)
 			player->news = NORTH;
 		else
 			player->news = SOUTH;
-		return (calc_distance_to_wall(player, ray_info, ray_info->y_pos_on_grid));
+		return (
+			calc_distance_to_wall(player, ray_info, ray_info->y_pos_on_grid));
 	}
 }
 
-void	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, float theta)
+void	find_nearest_grid_on_line(t_player_info *player, t_ray *ray_info, float theta)
 {
 	calc_dx_dy(player, ray_info);
 	set_nearest_pos(player, ray_info, theta);
@@ -60,7 +51,7 @@ void	find_nearest_grid_on_line(t_player_info *player, t_raycasting *ray_info, fl
  * @param game
  * @return float
  */
-void	measure_distance_to_wall(t_game *game, t_raycasting *ray_info, float theta)
+void	measure_distance_to_wall(t_game *game, t_ray *ray_info, float theta)
 {
 	find_nearest_grid_on_line(&game->player, ray_info, theta);
 	calc_digital_difference(ray_info, theta);
@@ -70,7 +61,7 @@ void	measure_distance_to_wall(t_game *game, t_raycasting *ray_info, float theta)
 
 void	get_wall_height(t_game *game, t_vec ray_dir, float theta)
 {
-	t_raycasting	ray_info;
+	t_ray	ray_info;
 
 	ray_info.ray_dir = ray_dir;
 	measure_distance_to_wall(game, &ray_info, theta);
