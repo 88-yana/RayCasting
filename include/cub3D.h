@@ -38,6 +38,7 @@ void	draw_wall_collision_point(t_game *game);
 void	draw_minimap(t_game *game);
 bool	is_start_position(char tile);
 void	draw_wall_intersection(t_game *game);
+void	check_map_size(t_game *game);
 
 //key_input
 void	fetch_key_input(t_game *game);

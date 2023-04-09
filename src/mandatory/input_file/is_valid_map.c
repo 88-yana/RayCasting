@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:22:20 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/04/08 20:55:03 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/04/09 23:33:22 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ bool	check_valid_map(t_game *game)
 {
 	check_valid_map_contents(game);
 	check_map_surrounded(game);
+	check_map_size(game);
 	return (true);
 }

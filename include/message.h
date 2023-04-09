@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   message.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:50:19 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 21:51:53 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/04/09 23:37:29 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERR_MALLOC_FAILURE "malloc error."
 # define ERR_INPUT_FILE "file format error."
 # define ERR_MAP "map format error."
+# define ERR_MAP_SIZE "map's size is too big."
 
 /***** Error messages (internal)*****/
 /** 以下はユーザー操作ではなく、実装ミスにより生じるエラー */
