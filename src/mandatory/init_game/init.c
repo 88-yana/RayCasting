@@ -24,5 +24,6 @@ void	init_game(t_game *game)
 	init_image(game);
 	load_images(game);
 	load_player(game);
+	game->is_minimap = true;
 	set_event_hooks(game);
 }
