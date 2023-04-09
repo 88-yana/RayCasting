@@ -55,8 +55,8 @@ float	calc_distance_to_wall(
 	float	ray_angle;
 	float	angle_difference;
 
-	player->x_wall_on_minimap = (int) floor(10 * wall_vec.x);
-	player->y_wall_on_minimap = (int) ceil(10 * wall_vec.y);
+	player->x_wall = wall_vec.x;
+	player->y_wall = wall_vec.y;
 	player_angle = dir_to_angle(player->dir);
 	ray_angle = dir_to_angle(ray_info->ray_dir);
 	angle_difference = fabs(ray_angle - player_angle);

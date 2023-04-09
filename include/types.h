@@ -69,19 +69,19 @@ typedef enum e_news
 }	t_news;
 
 typedef struct s_draw_info {
-	int		x_wall_on_minimap[WIN_WIDTH];
-	int		y_wall_on_minimap[WIN_WIDTH];
-	float	wall_height[WIN_WIDTH];
-	float	distance_to_wall[WIN_WIDTH];
+	float		x_wall[WIN_WIDTH];
+	float		y_wall[WIN_WIDTH];
+	float		wall_height[WIN_WIDTH];
+	float		distance_to_wall[WIN_WIDTH];
+	size_t		news[WIN_WIDTH];
 }	t_draw_info;
 typedef struct s_player_info {
 	t_vec		pos;
 	t_vec		dir;
-	t_draw_info	draw;
-	float		distance_to_wall; //FIXME: 要らないかも
+	float		distance_to_wall;
 	float		wall_height;
-	int			x_wall_on_minimap;
-	int			y_wall_on_minimap;
+	float		x_wall;
+	float		y_wall;
 	size_t		news;
 }	t_player_info;
 
@@ -90,6 +90,7 @@ typedef struct s_game {
 	t_map_info		map_info;
 	t_image_data	images;
 	t_player_info	player;
+	t_draw_info		draw;
 	int				key_store;
 	void			*mlx;
 	void			*win;

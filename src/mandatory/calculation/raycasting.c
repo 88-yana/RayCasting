@@ -14,10 +14,11 @@ bool	rotate_right_angle(t_vec *right_dir, float *right_angle)
 
 void	set_info_to_draw(t_game *game, int x)
 {
-	game->player.draw.x_wall_on_minimap[x] = game->player.x_wall_on_minimap;
-	game->player.draw.y_wall_on_minimap[x] = game->player.y_wall_on_minimap;
-	game->player.draw.wall_height[x] = game->player.wall_height;
-	game->player.draw.distance_to_wall[x] = game->player.distance_to_wall;
+	game->draw.x_wall[x] = game->player.x_wall;
+	game->draw.y_wall[x] = game->player.y_wall;
+	game->draw.wall_height[x] = game->player.wall_height;
+	game->draw.distance_to_wall[x] = game->player.distance_to_wall;
+	game->draw.news[x] = game->player.news;
 }
 
 void	emit_rays(t_game *game, t_vec *right_dir, float left_angle, float right_angle)

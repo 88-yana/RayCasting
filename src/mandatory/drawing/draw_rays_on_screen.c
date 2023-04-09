@@ -9,13 +9,18 @@ bool	is_in_window(int x, int y)
 	return (true);
 }
 
+// int	get_color(t_game *game, int x_axis, int y)
+// {
+
+// }
+
 void	draw_ray_on_screen(t_game *game, int x_axis)
 {
 	int	y;
 	// int	color;
 
 	y = 0;
-	while (y < (int) game->player.draw.wall_height[x_axis])
+	while (y < (int) game->draw.wall_height[x_axis])
 	{
 		// color = get_color(game, x_axis, y);
 		if (is_in_window(x_axis, y + WIN_HEIGHT / 2))
@@ -23,7 +28,7 @@ void	draw_ray_on_screen(t_game *game, int x_axis)
 		y++;
 	}
 	y = 0;
-	while (y > (int) - game->player.draw.wall_height[x_axis])
+	while (y > (int) - game->draw.wall_height[x_axis])
 	{
 		if (is_in_window(x_axis, y + WIN_HEIGHT / 2))
 			draw_pixel(&game->img, x_axis, y + WIN_HEIGHT / 2, COLOR_GREEN);

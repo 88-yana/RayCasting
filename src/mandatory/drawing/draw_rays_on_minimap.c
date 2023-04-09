@@ -7,12 +7,12 @@ void	draw_ray_on_minimap(t_game *game, int i)
 	int	player_x;
 	int	player_y;
 
-	x = game->player.draw.x_wall_on_minimap[i];
-	y = game->player.draw.y_wall_on_minimap[i];
+	x = floor(10 * game->draw.x_wall[i]);
+	y = floor(10 * game->draw.y_wall[i]);
 	player_x = game->player.pos.x * TIP_SIZE;
 	player_y = game->player.pos.y * TIP_SIZE;
-	if (!is_out_of_map_width(game, x / 10)
-		&& !is_out_of_map_height(game, y / 10))
+	if (!is_out_of_map_width(game, game->draw.x_wall[i])
+		&& !is_out_of_map_height(game, game->draw.y_wall[i]))
 	{
 		draw_pixel(&game->img, x, y, COLOR_GREEN);
 		draw_line(game, (t_vec){player_x, player_y}, (t_vec){x, y}, COLOR_YELLOW);
