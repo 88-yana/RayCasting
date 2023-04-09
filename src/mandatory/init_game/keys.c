@@ -52,6 +52,8 @@ void	config_game(t_game *game)
 {
 	if (game->key_store & GAME_EXIT)
 		exit_game(MSG_EXIT_GAME);
+	if (game->key_store & SWITCH_MINIMAP)
+		switch_display_minimap(game);
 }
 
 /**
