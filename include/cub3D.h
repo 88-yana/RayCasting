@@ -71,6 +71,8 @@ void	draw_pixel(t_image *img, int x, int y, int color);
 void	draw_rectangle(t_image *img, t_vec *p, int size, int color);
 void	draw_screen(t_game *game, int x_axis);
 void	draw_back(t_game *game);
+void	draw_rays_on_screen(t_game *game);
+void	draw_rays_on_minimap(t_game *game);
 
 //minimap
 void	draw_line(t_game *game, t_vec v0, t_vec v1, int color);
