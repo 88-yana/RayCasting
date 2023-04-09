@@ -65,5 +65,7 @@ float	calc_distance_to_wall(
 
 float	calculate_wall_height(float distance_to_wall)
 {
-	return (WALL_HEIGHT/distance_to_wall); //TODO:0で割るのを除外
+	if (distance_to_wall == 0)
+		return (WALL_HEIGHT * 2);
+	return (WALL_HEIGHT / distance_to_wall);
 }
