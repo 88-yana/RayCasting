@@ -75,6 +75,7 @@ void	draw_back(t_game *game);
 void	draw_rays_on_screen(t_game *game);
 void	draw_rays_on_minimap(t_game *game);
 void	draw_player_on_minimap(t_game *game);
+void	measure_distance_to_wall(t_game *game, t_ray *ray_info, float theta);
 
 //minimap
 void	draw_line(t_game *game, t_vec v0, t_vec v1, int color);

@@ -35,12 +35,10 @@ typedef struct s_image {
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		width;
+	int		height;
 }	t_image;
 typedef struct s_image_data {
-	char	*north_addr;
-	char	*south_addr;
-	char	*west_addr;
-	char	*east_addr;
 	t_image	north;
 	t_image	south;
 	t_image	east;
@@ -73,7 +71,7 @@ typedef struct s_draw_info {
 	float		y_wall[WIN_WIDTH];
 	float		wall_height[WIN_WIDTH];
 	float		distance_to_wall[WIN_WIDTH];
-	size_t		news[WIN_WIDTH];
+	int			news[WIN_WIDTH];
 }	t_draw_info;
 typedef struct s_player_info {
 	t_vec		pos;
@@ -82,7 +80,7 @@ typedef struct s_player_info {
 	float		wall_height;
 	float		x_wall;
 	float		y_wall;
-	size_t		news;
+	int			news;
 }	t_player_info;
 
 typedef struct s_game {

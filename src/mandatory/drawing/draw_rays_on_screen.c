@@ -9,30 +9,55 @@ bool	is_in_window(int x, int y)
 	return (true);
 }
 
-// int	get_color(t_game *game, int x_axis, int y)
-// {
+int	calc_color(t_image *image, float width_rate, float height_rate)
+{
+	int	pixel_pos;
+	int	color;
+	int x;
+	int	y;
 
-// }
+	x = width_rate * image->width;
+	y = height_rate * image->height;
+	pixel_pos = y * image->line_len + x * 4;
+	color = *(unsigned int *) (image->addr + pixel_pos);
+	return (color);
+}
+
+int	get_color(t_game *game, int x_axis, float height_rate)
+{
+	int		color;
+	float	x_wall_rate;
+	float	y_wall_rate;
+
+	x_wall_rate = game->draw.x_wall[x_axis] - floor(game->draw.x_wall[x_axis]);
+	y_wall_rate = game->draw.y_wall[x_axis] - floor(game->draw.y_wall[x_axis]);
+	if (game->draw.news[x_axis] == NORTH)
+		color = calc_color(&game->images.north, x_wall_rate, height_rate);
+	if (game->draw.news[x_axis] == SOUTH)
+		color = calc_color(&game->images.south, 1.0 - x_wall_rate, height_rate);
+	if (game->draw.news[x_axis] == EAST)
+		color = calc_color(&game->images.east, y_wall_rate, height_rate);
+	if (game->draw.news[x_axis] == WEST)
+		color = calc_color(&game->images.west, 1.0 - y_wall_rate, height_rate);
+	return (color);
+}
 
 void	draw_ray_on_screen(t_game *game, int x_axis)
 {
-	int	y;
-	// int	color;
+	float	y;
+	int	color;
+	int		wall_height;
+	float	height_rate;
 
+	wall_height = 2 * game->draw.wall_height[x_axis];
 	y = 0;
-	while (y < (int) game->draw.wall_height[x_axis])
+	while (y < wall_height)
 	{
-		// color = get_color(game, x_axis, y);
-		if (is_in_window(x_axis, y + WIN_HEIGHT / 2))
-			draw_pixel(&game->img, x_axis, y + WIN_HEIGHT / 2, COLOR_GREEN);
+		height_rate = y / wall_height;
+		color = get_color(game, x_axis, height_rate);
+		if (is_in_window(x_axis, y + WIN_HEIGHT / 2 - wall_height / 2))
+			draw_pixel(&game->img, x_axis, y + WIN_HEIGHT / 2 - wall_height / 2, color);
 		y++;
-	}
-	y = 0;
-	while (y > (int) - game->draw.wall_height[x_axis])
-	{
-		if (is_in_window(x_axis, y + WIN_HEIGHT / 2))
-			draw_pixel(&game->img, x_axis, y + WIN_HEIGHT / 2, COLOR_GREEN);
-		y--;
 	}
 }
 
