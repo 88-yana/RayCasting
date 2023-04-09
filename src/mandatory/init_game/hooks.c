@@ -58,7 +58,7 @@ int	update_game(t_game *game)
 	print_debug_info(game);
 	draw_back(game);
 	ray_casting(game);
-	// draw_minimap(game);
+	draw_minimap(game);
 	// 
 	// draw_wall_intersection(game);
 	// draw_player_position(game);

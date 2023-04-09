@@ -43,14 +43,14 @@ void	draw_screen(t_game *game, int x_axis)
 	while (y < (int) 50 * game->player.wall_height)
 	{
 		if (is_in_window(x_axis, y + WIN_HEIGHT / 2))
-			draw_pixel(&game->img, x_axis, y + 300, COLOR_RED);
+			draw_pixel(&game->img, x_axis, y + 300, COLOR_GREEN);
 		y++;
 	}
 	y = 0;
 	while (y > (int) - 50 * game->player.wall_height)
 	{
 		if (is_in_window(x_axis, y + WIN_HEIGHT / 2))
-			draw_pixel(&game->img, x_axis, y + 300, COLOR_RED);
+			draw_pixel(&game->img, x_axis, y + 300, COLOR_GREEN);
 		y--;
 	}
 }
