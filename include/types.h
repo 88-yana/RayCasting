@@ -86,6 +86,7 @@ typedef struct s_game {
 	void			*mlx;
 	void			*win;
 	t_image			img;
+	bool			is_minimap;
 }	t_game;
 
 typedef enum e_input_key {
@@ -97,9 +98,10 @@ typedef enum e_input_key {
 	ROTATE_RIGHT = 1 << 4,
 	ROTATE_LEFT = 1 << 5,
 	GAME_EXIT = 1 << 6,
+	SWITCH_MINIMAP = 1 << 7,
 	MOVE = MOVE_FORWARD | MOVE_BACKWARD | MOVE_RIGHT | MOVE_LEFT,
 	ROTATE = ROTATE_RIGHT | ROTATE_LEFT,
-	CONFIG = GAME_EXIT,
+	CONFIG = GAME_EXIT | SWITCH_MINIMAP,
 	ALL = ~0,
 }	t_input_key;
 

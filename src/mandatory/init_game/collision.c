@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-#define COLLISION_MARGIN 0.3
+#define COLLISION_MARGIN 0.5
 
 bool	is_collided_with_wall(t_vec p, char **map)
 {
@@ -39,12 +39,14 @@ void	check_collision(t_game *game)
 	t_vec	next_pos1;
 	t_vec	next_pos2;
 	t_vec	dir;
+	t_vec	dir1;
+	t_vec	dir2;
 
 	dir = get_current_direction(game);
-	ft_rotate_vec(dir, M_PI / 12);
-	next_pos1 = get_next_position(game->player.pos, dir);
-	ft_rotate_vec(dir, -M_PI / 12);
-	next_pos2 = get_next_position(game->player.pos, dir);
+	dir1 = ft_rotate_vec(dir, M_PI / 12);
+	next_pos1 = get_next_position(game->player.pos, dir1);
+	dir2 = ft_rotate_vec(dir, -M_PI / 12);
+	next_pos2 = get_next_position(game->player.pos, dir2);
 	if (is_collided_with_wall(next_pos1, game->map)
 		&& is_collided_with_wall(next_pos2, game->map))
 	{

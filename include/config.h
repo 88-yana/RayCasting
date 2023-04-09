@@ -50,6 +50,7 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_Q 12
+# define KEY_M 46
 # define KEY_ESC 53
 
 /* Key settings for Linux.

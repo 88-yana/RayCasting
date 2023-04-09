@@ -78,6 +78,7 @@ void	draw_rays_on_minimap(t_game *game);
 void	draw_line(t_game *game, t_vec v0, t_vec v1, int color);
 void	draw_player_position(t_game *game);
 void	draw_player_pos(t_game *game);
+void	switch_display_minimap(t_game *game);
 
 //debug
 void	print_debug_info(t_game *game);

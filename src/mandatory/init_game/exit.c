@@ -16,3 +16,12 @@ int	exit_game(char *msg)
 	ft_putendl_fd(DEFAULT, 2);
 	exit(0);
 }
+
+void	switch_display_minimap(t_game *game)
+{
+	if (game->is_minimap == true)
+		game->is_minimap = false;
+	else if (game->is_minimap == false)
+		game->is_minimap = true;
+	game->key_store &= ~SWITCH_MINIMAP;
+}

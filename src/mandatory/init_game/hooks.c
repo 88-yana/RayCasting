@@ -21,6 +21,8 @@ int	store_key_press(int keycode, t_game *game)
 		game->key_store |= ROTATE_LEFT;
 	if (keycode == KEY_RIGHT)
 		game->key_store |= ROTATE_RIGHT;
+	if (keycode == KEY_M)
+		game->key_store |= SWITCH_MINIMAP;
 	return (0);
 }
 
@@ -48,6 +50,8 @@ int	store_key_release(int keycode, t_game *game)
 		game->key_store &= ~ROTATE_LEFT;
 	if (keycode == KEY_RIGHT)
 		game->key_store &= ~ROTATE_RIGHT;
+	if (keycode == KEY_M)
+		game->key_store &= ~SWITCH_MINIMAP;
 	return (0);
 }
 
@@ -59,9 +63,12 @@ void	render(t_game *game)
 	draw_back(game);
 	ray_casting(game);
 	draw_rays_on_screen(game);
-	draw_minimap(game);
-	draw_rays_on_minimap(game);
-	draw_player_position(game);
+	if (game->is_minimap == true)
+	{
+		draw_minimap(game);
+		draw_rays_on_minimap(game);
+		draw_player_position(game);
+	}
 	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);
 }
 
