@@ -64,8 +64,6 @@ typedef struct s_player_info {
 	float		wall_height;
 	int			x_wall_on_minimap;
 	int			y_wall_on_minimap;
-	int			near_x;
-	int			near_y;
 	size_t		news;
 }	t_player_info;
 
@@ -105,7 +103,7 @@ typedef enum e_input_key {
 	ALL = ~0,
 }	t_input_key;
 
-typedef struct s_raycasting {
+typedef struct s_ray {
 	float	dx;
 	float	dy;
 	t_vec	ray_dir;
@@ -117,6 +115,6 @@ typedef struct s_raycasting {
 	float	y_tile_step;
 	float	x_distance_to_wall;
 	float	y_distance_to_wall;
-}	t_raycasting;
+}	t_ray;
 
 #endif

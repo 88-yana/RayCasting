@@ -67,7 +67,7 @@ void	draw_triangle(t_image *img, t_vec v[3], int color)
 	}
 }
 
-void	draw_player_position(t_game *game)
+void	draw_player_on_minimap(t_game *game)
 {
 	t_vec	p;
 	t_vec	d;
