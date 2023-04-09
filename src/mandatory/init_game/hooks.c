@@ -58,11 +58,11 @@ int	update_game(t_game *game)
 	print_debug_info(game);
 	draw_back(game);
 	ray_casting(game);
-	draw_minimap(game);
+	// draw_minimap(game);
 	// 
 	// draw_wall_intersection(game);
 	// draw_player_position(game);
-		draw_player_position(game);
+	draw_player_position(game);
 	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
 }
