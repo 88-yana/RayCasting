@@ -50,16 +50,23 @@ typedef enum e_news
 	NORTH = 8,
 }	t_news;
 
+typedef struct s_draw_info {
+	int		x_wall_on_minimap[WIN_WIDTH];
+	int		y_wall_on_minimap[WIN_WIDTH];
+	float	wall_height[WIN_WIDTH];
+	float	distance_to_wall[WIN_WIDTH];
+}	t_draw_info;
 typedef struct s_player_info {
-	t_vec	pos;
-	t_vec	dir;
-	float	distance_to_wall; //FIXME: 要らないかも
-	float	wall_height;
-	int		x_wall_on_minimap;
-	int		y_wall_on_minimap;
-	int		near_x;
-	int		near_y;
-	size_t	news;
+	t_vec		pos;
+	t_vec		dir;
+	t_draw_info	draw;
+	float		distance_to_wall; //FIXME: 要らないかも
+	float		wall_height;
+	int			x_wall_on_minimap;
+	int			y_wall_on_minimap;
+	int			near_x;
+	int			near_y;
+	size_t		news;
 }	t_player_info;
 
 typedef struct s_image {

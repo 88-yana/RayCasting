@@ -12,17 +12,24 @@ bool	rotate_right_angle(t_vec *right_dir, float *right_angle)
 	return (true);
 }
 
+void	set_info_to_draw(t_game *game, int x)
+{
+	game->player.draw.x_wall_on_minimap[x] = game->player.x_wall_on_minimap;
+	game->player.draw.y_wall_on_minimap[x] = game->player.y_wall_on_minimap;
+	game->player.draw.wall_height[x] = game->player.wall_height;
+	game->player.draw.distance_to_wall[x] = game->player.distance_to_wall;
+}
+
 void	emit_rays(t_game *game, t_vec *right_dir, float left_angle, float right_angle)
 {
 	static int	x_axis = WIN_WIDTH - 1;
 
-	if (x_axis < 1)
+	if (x_axis < 0)
 		x_axis = WIN_WIDTH - 1;
-	while (left_angle > right_angle)
+	while (left_angle > right_angle && x_axis >= 0)
 	{
 		get_wall_height(game, *right_dir, right_angle);
-		draw_screen(game, x_axis);
-		draw_wall_intersection(game);
+		set_info_to_draw(game, x_axis);
 		if (!rotate_right_angle(right_dir, &right_angle))
 			break ;
 		x_axis--;
