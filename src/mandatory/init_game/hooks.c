@@ -61,7 +61,7 @@ void	render(t_game *game)
 	draw_rays_on_screen(game);
 	draw_minimap(game);
 	draw_rays_on_minimap(game);
-	draw_player_position(game);
+	draw_player_on_minimap(game);
 	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);
 }
 

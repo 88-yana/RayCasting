@@ -20,7 +20,7 @@
 # define SP 2
 
 # define FILE_HEADER_SIZE 6
-# define WALL_HEIGHT 3
+# define WALL_HEIGHT 150
 # define VIEWING_ANGLE 30
 # define INF 3000
 
