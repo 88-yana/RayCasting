@@ -81,6 +81,7 @@ typedef struct s_game {
 	t_texture		images;
 	t_player_info	player;
 	int				key_store;
+	int				mouse_pos_x;
 	void			*mlx;
 	void			*win;
 	t_image			img;
