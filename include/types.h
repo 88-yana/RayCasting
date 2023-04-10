@@ -29,6 +29,22 @@ typedef struct s_texture {
 	void	*east;
 }	t_texture;
 
+typedef struct s_image {
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		width;
+	int		height;
+}	t_image;
+typedef struct s_image_data {
+	t_image	north;
+	t_image	south;
+	t_image	east;
+	t_image	west;
+}	t_image_data;
+
 typedef struct s_map_info {
 	t_path_to_texture	path;
 	t_rgb				floor;
@@ -51,35 +67,28 @@ typedef enum e_news
 }	t_news;
 
 typedef struct s_draw_info {
-	int		x_wall_on_minimap[WIN_WIDTH];
-	int		y_wall_on_minimap[WIN_WIDTH];
-	float	wall_height[WIN_WIDTH];
-	float	distance_to_wall[WIN_WIDTH];
+	float		x_wall[WIN_WIDTH];
+	float		y_wall[WIN_WIDTH];
+	float		wall_height[WIN_WIDTH];
+	float		distance_to_wall[WIN_WIDTH];
+	int			news[WIN_WIDTH];
 }	t_draw_info;
 typedef struct s_player_info {
 	t_vec		pos;
 	t_vec		dir;
-	t_draw_info	draw;
-	float		distance_to_wall; //FIXME: 要らないかも
+	float		distance_to_wall;
 	float		wall_height;
-	int			x_wall_on_minimap;
-	int			y_wall_on_minimap;
-	size_t		news;
+	float		x_wall;
+	float		y_wall;
+	int			news;
 }	t_player_info;
-
-typedef struct s_image {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_image;
 
 typedef struct s_game {
 	char			**map;
 	t_map_info		map_info;
-	t_texture		images;
+	t_image_data	images;
 	t_player_info	player;
+	t_draw_info		draw;
 	int				key_store;
 	void			*mlx;
 	void			*win;

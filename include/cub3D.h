@@ -64,7 +64,7 @@ void	calc_tile_step(t_ray *ray_info);
 void	calc_digital_difference(t_ray *ray_info, float theta);
 float	calc_distance_to_wall(
 			t_player_info *player, t_ray *ray_info, t_vec wall_vec);
-float	calculate_wall_height(float distance_to_wall);
+float	calc_wall_height(float distance_to_wall);
 bool	set_inf(float *x, float *y);
 bool	except_x_error(t_game *game, t_ray *ray_info);
 bool	except_y_error(t_game *game, t_ray *ray_info);
@@ -75,6 +75,7 @@ void	draw_back(t_game *game);
 void	draw_rays_on_screen(t_game *game);
 void	draw_rays_on_minimap(t_game *game);
 void	draw_player_on_minimap(t_game *game);
+void	measure_distance_to_wall(t_game *game, t_ray *ray_info, float theta);
 
 //minimap
 void	draw_line(t_game *game, t_vec v0, t_vec v1, int color);
