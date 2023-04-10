@@ -12,7 +12,7 @@
  * @param str
  * @param offset
  */
-void	putstr_to_window(t_game *game, char *str, size_t offset)
+static void	putstr_to_window(t_game *game, char *str, size_t offset)
 {
 	int	color;
 
@@ -27,7 +27,7 @@ void	putstr_to_window(t_game *game, char *str, size_t offset)
  * @param game
  * @param str
  */
-void	putstr_to_console(t_game *game, char *str)
+static void	putstr_to_console(t_game *game, char *str)
 {
 	(void)game;
 	ft_printf("\033[1K\033[1G");
@@ -50,6 +50,6 @@ void	print_debug_info(t_game *game)
 	player = &game->player;
 	snprintf(buff, 100, "pos:{%f, %f} dir:{%f, %f} mouse:{%d}", \
 		player->pos.x, player->pos.y, player->dir.x, player->dir.y, game->mouse_pos_x);
-//	putstr_to_window(game, buff, 16);
+	putstr_to_window(game, buff, 16);
 	putstr_to_console(game, buff);
 }

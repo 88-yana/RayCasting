@@ -25,6 +25,5 @@ void	init_game(t_game *game)
 	load_images(game);
 	load_player(game);
 	game->is_minimap = true;
-	game->mouse_pos_x = 0;
 	set_event_hooks(game);
 }

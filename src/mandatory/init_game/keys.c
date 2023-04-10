@@ -55,17 +55,6 @@ void	config_game(t_game *game)
 		switch_display_minimap(game);
 }
 
-void	fetch_mouse_position(t_game *game)
-{
-	t_vec	*dir;
-
-	dir = &game->player.dir;
-	if (game->mouse_pos_x < WIN_WIDTH / 2 * 0.8)
-		*dir = ft_rotate_vec(*dir, ft_deg_to_rad(1));
-	if (game->mouse_pos_x > -WIN_WIDTH / 2 * 0.8)
-		*dir = ft_rotate_vec(*dir, ft_deg_to_rad(-1));
-}
-
 /**
  * @brief 入力されたキーコードを取得し、対応する操作を行う。
  *
