@@ -44,6 +44,7 @@ typedef struct s_map_info {
 
 typedef enum e_news
 {
+	NONE = 0,
 	SOUTH = 1,
 	WEST = 2,
 	EAST = 4,

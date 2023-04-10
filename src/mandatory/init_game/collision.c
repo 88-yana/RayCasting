@@ -1,70 +1,21 @@
 #include "cub3D.h"
 
-#define COLLISION_MARGIN 0.5
+#define COLLISION_MARGIN 0.3
 
-bool	is_collided_with_wall(t_vec p, char **map)
+bool	is_collided_with_wall(t_vec next_pos, char **map)
 {
-	if (map[(int)p.y][(int)p.x] == '1')
+	if (map[(int)next_pos.y][(int)next_pos.x] == '1')
 		return (true);
 	return (false);
 }
 
-t_vec	get_current_direction(t_game *game)
-{
-	t_vec	dir;
-
-	dir = game->player.dir;
-	if (game->key_store & MOVE_FORWARD)
-		game->player.move = dir;
-	if (game->key_store & MOVE_BACKWARD)
-		game->player.move = ft_rotate_vec(dir, M_PI);
-	if (game->key_store & MOVE_LEFT)
-		game->player.move = ft_rotate_vec(dir, M_PI_2);
-	if (game->key_store & MOVE_RIGHT)
-		game->player.move = ft_rotate_vec(dir, -M_PI_2);
-	return (dir);
-}
-
-t_vec	get_next_position(t_vec pos, t_vec dir)
+t_vec	get_next_position(t_vec pos, t_vec move)
 {
 	t_vec	next_pos;
 
-	dir.y = -dir.y;
-	next_pos = ft_add_vec(pos, ft_mul_vec(dir, COLLISION_MARGIN));
+	move.y = -move.y;
+	next_pos = ft_add_vec(pos, ft_mul_vec(move, COLLISION_MARGIN));
 	return (next_pos);
-}
-
-void	check_collision(t_game *game)
-{
-	t_vec	next_pos1;
-	t_vec	next_pos2;
-	t_vec	dir;
-	t_vec	dir1;
-	t_vec	dir2;
-
-	dir = get_current_direction(game);
-	dir1 = ft_rotate_vec(dir, M_PI / 12);
-	next_pos1 = get_next_position(game->player.pos, dir1);
-	dir2 = ft_rotate_vec(dir, -M_PI / 12);
-	next_pos2 = get_next_position(game->player.pos, dir2);
-	if (is_collided_with_wall(next_pos1, game->map)
-		&& is_collided_with_wall(next_pos2, game->map))
-	{
-		game->key_store &= ~MOVE;
-	}
-}
-
-/*
-t_vec	get_normal_vector(t_game *game)
-{
-	t_vec	dir;
-	t_vec	nor;
-
-	dir = game->player.dir;
-	nor = (t_vec){0, 0};
-	if (dir.x > 0 && dir.y > 0)
-		nor = (t_vec){0, 1};
-	return (dir);
 }
 
 t_vec	get_vector_slide(t_vec spd, t_vec nor)
@@ -77,15 +28,74 @@ t_vec	get_vector_slide(t_vec spd, t_vec nor)
 	return (s);
 }
 
-void	calc_slide_vector(t_game *game)
+t_news	detect_collision_direction(t_vec move, t_vec pos, t_vec next_pos, char **map)
 {
-	t_vec	nor;
-	t_vec	s;
-
-	nor = get_normal_vector(game);
-	s = get_vector_slide(game->player.dir, nor);
-	s = ft_mul_vec(s, MOVE_COEF);
-	game->player.pos.x += s.x;
-	game->player.pos.y -= s.y;
+	if (move.x > 0 && move.y > 0)
+	{
+		if (map[(int)next_pos.y][(int)pos.x] == '1')
+			return (SOUTH);
+		else if (map[(int)pos.y][(int)next_pos.x] == '1')
+			return (WEST);
+	}
+	else if (move.x < 0 && move.y > 0)
+	{
+		if (map[(int)next_pos.y][(int)pos.x] == '1')
+			return (SOUTH);
+		else if (map[(int)pos.y][(int)next_pos.x] == '1')
+			return (EAST);
+	}
+	else if (move.x < 0 && move.y < 0)
+	{
+		if (map[(int)next_pos.y][(int)pos.x] == '1')
+			return (NORTH);
+		else if (map[(int)pos.y][(int)next_pos.x] == '1')
+			return (EAST);
+	}
+	else if (move.x > 0 && move.y < 0)
+	{
+		if (map[(int)next_pos.y][(int)pos.x] == '1')
+			return (NORTH);
+		else if (map[(int)pos.y][(int)next_pos.x] == '1')
+			return (WEST);
+	}
+	return (NONE);
 }
-*/
+
+t_vec	get_normal_vector(t_news wall)
+{
+	if (wall & NORTH)
+		return ((t_vec){0, 1});
+	if (wall & EAST)
+		return ((t_vec){-1, 0});
+	if (wall & WEST)
+		return ((t_vec){1, 0});
+	if (wall & SOUTH)
+		return ((t_vec){0, -1});
+	return ((t_vec){0, 0});
+}
+
+void	check_collision(t_game *game)
+{
+	t_vec	move;
+	t_vec	pos;
+	t_vec	next_pos;
+
+	move = game->player.move;
+	pos = game->player.pos;
+	next_pos = get_next_position(game->player.pos, game->player.move);
+	if (is_collided_with_wall(next_pos, game->map))
+	{
+		t_news wall = detect_collision_direction(move, pos, next_pos, game->map);
+		if (wall & NORTH)
+			puts("N");
+		if (wall & SOUTH)
+			puts("S");
+		if (wall & WEST)
+			puts("W");
+		if (wall & EAST)
+			puts("E");
+		t_vec nor = get_normal_vector(wall);
+		game->player.move = get_vector_slide(ft_mul_vec(move, 5), nor);
+		game->key_store &= ~MOVE;
+	}
+}

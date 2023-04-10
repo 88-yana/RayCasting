@@ -76,13 +76,12 @@ void	player_move(t_game *game)
 	game->player.pos.y -= game->player.move.y;
 }
 
-
 int	update_game(t_game *game)
 {
 	fetch_key_input(game);
-//	check_collision(game);
+	check_collision(game);
 	player_move(game);
-	print_debug_info(game);
+//	print_debug_info(game);
 	render(game);
 	return (0);
 }

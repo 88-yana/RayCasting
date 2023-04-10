@@ -1,6 +1,5 @@
 #include "cub3D.h"
 
-
 /**
  * @brief キー入力：移動
  *
