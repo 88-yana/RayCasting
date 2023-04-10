@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:22:20 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/04/09 23:33:22 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/04/10 09:05:55 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static void	cnt_start(t_map_info *map_info, char c)
  */
 static bool	is_valid_start_num(t_map_info *map_info)
 {
-	if (map_info->cnt_n + map_info->cnt_s + map_info->cnt_w + map_info->cnt_e == 1)
+	if (map_info->cnt_n + map_info->cnt_s
+		+ map_info->cnt_w + map_info->cnt_e == 1)
 		return (true);
 	return (false);
 }
