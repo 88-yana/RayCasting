@@ -14,7 +14,8 @@ static void	set_nearest_pos(t_player_info *player, t_ray *ray_info, float theta)
 	ray_info->y_pos_on_grid.y = player->pos.y + ray_info->dy;
 }
 
-static void	find_nearest_grid_on_line(t_player_info *player, t_ray *ray_info, float theta)
+static void	find_nearest_grid_on_line(
+		t_player_info *player, t_ray *ray_info, float theta)
 {
 	calc_dx_dy(player, ray_info);
 	set_nearest_pos(player, ray_info, theta);

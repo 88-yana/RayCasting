@@ -13,13 +13,13 @@ int	calc_color(t_image *image, float width_rate, float height_rate)
 {
 	int	pixel_pos;
 	int	color;
-	int x;
+	int	x;
 	int	y;
 
 	x = width_rate * image->width;
 	y = height_rate * image->height;
 	pixel_pos = y * image->line_len + x * 4;
-	color = *(unsigned int *) (image->addr + pixel_pos);
+	color = *(unsigned int *)(image->addr + pixel_pos);
 	return (color);
 }
 
@@ -45,18 +45,20 @@ int	get_color(t_game *game, int x_axis, float height_rate)
 void	draw_ray_on_screen(t_game *game, int x_axis)
 {
 	float	y;
-	int	color;
+	int		color;
 	int		wall_height;
+	int		start_pos;
 	float	height_rate;
 
+	start_pos = WIN_HEIGHT / 2 - game->draw.wall_height[x_axis];
 	wall_height = 2 * game->draw.wall_height[x_axis];
 	y = 0;
 	while (y < wall_height)
 	{
 		height_rate = y / wall_height;
 		color = get_color(game, x_axis, height_rate);
-		if (is_in_window(x_axis, y + WIN_HEIGHT / 2 - wall_height / 2))
-			draw_pixel(&game->img, x_axis, y + WIN_HEIGHT / 2 - wall_height / 2, color);
+		if (is_in_window(x_axis, y + start_pos))
+			draw_pixel(&game->img, x_axis, y + start_pos, color);
 		y++;
 	}
 }

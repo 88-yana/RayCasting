@@ -63,7 +63,7 @@ float	calc_distance_to_wall(
 	return (ft_distance_vec(wall_vec, player->pos) * cos(angle_difference));
 }
 
-float	calculate_wall_height(float distance_to_wall)
+float	calc_wall_height(float distance_to_wall)
 {
 	if (distance_to_wall == 0)
 		return (WALL_HEIGHT * 2);

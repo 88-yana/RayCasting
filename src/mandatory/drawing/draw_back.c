@@ -34,10 +34,10 @@ int	rgb_to_int(int r, int g, int b)
 void	draw_back(t_game *game)
 {
 	t_rgb	floor;
-	t_rgb	ceiling;
+	t_rgb	ceil;
 
 	floor = game->map_info.floor;
-	ceiling = game->map_info.ceiling;
+	ceil = game->map_info.ceiling;
 	draw_half(game, 0, rgb_to_int(floor.r, floor.g, floor.b));
-	draw_half(game, WIN_HEIGHT / 2, rgb_to_int(ceiling.r, ceiling.g, ceiling.b));
+	draw_half(game, WIN_HEIGHT / 2, rgb_to_int(ceil.r, ceil.g, ceil.b));
 }
