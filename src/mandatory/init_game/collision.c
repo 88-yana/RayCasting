@@ -15,13 +15,13 @@ t_vec	get_current_direction(t_game *game)
 
 	dir = game->player.dir;
 	if (game->key_store & MOVE_FORWARD)
-		;
+		game->player.move = dir;
 	if (game->key_store & MOVE_BACKWARD)
-		dir = ft_rotate_vec(dir, M_PI);
+		game->player.move = ft_rotate_vec(dir, M_PI);
 	if (game->key_store & MOVE_LEFT)
-		dir = ft_rotate_vec(dir, M_PI_2);
+		game->player.move = ft_rotate_vec(dir, M_PI_2);
 	if (game->key_store & MOVE_RIGHT)
-		dir = ft_rotate_vec(dir, -M_PI_2);
+		game->player.move = ft_rotate_vec(dir, -M_PI_2);
 	return (dir);
 }
 

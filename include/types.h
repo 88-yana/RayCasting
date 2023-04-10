@@ -59,6 +59,7 @@ typedef struct s_draw_info {
 typedef struct s_player_info {
 	t_vec		pos;
 	t_vec		dir;
+	t_vec		move;
 	t_draw_info	draw;
 	float		distance_to_wall; //FIXME: 要らないかも
 	float		wall_height;

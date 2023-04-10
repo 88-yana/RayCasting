@@ -14,16 +14,13 @@ void	move_player(t_game *game)
 	pos = game->player.pos;
 	dir = game->player.dir;
 	if (game->key_store & MOVE_FORWARD)
-		;
+		game->player.move = dir;
 	else if (game->key_store & MOVE_BACKWARD)
-		dir = ft_rotate_vec(dir, M_PI);
+		game->player.move = ft_rotate_vec(dir, M_PI);
 	else if (game->key_store & MOVE_LEFT)
-		dir = ft_rotate_vec(dir, M_PI_2);
+		game->player.move = ft_rotate_vec(dir, M_PI_2);
 	else if (game->key_store & MOVE_RIGHT)
-		dir = ft_rotate_vec(dir, -M_PI_2);
-	dir = ft_mul_vec(dir, MOVE_COEF);
-	game->player.pos.x += dir.x;
-	game->player.pos.y -= dir.y;
+		game->player.move = ft_rotate_vec(dir, -M_PI_2);
 }
 
 /**

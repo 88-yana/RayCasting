@@ -57,9 +57,6 @@ int	store_key_release(int keycode, t_game *game)
 
 void	render(t_game *game)
 {
-	check_collision(game);
-	fetch_key_input(game);
-	print_debug_info(game);
 	draw_back(game);
 	ray_casting(game);
 	draw_rays_on_screen(game);
@@ -72,10 +69,19 @@ void	render(t_game *game)
 	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);
 }
 
+void	player_move(t_game *game)
+{
+	game->player.move = ft_mul_vec(game->player.move, MOVE_COEF);
+	game->player.pos.x += game->player.move.x;
+	game->player.pos.y -= game->player.move.y;
+}
+
+
 int	update_game(t_game *game)
 {
-	check_collision(game);
 	fetch_key_input(game);
+//	check_collision(game);
+	player_move(game);
 	print_debug_info(game);
 	render(game);
 	return (0);

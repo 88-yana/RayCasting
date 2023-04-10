@@ -25,5 +25,6 @@ void	init_game(t_game *game)
 	load_images(game);
 	load_player(game);
 	game->is_minimap = true;
+	game->player.move = (t_vec){0, 0};
 	set_event_hooks(game);
 }
