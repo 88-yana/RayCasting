@@ -64,10 +64,13 @@ int	store_mouse_position(int x, int y, t_game *game)
 
 void	render(t_game *game)
 {
+	static float	offset = -8;
+	static float	sign = 0.7;
+
 	mlx_do_sync(game->mlx);
 	draw_back(game);
 	ray_casting(game);
-	draw_rays_on_screen(game);
+	draw_rays_on_screen(game, offset);
 	if (game->is_minimap == true)
 	{
 		draw_minimap(game);
@@ -75,6 +78,12 @@ void	render(t_game *game)
 		draw_player_on_minimap(game);
 	}
 	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);
+	if (game->key_store & MOVE)
+		offset += sign;
+	if (offset > 8)
+		sign = -0.7;
+	if (offset < -8)
+		sign = 0.7;
 }
 
 int	update_game(t_game *game)

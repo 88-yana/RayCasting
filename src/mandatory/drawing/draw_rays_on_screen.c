@@ -42,7 +42,7 @@ int	get_color(t_game *game, int x_axis, float height_rate)
 	return (color);
 }
 
-void	draw_ray_on_screen(t_game *game, int x_axis)
+void	draw_ray_on_screen(t_game *game, int x_axis, int offset)
 {
 	float	y;
 	int		color;
@@ -50,7 +50,7 @@ void	draw_ray_on_screen(t_game *game, int x_axis)
 	int		start_pos;
 	float	height_rate;
 
-	start_pos = WIN_HEIGHT / 2 - game->draw.wall_height[x_axis];
+	start_pos = WIN_HEIGHT / 2 - game->draw.wall_height[x_axis] + offset;
 	wall_height = 2 * game->draw.wall_height[x_axis];
 	if (start_pos < 0)
 		y = -start_pos;
@@ -66,14 +66,14 @@ void	draw_ray_on_screen(t_game *game, int x_axis)
 	}
 }
 
-void	draw_rays_on_screen(t_game *game)
+void	draw_rays_on_screen(t_game *game, int offset)
 {
 	int	x;
 
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		draw_ray_on_screen(game, x);
+		draw_ray_on_screen(game, x, offset);
 		x++;
 	}
 }
