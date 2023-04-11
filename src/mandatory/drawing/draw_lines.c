@@ -20,7 +20,6 @@ void	draw_line(t_game *game, t_vec v0, t_vec v1, int color)
 	s.x = v0.x < v1.x ? 1 : -1;
 	s.y = v0.y < v1.y ? 1 : -1;
 	err = d.x + d.y;
-
 	while (true)
 	{
 		draw_pixel(&game->img, v0.x, v0.y, color);
