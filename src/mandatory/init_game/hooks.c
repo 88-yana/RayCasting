@@ -55,8 +55,16 @@ int	store_key_release(int keycode, t_game *game)
 	return (0);
 }
 
+int	store_mouse_position(int x, int y, t_game *game)
+{
+	(void)y;
+	game->mouse_pos_x = -(WIN_WIDTH / 2) + x;
+	return (0);
+}
+
 void	render(t_game *game)
 {
+	mlx_do_sync(game->mlx);
 	draw_back(game);
 	ray_casting(game);
 	draw_rays_on_screen(game);
@@ -79,6 +87,7 @@ void	player_move(t_game *game)
 int	update_game(t_game *game)
 {
 	fetch_key_input(game);
+	fetch_mouse_position(game);
 	check_collision(game);
 	print_debug_info(game);
 	player_move(game);
@@ -95,6 +104,7 @@ void	set_event_hooks(t_game *game)
 {
 	mlx_hook(game->win, 02, 1L << 0, store_key_press, game);
 	mlx_hook(game->win, 03, 1L << 0, store_key_release, game);
+	mlx_hook(game->win, 06, 1L << 6, store_mouse_position, game);
 	mlx_hook(game->win, 17, 0, exit_game, game);
 	mlx_loop_hook(game->mlx, update_game, game);
 //	mlx_expose_hook (game->win, render_map, game);

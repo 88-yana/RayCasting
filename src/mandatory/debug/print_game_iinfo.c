@@ -52,9 +52,4 @@ void	print_debug_info(t_game *game)
 		player->pos.x, player->pos.y, player->dir.x, player->dir.y, player->move.x, player->move.y);
 	putstr_to_window(game, buff, 16);
 	putstr_to_console(game, buff);
-	if (game->key_store)
-	{
-		ft_snprintf(buff, 100, "KEY: %d", game->key_store);
-		putstr_to_window(game, buff, 32);
-	}
 }

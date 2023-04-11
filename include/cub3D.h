@@ -43,6 +43,10 @@ void	check_map_size(t_game *game);
 //key_input
 void	fetch_key_input(t_game *game);
 void	check_collision(t_game *game);
+void	fetch_mouse_position(t_game *game);
+
+//mouse input
+void	fetch_mouse_position(t_game *game);
 
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);
