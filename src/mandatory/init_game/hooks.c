@@ -64,6 +64,7 @@ int	store_mouse_position(int x, int y, t_game *game)
 
 void	render(t_game *game)
 {
+	mlx_do_sync(game->mlx);
 	draw_back(game);
 	ray_casting(game);
 	draw_rays_on_screen(game);
@@ -80,8 +81,8 @@ int	update_game(t_game *game)
 {
 	check_collision(game);
 	fetch_key_input(game);
+	// print_debug_info(game);
 	fetch_mouse_position(game);
-	print_debug_info(game);
 	render(game);
 	return (0);
 }

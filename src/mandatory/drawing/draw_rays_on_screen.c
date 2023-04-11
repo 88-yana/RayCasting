@@ -52,8 +52,11 @@ void	draw_ray_on_screen(t_game *game, int x_axis)
 
 	start_pos = WIN_HEIGHT / 2 - game->draw.wall_height[x_axis];
 	wall_height = 2 * game->draw.wall_height[x_axis];
-	y = 0;
-	while (y < wall_height)
+	if (start_pos < 0)
+		y = -start_pos;
+	else
+		y = 0;
+	while (y < wall_height && y + start_pos < WIN_HEIGHT)
 	{
 		height_rate = y / wall_height;
 		color = get_color(game, x_axis, height_rate);
