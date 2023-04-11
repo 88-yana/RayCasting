@@ -7,18 +7,16 @@
  */
 void	move_player(t_game *game)
 {
-	t_vec	pos;
 	t_vec	dir;
 
-	pos = game->player.pos;
 	dir = game->player.dir;
 	if (game->key_store & MOVE_FORWARD)
 		game->player.move = dir;
-	else if (game->key_store & MOVE_BACKWARD)
+	if (game->key_store & MOVE_BACKWARD)
 		game->player.move = ft_rotate_vec(dir, M_PI);
-	else if (game->key_store & MOVE_LEFT)
+	if (game->key_store & MOVE_LEFT)
 		game->player.move = ft_rotate_vec(dir, M_PI_2);
-	else if (game->key_store & MOVE_RIGHT)
+	if (game->key_store & MOVE_RIGHT)
 		game->player.move = ft_rotate_vec(dir, -M_PI_2);
 }
 
@@ -41,7 +39,7 @@ void	rotate_player(t_game *game)
 /**
  * @brief キー入力：システム
  *
- * @detail TODO: Mandatoryの実装では終了操作のみ
+ * @detail 終了操作（Q）およびミニマップの表示切り替え（M）
  * @param game
  */
 void	config_game(t_game *game)

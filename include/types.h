@@ -79,7 +79,6 @@ typedef struct s_player_info {
 	t_vec		dir;
 	t_vec		move;
 	t_draw_info	draw;
-	float		distance_to_wall; //FIXME: 要らないかも
 	float		distance_to_wall;
 	float		wall_height;
 	float		x_wall;

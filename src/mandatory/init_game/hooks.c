@@ -80,8 +80,8 @@ int	update_game(t_game *game)
 {
 	fetch_key_input(game);
 	check_collision(game);
+	print_debug_info(game);
 	player_move(game);
-//	print_debug_info(game);
 	render(game);
 	return (0);
 }
