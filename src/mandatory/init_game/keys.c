@@ -59,8 +59,8 @@ void	fetch_key_input(t_game *game)
 {
 	if (game->key_store & MOVE)
 		move_player(game);
-	else if (game->key_store & ROTATE)
+	if (game->key_store & ROTATE)
 		rotate_player(game);
-	else if (game->key_store & CONFIG)
+	if (game->key_store & CONFIG)
 		config_game(game);
 }
