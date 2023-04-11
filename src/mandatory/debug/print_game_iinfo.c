@@ -48,13 +48,8 @@ void	print_debug_info(t_game *game)
 	t_player_info	*player;
 
 	player = &game->player;
-	snprintf(buff, 100, "pos:{%f, %f} dir:{%f, %f} ", \
-		player->pos.x, player->pos.y, player->dir.x, player->dir.y);
+	snprintf(buff, 100, "pos:{%f, %f} dir:{%f, %f} mouse:{%d}", \
+		player->pos.x, player->pos.y, player->dir.x, player->dir.y, game->mouse_pos_x);
 	putstr_to_window(game, buff, 16);
 	putstr_to_console(game, buff);
-	if (game->key_store)
-	{
-		ft_snprintf(buff, 100, "KEY: %d", game->key_store);
-		putstr_to_window(game, buff, 32);
-	}
 }
