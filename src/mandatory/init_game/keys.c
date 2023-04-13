@@ -7,22 +7,25 @@
  */
 void	move_player(t_game *game)
 {
-	t_vec	pos;
 	t_vec	dir;
 
-	pos = game->player.pos;
 	dir = game->player.dir;
 	if (game->key_store & MOVE_FORWARD)
-		;
-	else if (game->key_store & MOVE_BACKWARD)
-		dir = ft_rotate_vec(dir, M_PI);
-	else if (game->key_store & MOVE_LEFT)
-		dir = ft_rotate_vec(dir, M_PI_2);
-	else if (game->key_store & MOVE_RIGHT)
-		dir = ft_rotate_vec(dir, -M_PI_2);
-	dir = ft_mul_vec(dir, MOVE_COEF);
-	game->player.pos.x += dir.x;
-	game->player.pos.y -= dir.y;
+		game->player.move = dir;
+	if (game->key_store & MOVE_BACKWARD)
+		game->player.move = ft_rotate_vec(dir, M_PI);
+	if (game->key_store & MOVE_LEFT)
+		game->player.move = ft_rotate_vec(dir, M_PI_2);
+	if (game->key_store & MOVE_RIGHT)
+		game->player.move = ft_rotate_vec(dir, -M_PI_2);
+	if (game->key_store & MOVE_FORWARD && game->key_store & MOVE_RIGHT)
+		game->player.move = ft_rotate_vec(dir, -M_PI_4);
+	if (game->key_store & MOVE_FORWARD && game->key_store & MOVE_LEFT)
+		game->player.move = ft_rotate_vec(dir, M_PI_4);
+	if (game->key_store & MOVE_BACKWARD && game->key_store & MOVE_RIGHT)
+		game->player.move = ft_rotate_vec(dir, M_PI + M_PI_4);
+	if (game->key_store & MOVE_BACKWARD && game->key_store & MOVE_LEFT)
+		game->player.move = ft_rotate_vec(dir, M_PI - M_PI_4);
 }
 
 /**
@@ -44,7 +47,7 @@ void	rotate_player(t_game *game)
 /**
  * @brief キー入力：システム
  *
- * @detail TODO: Mandatoryの実装では終了操作のみ
+ * @detail 終了操作（Q）およびミニマップの表示切り替え（M）
  * @param game
  */
 void	config_game(t_game *game)
@@ -64,8 +67,8 @@ void	fetch_key_input(t_game *game)
 {
 	if (game->key_store & MOVE)
 		move_player(game);
-	else if (game->key_store & ROTATE)
+	if (game->key_store & ROTATE)
 		rotate_player(game);
-	else if (game->key_store & CONFIG)
+	if (game->key_store & CONFIG)
 		config_game(game);
 }
