@@ -40,13 +40,14 @@ bool	is_start_position(char tile);
 void	draw_wall_intersection(t_game *game);
 void	check_map_size(t_game *game);
 
-//key_input
+//key_mouse_input
 void	fetch_key_input(t_game *game);
-void	check_collision(t_game *game);
 void	fetch_mouse_position(t_game *game);
 
-//mouse input
-void	fetch_mouse_position(t_game *game);
+//collision
+void	check_collision(t_game *game);
+t_vec	get_normal_vector(t_news wall);
+t_news	get_collision_direction(t_vec move, t_vec pos, t_vec next_pos, char **map);
 
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);

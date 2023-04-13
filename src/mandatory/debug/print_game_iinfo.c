@@ -12,12 +12,12 @@
  * @param str
  * @param offset
  */
-static void	putstr_to_window(t_game *game, char *str, size_t offset)
+void	putstr_to_window(t_game *game, char *str)
 {
-	int	color;
+	int	offset;
 
-	color = create_trgb(0, 255, 255, 255);
-	mlx_string_put(game->mlx, game->win, 16, offset, 0x00FF000, str);
+	offset = WIN_HEIGHT - TIP_SIZE;
+	mlx_string_put(game->mlx, game->win, TIP_SIZE, offset, COLOR_WHITE, str);
 	return ;
 }
 
@@ -48,8 +48,8 @@ void	print_debug_info(t_game *game)
 	t_player_info	*player;
 
 	player = &game->player;
-	snprintf(buff, 100, "pos:{%f, %f} dir:{%f, %f} mouse:{%d}", \
-		player->pos.x, player->pos.y, player->dir.x, player->dir.y, game->mouse_pos_x);
-	putstr_to_window(game, buff, 16);
+	snprintf(buff, 100, "pos:{%f, %f} dir:{%f, %f} move:{%f, %f} ", \
+		player->pos.x, player->pos.y, player->dir.x, player->dir.y, player->move.x, player->move.y);
+//	putstr_to_window(game, buff);
 	putstr_to_console(game, buff);
 }

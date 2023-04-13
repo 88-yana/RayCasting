@@ -34,6 +34,7 @@
 # define COLOR_GRAY 0x0eae8e1
 # define COLOR_LGRAY 0x0afafb0
 # define COLOR_YELLOW 0x0FFFF00
+# define COLOR_WHITE 0xffffff
 
 /** Screen settings */
 # define WIN_WIDTH 800

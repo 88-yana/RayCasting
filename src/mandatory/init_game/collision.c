@@ -1,91 +1,108 @@
 #include "cub3D.h"
 
-#define COLLISION_MARGIN 0.5
-
-bool	is_collided_with_wall(t_vec p, char **map)
+/**
+ * @brief 壁の衝突判定
+ *
+ * @detail 念のためマップ外（'2'）の要素でも検証を行っている
+ * @param next_pos
+ * @param map
+ * @return true
+ * @return false
+ */
+static bool	is_collided(t_vec next_pos, char **map)
 {
-	if (map[(int)p.y][(int)p.x] == '1')
+
+	if (map[(int)next_pos.y][(int)next_pos.x] == '1')
+		return (true);
+	if (map[(int)next_pos.y][(int)next_pos.x] == '2')
 		return (true);
 	return (false);
 }
 
-t_vec	get_current_direction(t_game *game)
-{
-	t_vec	dir;
-
-	dir = game->player.dir;
-	if (game->key_store & MOVE_FORWARD)
-		;
-	if (game->key_store & MOVE_BACKWARD)
-		dir = ft_rotate_vec(dir, M_PI);
-	if (game->key_store & MOVE_LEFT)
-		dir = ft_rotate_vec(dir, M_PI_2);
-	if (game->key_store & MOVE_RIGHT)
-		dir = ft_rotate_vec(dir, -M_PI_2);
-	return (dir);
-}
-
-t_vec	get_next_position(t_vec pos, t_vec dir)
+/**
+ * @brief 移動方向の点を取得する
+ *
+ * @param pos
+ * @param move
+ * @return t_vec
+ */
+static t_vec	get_next_position(t_vec pos, t_vec move, float coef)
 {
 	t_vec	next_pos;
 
-	dir.y = -dir.y;
-	next_pos = ft_add_vec(pos, ft_mul_vec(dir, COLLISION_MARGIN));
+	move.y = -move.y;
+	next_pos = ft_add_vec(pos, ft_mul_vec(move, coef));
 	return (next_pos);
 }
 
-void	check_collision(t_game *game)
+/**
+ * @brief 内積を用いて壁に沿ったベクトルを取得
+ *
+ * @param move 移動ベクトル
+ * @param nor　法線ベクトル
+ * @return t_vec
+ */
+static t_vec	get_vector_slide(t_vec move, t_vec nor)
 {
-	t_vec	next_pos1;
-	t_vec	next_pos2;
-	t_vec	dir;
-	t_vec	dir1;
-	t_vec	dir2;
-
-	dir = get_current_direction(game);
-	dir1 = ft_rotate_vec(dir, M_PI / 12);
-	next_pos1 = get_next_position(game->player.pos, dir1);
-	dir2 = ft_rotate_vec(dir, -M_PI / 12);
-	next_pos2 = get_next_position(game->player.pos, dir2);
-	if (is_collided_with_wall(next_pos1, game->map)
-		&& is_collided_with_wall(next_pos2, game->map))
-	{
-		game->key_store &= ~MOVE;
-	}
-}
-
-/*
-t_vec	get_normal_vector(t_game *game)
-{
-	t_vec	dir;
-	t_vec	nor;
-
-	dir = game->player.dir;
-	nor = (t_vec){0, 0};
-	if (dir.x > 0 && dir.y > 0)
-		nor = (t_vec){0, 1};
-	return (dir);
-}
-
-t_vec	get_vector_slide(t_vec spd, t_vec nor)
-{
-	int		t;
+	float	t;
 	t_vec	s;
 
-	t = -(nor.x * spd.x + nor.y * spd.y) / (nor.x * nor.x + nor.y * nor.y);
-	s = (t_vec){spd.x + t * nor.x, spd.y + t * nor.y};
+	t = -(nor.x * move.x + nor.y * move.y) / (nor.x * nor.x + nor.y * nor.y);
+	s = (t_vec){move.x + t * nor.x, move.y + t * nor.y};
 	return (s);
 }
 
-void	calc_slide_vector(t_game *game)
+/**
+ * @brief プレーヤーの移動ベクトルを壁に沿うように変更する
+ *
+ * @param game
+ * @param move
+ * @param pos
+ * @param next_pos
+ */
+void
+	turn_move_along_wall(t_game *game, t_vec move, t_vec pos, t_vec next_pos)
 {
+	t_news	wall_dir;
 	t_vec	nor;
-	t_vec	s;
 
-	nor = get_normal_vector(game);
-	s = get_vector_slide(game->player.dir, nor);
-	s = ft_mul_vec(s, MOVE_COEF);
-	game->player.pos.x += s.x;
-	game->player.pos.y -= s.y;
+	wall_dir = get_collision_direction(move, pos, next_pos, game->map);
+	if (wall_dir & NONE)
+	{
+		game->player.move = (t_vec){};
+		return ;
+	}
+	nor = get_normal_vector(wall_dir);
+	if (!nor.x && !nor.y)
+	{
+		game->player.move = (t_vec){};
+		return ;
+	}
+	game->player.move = get_vector_slide(move, nor);
 }
-*/
+
+/**
+ * @brief プレーヤーの衝突判定
+ *
+ * @param game
+ */
+void	check_collision(t_game *game)
+{
+	t_vec	p1;
+	t_vec	p2;
+	t_vec	p3;
+
+	p1 = get_next_position(game->player.pos, game->player.move, 0.3);
+	p2 = get_next_position(game->player.pos, \
+		ft_rotate_vec(game->player.move, M_PI / 5), 0.05);
+	p3 = get_next_position(game->player.pos, \
+		ft_rotate_vec(game->player.move, -M_PI / 5), 0.05);
+	if (is_collided(p1, game->map) || is_collided(p2, game->map)
+		|| is_collided(p3, game->map))
+	{
+		turn_move_along_wall(game, game->player.move, game->player.pos, p1);
+		p1 = get_next_position(game->player.pos, game->player.move, MOVE_COEF);
+		if (is_collided(p1, game->map))
+			game->player.move = (t_vec){};
+	}
+}
