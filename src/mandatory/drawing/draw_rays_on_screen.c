@@ -83,5 +83,4 @@ void	draw_rays_on_screen(t_game *game)
 	}
 	if (game->key_store & MOVE)
 		diff += 0.25;
-	printf("%f\n", diff);
 }
