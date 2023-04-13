@@ -64,8 +64,8 @@ int	store_mouse_position(int x, int y, t_game *game)
 
 void	render(t_game *game)
 {
-	static float	offset = -8;
-	static float	sign = 0.7;
+	static float	offset = -5;
+	static float	sign = 0.8;
 
 	mlx_do_sync(game->mlx);
 	draw_back(game);
