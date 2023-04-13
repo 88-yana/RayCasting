@@ -66,14 +66,22 @@ void	draw_ray_on_screen(t_game *game, int x_axis, int offset)
 	}
 }
 
-void	draw_rays_on_screen(t_game *game, int offset)
+void	draw_rays_on_screen(t_game *game)
 {
-	int	x;
+	static float	diff = 0;
+	int				x;
+	float			offset;
 
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
+		offset = 4.5 * sin(diff);
+		if (offset > 0)
+			offset /= 2;
 		draw_ray_on_screen(game, x, offset);
 		x++;
 	}
+	if (game->key_store & MOVE)
+		diff += 0.25;
+	printf("%f\n", diff);
 }
