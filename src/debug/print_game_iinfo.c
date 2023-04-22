@@ -5,22 +5,7 @@
 #define RED "\033[31m"
 #define DEFAULT "\033[m"
 
-/**
- * @brief スクリーンへの出力
- *
- * @param game
- * @param str
- * @param offset
- */
-void	putstr_to_window(t_game *game, char *str)
-{
-	int	offset;
-
-	offset = WIN_HEIGHT - TIP_SIZE;
-	mlx_string_put(game->mlx, game->win, TIP_SIZE, offset, COLOR_WHITE, str);
-	return ;
-}
-
+#ifdef DEBUG
 /**
  * @brief コンソールへの出力
  *
@@ -39,7 +24,7 @@ static void	putstr_to_console(t_game *game, char *str)
 /**
  * @brief ゲーム中のデバッグ情報を出力する。
  *
- * @detail TODO: snprintfを使用しているため提出時に削除すること。
+ * @detail
  * @param game
  */
 void	print_debug_info(t_game *game)
@@ -48,8 +33,16 @@ void	print_debug_info(t_game *game)
 	t_player_info	*player;
 
 	player = &game->player;
-	snprintf(buff, 100, "pos:{%f, %f} dir:{%f, %f} move:{%f, %f} ", \
-		player->pos.x, player->pos.y, player->dir.x, player->dir.y, player->move.x, player->move.y);
-//	putstr_to_window(game, buff);
+	snprintf(buff, 100, "pos:{%f, %f} dir:{%f, %f} move:{%f, %f} ",
+		player->pos.x, player->pos.y,
+		player->dir.x, player->dir.y,
+		player->move.x, player->move.y);
 	putstr_to_console(game, buff);
 }
+#else
+
+void	print_debug_info(t_game *game)
+{
+	(void)game;
+}
+#endif

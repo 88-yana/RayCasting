@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:35:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/28 10:33:21 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/04/23 01:17:17 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
  * @brief elementをkeyとvalueに分ける
  * 			keyとvalueの2つなかったら，エラー
  * 			最後が改行だったら，null文字に
- * @param element 
- * @return char** 
+ * @param element
+ * @return char**
  */
 static char	**parse_line(char *element)
 {
@@ -33,9 +33,9 @@ static char	**parse_line(char *element)
 
 /**
  * @brief 取得したkeyとvalueを構造体に代入
- * 
- * @param dict 
- * @param contents 
+ *
+ * @param dict
+ * @param contents
  */
 static void	parse_header_lines(t_dictionary *dict, char **contents)
 {
@@ -61,10 +61,10 @@ static void	parse_header_lines(t_dictionary *dict, char **contents)
 
 /**
  * @brief ファイルの中身を構造体に入れる
- * 
- * @param game 
- * @param height 
- * @param contents 
+ *
+ * @param game
+ * @param height
+ * @param contents
  */
 void	get_map_info(t_game *game, char **contents)
 {

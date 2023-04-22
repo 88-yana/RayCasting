@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_surrounded.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:58:51 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 16:30:50 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/04/23 01:17:15 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 /**
  * @brief map内の要素の場合true
- * 
- * @param c 
- * @return true 
- * @return false 
+ *
+ * @param c
+ * @return true
+ * @return false
  */
 static bool	is_in_map(char c)
 {
@@ -38,9 +38,9 @@ static bool	is_in_map(char c)
  * @brief 範囲外やMARK,WALLであったら,return
  * マップ内に到達したら,エラー
  * 現時点にMARKを付けて，探索
- * @param game 
- * @param i 
- * @param j 
+ * @param game
+ * @param i
+ * @param j
  */
 static void	dfs_map(t_game *game, int i, int j)
 {
@@ -63,9 +63,9 @@ static void	dfs_map(t_game *game, int i, int j)
  * @brief map外であるスペースを探す
  * スペースからdfs_mapを開始する
  * map内に侵入できないかをcheckする
- * @param game 
- * @return true 
- * @return false 
+ * @param game
+ * @return true
+ * @return false
  */
 void	check_map_surrounded(t_game *game)
 {
