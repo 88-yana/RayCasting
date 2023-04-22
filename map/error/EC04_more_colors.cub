@@ -1,0 +1,13 @@
+NO ./img/north_mock.xpm
+SO ./img/south_mock.xpm
+WE ./img/west_mock.xpm
+EA ./img/east_mock.xpm
+
+F 100,100,0
+C 100,100,0,0
+
+11111111111
+10000000001
+10000N00001
+10000000001
+11111111111
