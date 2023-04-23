@@ -1,65 +1,66 @@
-NAME := cub3D
-CC := cc
-CFLAGS := -Wall -Werror -Wextra -MMD -MP -O2
-SRCDIR := src
-OBJDIR := obj
-SRC := \
-	main.c \
-	check_arg.c \
-	input_file/check_map_size.c \
-	input_file/check_map_surrounded.c \
-	input_file/get_map.c \
-	input_file/get_map_info.c \
-	input_file/input_file.c \
-	input_file/is_valid_map.c \
-	input_file/is_valid_map_info.c \
-	input_file/is_valid_rgb_number.c \
-	input_file/set_map_info.c \
-	init_game/hooks.c \
-	init_game/init.c \
-	init_game/load_images.c \
-	init_game/load_player.c \
-	calculation/calc.c \
-	calculation/dir_to_angle.c \
-	calculation/get_wall_height.c \
-	calculation/is_out_of.c \
-	calculation/measure_distance_to_wall.c \
-	calculation/raycasting.c \
-	calculation/walk_to_wall.c \
-	calculation/walk_to_wall_utils.c \
-	render/render.c \
-	render/draw_back.c \
-	render/draw_lines.c \
-	render/draw_minimap.c \
-	render/draw_player_on_minimap.c \
-	render/draw_rays_on_minimap.c \
-	render/draw_rays_on_screen.c \
-	operation/collision.c \
-	operation/collision_utils.c \
-	operation/exit.c \
-	operation/mouse.c \
-	operation/keys.c \
-	utils/gnl_wrapper.c \
-	utils/handle_error.c \
-	debug/print_game_iinfo.c \
-	debug/print_input.c
+NAME = cub3D
+CC = cc
+CFLAGS = -Wall -Werror -Wextra -MMD -MP -O2
+SRCDIR = src
+OBJDIR = obj
+SRC = \
+	src/main.c \
+	src/check_arg.c \
+	src/input_file/check_map_size.c \
+	src/input_file/check_map_surrounded.c \
+	src/input_file/get_map.c \
+	src/input_file/get_map_info.c \
+	src/input_file/input_file.c \
+	src/input_file/is_valid_map.c \
+	src/input_file/is_valid_map_info.c \
+	src/input_file/is_valid_rgb_number.c \
+	src/input_file/set_map_info.c \
+	src/init_game/hooks.c \
+	src/init_game/init.c \
+	src/init_game/load_images.c \
+	src/init_game/load_player.c \
+	src/calculation/calc.c \
+	src/calculation/dir_to_angle.c \
+	src/calculation/get_wall_height.c \
+	src/calculation/is_out_of.c \
+	src/calculation/measure_distance_to_wall.c \
+	src/calculation/raycasting.c \
+	src/calculation/walk_to_wall.c \
+	src/calculation/walk_to_wall_utils.c \
+	src/render/render.c \
+	src/render/draw_back.c \
+	src/render/draw_lines.c \
+	src/render/draw_minimap.c \
+	src/render/draw_player_on_minimap.c \
+	src/render/draw_rays_on_minimap.c \
+	src/render/draw_rays_on_screen.c \
+	src/operation/collision.c \
+	src/operation/collision_utils.c \
+	src/operation/exit.c \
+	src/operation/mouse.c \
+	src/operation/keys.c \
+	src/utils/gnl_wrapper.c \
+	src/utils/handle_error.c \
+	src/debug/print_game_iinfo.c \
+	src/debug/print_input.c
 
-OBJ := ${addprefix ${OBJDIR}/,${SRC:.c=.o}}
+OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-LIBFTDIR := ./lib/libft
-LIBFT_A := $(LIBFTDIR)/libft.a
+LIBFTDIR = ./lib/libft
+LIBFT_A = $(LIBFTDIR)/libft.a
 
-MINILIBXDIR := ./lib/minilibx
-MINILIBX := libmlx.dylib
+MINILIBXDIR = ./lib/minilibx
+MINILIBX = libmlx.dylib
 
 MAPS = $(shell find map/normal/)
 TEST_MAPS = $(shell find map/error/)
 
-INCLUDE := -I ./include/ -I $(LIBFTDIR)/incs/ -I $(MINILIBXDIR)/
+INCLUDE = -I ./include/ -I $(LIBFTDIR)/incs/ -I $(MINILIBXDIR)/
+
 DEPS := ${addprefix ${OBJDIR}/, ${SRC:.c=.d}}
 -include ${DEPS}
 
-# Print variables
+#: Print variables
 PRINTF := printf
 DEFAULT := \033[0;39m
 BLUE := \033[0;94m
@@ -79,7 +80,6 @@ $(OBJDIR):
 	mkdir $(shell find $(SRCDIR) -type d | sed 's/^$(SRCDIR)/$(OBJDIR)/g')
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@${PROGRESS}
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
 $(LIBFT_A):
@@ -103,13 +103,13 @@ fclean: clean
 #: Remove and recompile all.
 re: fclean all
 
-# Open error maps.
+#: Open error maps.
 t: all
 	@for map in ${TEST_MAPS} ; \
 	do echo $$map ; ./${NAME} $$map ; echo "$?"; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 
-# Open normal maps.
+#: Open normal maps.
 p: all
 	@for map in ${MAPS} ; \
 	do echo $$map ; ./${NAME} $$map ; echo "$?"; done
