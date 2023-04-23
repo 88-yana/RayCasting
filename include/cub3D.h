@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/23 13:12:07 by tmuramat          #+#    #+#             */
+/*   Updated: 2023/04/23 13:33:32 by tmuramat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -47,7 +59,7 @@ void	fetch_mouse_position(t_game *game);
 //collision
 void	check_collision(t_game *game);
 t_vec	get_normal_vector(t_news wall);
-t_news	get_collision_direction(t_vec move, t_vec pos, t_vec next_pos, char **map);
+t_news	get_collision_dir(t_vec move, t_vec pos, t_vec next_pos, char **map);
 
 //utils
 ssize_t	gnl_wrapper(int fd, char **line);
@@ -55,6 +67,13 @@ int		create_trgb(int t, int r, int g, int b);
 void	draw_player_pos(t_game *game);
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void	draw_pixel(t_image *img, int x, int y, int color);
+
+int		render(t_game *game);
+int		update_game(t_game *game);
+void	player_move(t_game *game);
+int		store_mouse_position(int x, int y, t_game *game);
+int		store_key_press(int keycode, t_game *game);
+int		store_key_release(int keycode, t_game *game);
 
 //raycasting
 void	walk_to_wall(t_game *game, t_ray *ray_info);

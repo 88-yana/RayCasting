@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_map_size.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/04/23 13:57:13 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/04/23 01:17:12 by tmuramat          #+#    #+#             */
+/*   Updated: 2023/04/23 01:17:13 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	print_input(t_game *game);
-
-int	main(int argc, char **argv)
+void	check_map_size(t_game *game)
 {
-	t_game	game;
-
-	check_arg(argc, argv);
-	input_file(&game, argv[1]);
-	print_input(&game);
-	init_game(&game);
-	mlx_loop(game.mlx);
-	return (0);
+	if (game->map_info.height > 50 || game->map_info.width > 50)
+		handle_error(ERR_MAP_SIZE);
 }

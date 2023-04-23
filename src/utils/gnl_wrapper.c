@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   gnl_wrapper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/04/23 13:57:13 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/03/23 01:01:37 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/04/23 01:17:38 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	print_input(t_game *game);
-
-int	main(int argc, char **argv)
+ssize_t	gnl_wrapper(int fd, char **line)
 {
-	t_game	game;
-
-	check_arg(argc, argv);
-	input_file(&game, argv[1]);
-	print_input(&game);
-	init_game(&game);
-	mlx_loop(game.mlx);
-	return (0);
+	errno = 0;
+	*line = get_next_line(fd);
+	if (errno)
+		exit(EXIT_FAILURE);
+	if (*line == NULL)
+		return (0);
+	return (ft_strlen(*line));
 }

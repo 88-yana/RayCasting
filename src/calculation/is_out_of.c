@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_out_of.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 16:30:01 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/04/23 13:57:13 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/04/23 01:17:04 by tmuramat          #+#    #+#             */
+/*   Updated: 2023/04/23 01:17:05 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	print_input(t_game *game);
-
-int	main(int argc, char **argv)
+bool	is_out_of_map_height(t_game *game, double y)
 {
-	t_game	game;
+	if (y < 0 || game->map_info.height + SP <= y)
+		return (true);
+	return (false);
+}
 
-	check_arg(argc, argv);
-	input_file(&game, argv[1]);
-	print_input(&game);
-	init_game(&game);
-	mlx_loop(game.mlx);
-	return (0);
+bool	is_out_of_map_width(t_game *game, double x)
+{
+	if (x < 0 || game->map_info.width + SP <= x)
+		return (true);
+	return (false);
 }
