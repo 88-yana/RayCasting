@@ -118,7 +118,7 @@ p: all
 #: Check norminette.
 norm:
 	@${PRINTF} "${RED}\nChecking norm for ${NAME}...${DEFAULT}\n "
-	@norminette ${SRCDIR} inc/ lib/libft
+	@norminette ${SRCDIR} include/ lib/libft
 
 # Check approved functions.
 nm: $(NAME)

@@ -115,14 +115,7 @@ DEL := \033[2K
 CR := \033[1G
 
 # Progress variables
-SRC_TOT := ${shell expr ${words ${ALL_SRCS}} - $(shell ls -l $(OBJ_DIR) | grep .o$ | wc -l) + 1}
-ifndef SRC_TOT
-	SRC_TOT := ${words ${ALL_SRCS}}
-endif
-SRC_CNT := 0
-SRC_PCT = $(shell expr 100 \* $(SRC_CNT) / $(SRC_TOT))
-PROGRESS = $(evalator SRC_CNT = $(shell expr ${SRC_CNT} + 1)) \
-	${PRINTF} "${DEL}${GREEN}[ %d/%d (%d%%) ] ${CC} ${CFLAGS} $< ...${DEFAULT}${CR}" $(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
+PROGRESS = ${PRINTF} "${DEL}${GREEN}${CC} ${CFLAGS} $< ...${DEFAULT}${CR}"
 
 # Command
 ${NAME}: ${ALL_OBJS}
