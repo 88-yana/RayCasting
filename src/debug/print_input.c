@@ -6,18 +6,18 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 06:14:08 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/04/23 15:08:27 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:18:36 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+#ifdef DEBUG
 /**
  * @brief debug用，取得したファイルの中身を表示
  * 		 mapの右端に2マス空白が入るのは，\nの分
  * @param game 
  */
-#ifdef DEBUG
 void	print_input(t_game *game)
 {
 	size_t	i;
