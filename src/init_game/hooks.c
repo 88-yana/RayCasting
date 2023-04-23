@@ -6,7 +6,7 @@
 /*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 01:16:53 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/04/23 01:16:54 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:30:00 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,6 @@ int	store_mouse_position(int x, int y, t_game *game)
 	return (0);
 }
 
-void	render(t_game *game)
-{
-	mlx_do_sync(game->mlx);
-	draw_back(game);
-	ray_casting(game);
-	draw_rays_on_screen(game);
-	if (game->is_minimap == true)
-	{
-		draw_minimap(game);
-		draw_rays_on_minimap(game);
-		draw_player_on_minimap(game);
-	}
-	mlx_put_image_to_window(&game->mlx, game->win, game->img.img, 0, 0);
-}
-
 void	player_move(t_game *game)
 {
 	game->player.move = ft_mul_vec(game->player.move, MOVE_COEF);
@@ -105,19 +90,4 @@ int	update_game(t_game *game)
 	player_move(game);
 	render(game);
 	return (0);
-}
-
-/**
- * @brief ゲーム中に使用するイベントフックを設定
- *
- * @param game
- */
-void	set_event_hooks(t_game *game)
-{
-	mlx_hook(game->win, 02, 1L << 0, store_key_press, game);
-	mlx_hook(game->win, 03, 1L << 0, store_key_release, game);
-	mlx_hook(game->win, 06, 1L << 6, store_mouse_position, game);
-	mlx_hook(game->win, 17, 0, exit_game, game);
-	mlx_loop_hook(game->mlx, update_game, game);
-//	mlx_expose_hook (game->win, render_map, game);
 }

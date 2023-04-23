@@ -6,7 +6,7 @@
 /*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 01:16:56 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/04/23 01:16:57 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:12:54 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_vec	get_normal_vector(t_news wall)
  * @param map
  * @return t_news
  */
-t_news	get_collision_direction(t_vec move, t_vec pos, t_vec next_pos, char **map)
+t_news	get_collision_dir(t_vec move, t_vec pos, t_vec next_pos, char **map)
 {
 	if (move.x >= 0 && move.y >= 0)
 	{

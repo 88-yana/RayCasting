@@ -6,7 +6,7 @@
 /*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 01:16:57 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/04/23 01:16:58 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:34:10 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
  */
 static bool	is_collided(t_vec next_pos, char **map)
 {
-
 	if (map[(int)next_pos.y][(int)next_pos.x] == '1')
 		return (true);
 	if (map[(int)next_pos.y][(int)next_pos.x] == '2')
@@ -78,7 +77,7 @@ void
 	t_news	wall_dir;
 	t_vec	nor;
 
-	wall_dir = get_collision_direction(move, pos, next_pos, game->map);
+	wall_dir = get_collision_dir(move, pos, next_pos, game->map);
 	if (wall_dir & NONE)
 	{
 		game->player.move = (t_vec){};

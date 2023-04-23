@@ -6,29 +6,6 @@ OBJDIR := obj
 SRC := \
 	main.c \
 	check_arg.c \
-	calculation/calc.c \
-	calculation/dir_to_angle.c \
-	calculation/get_wall_height.c \
-	calculation/is_out_of.c \
-	calculation/measure_distance_to_wall.c \
-	calculation/raycasting.c \
-	calculation/walk_to_wall.c \
-	calculation/walk_to_wall_utils.c \
-	render/draw_back.c \
-	render/draw_lines.c \
-	render/draw_minimap.c \
-	render/draw_player_on_minimap.c \
-	render/draw_rays_on_minimap.c \
-	render/draw_rays_on_screen.c \
-	init_game/collision.c \
-	init_game/collision_utils.c \
-	init_game/exit.c \
-	init_game/hooks.c \
-	init_game/init.c \
-	init_game/keys.c \
-	init_game/load_images.c \
-	init_game/load_player.c \
-	init_game/mouse.c \
 	input_file/check_map_size.c \
 	input_file/check_map_surrounded.c \
 	input_file/get_map.c \
@@ -38,6 +15,30 @@ SRC := \
 	input_file/is_valid_map_info.c \
 	input_file/is_valid_rgb_number.c \
 	input_file/set_map_info.c \
+	init_game/hooks.c \
+	init_game/init.c \
+	init_game/load_images.c \
+	init_game/load_player.c \
+	calculation/calc.c \
+	calculation/dir_to_angle.c \
+	calculation/get_wall_height.c \
+	calculation/is_out_of.c \
+	calculation/measure_distance_to_wall.c \
+	calculation/raycasting.c \
+	calculation/walk_to_wall.c \
+	calculation/walk_to_wall_utils.c \
+	render/render.c \
+	render/draw_back.c \
+	render/draw_lines.c \
+	render/draw_minimap.c \
+	render/draw_player_on_minimap.c \
+	render/draw_rays_on_minimap.c \
+	render/draw_rays_on_screen.c \
+	operation/collision.c \
+	operation/collision_utils.c \
+	operation/exit.c \
+	operation/mouse.c \
+	operation/keys.c \
 	utils/gnl_wrapper.c \
 	utils/handle_error.c \
 	debug/print_game_iinfo.c \
@@ -67,7 +68,6 @@ RED := \033[0;91m
 DEL := \033[2K
 MOVE := \033[1F
 CR := \033[1G
-
 
 #: Make executable file.
 all: $(OBJDIR) $(NAME)
@@ -118,7 +118,7 @@ p: all
 #: Check norminette.
 norm:
 	@${PRINTF} "${RED}\nChecking norm for ${NAME}...${DEFAULT}\n "
-	@norminette ${SRCDIR} inc/ lib/
+	@norminette ${SRCDIR} inc/ lib/libft
 
 # Check approved functions.
 nm: $(NAME)

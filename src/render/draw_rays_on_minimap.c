@@ -6,7 +6,7 @@
 /*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 01:17:28 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/04/23 01:17:29 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/04/23 12:59:28 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	draw_ray_on_minimap(t_game *game, int i)
 		&& !is_out_of_map_height(game, game->draw.y_wall[i]))
 	{
 		draw_pixel(&game->img, x, y, COLOR_GREEN);
-		draw_line(game, (t_vec){player_x, player_y}, (t_vec){x, y}, COLOR_YELLOW);
+		draw_line(game, (t_vec){player_x, player_y},
+			(t_vec){x, y}, COLOR_YELLOW);
 	}
 }
 

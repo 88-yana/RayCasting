@@ -6,7 +6,7 @@
 /*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 01:17:29 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/04/23 01:17:30 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:16:28 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	calc_color(t_image *image, float width_rate, float height_rate)
 
 	x = width_rate * image->width;
 	y = height_rate * image->height;
-	pixel_pos = y * image->line_len + x * 4;
+	pixel_pos = y * image->len + x * 4;
 	color = *(unsigned int *)(image->addr + pixel_pos);
 	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 01:17:24 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/04/23 01:17:25 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:16:28 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	draw_pixel(t_image *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
+	dst = img->addr + (y * img->len + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
 void	draw_rectangle(t_image *img, t_vec *p, int size, int color)
@@ -50,9 +50,11 @@ void	draw_minimap(t_game *game)
 		while (j < game->map_info.width + 2)
 		{
 			if (game->map[i][j] == '1')
-				draw_rectangle(&game->img, &(t_vec){i * TIP_SIZE, j * TIP_SIZE}, TIP_SIZE, COLOR_LGRAY);
-			else if (game->map[i][j] == '0' || is_start_position(game->map[i][j]))
-				draw_rectangle(&game->img, &(t_vec){i * TIP_SIZE, j * TIP_SIZE}, TIP_SIZE, COLOR_GRAY);
+				draw_rectangle(&game->img, &(t_vec){i * TIP_SIZE, j * TIP_SIZE},
+					TIP_SIZE, COLOR_LGRAY);
+			if (game->map[i][j] == '0' || is_start_position(game->map[i][j]))
+				draw_rectangle(&game->img, &(t_vec){i * TIP_SIZE, j * TIP_SIZE},
+					TIP_SIZE, COLOR_GRAY);
 			j++;
 		}
 		i++;
