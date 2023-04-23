@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 01:16:54 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/04/23 01:16:55 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:10:01 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@
  */
 int	exit_game(char *msg)
 {
-	ft_putendl_fd(GREEN, 2);
-	ft_putendl_fd(msg, 2);
-	ft_putendl_fd(DEFAULT, 2);
+	(void) *msg;
 	exit(0);
 }
 

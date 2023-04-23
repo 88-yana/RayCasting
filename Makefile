@@ -52,8 +52,8 @@ LIBFT_A = $(LIBFTDIR)/libft.a
 MINILIBXDIR = ./lib/minilibx
 MINILIBX = libmlx.dylib
 
-MAPS = $(shell find map/normal/)
-TEST_MAPS = $(shell find map/error/)
+MAPS = $(shell find map/normal/ -type f)
+TEST_MAPS = $(shell find map/error/ -type f)
 
 INCLUDE = -I ./include/ -I $(LIBFTDIR)/incs/ -I $(MINILIBXDIR)/
 

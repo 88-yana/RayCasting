@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 06:14:08 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/03/26 15:17:58 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:08:27 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
  * 		 mapの右端に2マス空白が入るのは，\nの分
  * @param game 
  */
+#ifdef DEBUG
 void	print_input(t_game *game)
 {
 	size_t	i;
@@ -44,3 +45,10 @@ void	print_input(t_game *game)
 	ft_printf("%d ", game->map_info.ceiling.g);
 	ft_printf("%d\n\n", game->map_info.ceiling.b);
 }
+#else
+
+void	print_input(t_game *game)
+{
+	(void)game;
+}
+#endif
