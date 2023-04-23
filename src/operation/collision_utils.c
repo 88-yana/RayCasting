@@ -6,7 +6,7 @@
 /*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 01:16:56 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/04/23 13:12:54 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/04/23 14:28:19 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param wall
  * @return t_vec
  */
-t_vec	get_normal_vector(t_news wall)
+static t_vec	get_normal_vector(t_news wall)
 {
 	if (wall & NORTH)
 		return ((t_vec){0, -1});
@@ -31,8 +31,29 @@ t_vec	get_normal_vector(t_news wall)
 	return ((t_vec){0, 0});
 }
 
+/** 衝突した壁の向きを判定（第3・4象限）*/
+static t_news	get_collision_dir_quad34(
+	t_vec move, t_vec pos, t_vec next_pos, char **map)
+{
+	if (move.x < 0 && move.y < 0)
+	{
+		if (map[(int)next_pos.y][(int)pos.x] == '1')
+			return (NORTH);
+		else if (map[(int)pos.y][(int)next_pos.x] == '1')
+			return (EAST);
+	}
+	else if (move.x >= 0 && move.y < 0)
+	{
+		if (map[(int)next_pos.y][(int)pos.x] == '1')
+			return (NORTH);
+		else if (map[(int)pos.y][(int)next_pos.x] == '1')
+			return (WEST);
+	}
+	return (NONE);
+}
+
 /**
- * @brief 衝突した壁の向きを判定（TODO: norm対応）
+ * @brief 衝突した壁の向きを判定(第1・2象限)
  *
  * @param move
  * @param pos
@@ -40,7 +61,8 @@ t_vec	get_normal_vector(t_news wall)
  * @param map
  * @return t_news
  */
-t_news	get_collision_dir(t_vec move, t_vec pos, t_vec next_pos, char **map)
+t_news	get_collision_dir_quad12(
+	t_vec move, t_vec pos, t_vec next_pos, char **map)
 {
 	if (move.x >= 0 && move.y >= 0)
 	{
@@ -56,19 +78,5 @@ t_news	get_collision_dir(t_vec move, t_vec pos, t_vec next_pos, char **map)
 		else if (map[(int)pos.y][(int)next_pos.x] == '1')
 			return (EAST);
 	}
-	else if (move.x < 0 && move.y < 0)
-	{
-		if (map[(int)next_pos.y][(int)pos.x] == '1')
-			return (NORTH);
-		else if (map[(int)pos.y][(int)next_pos.x] == '1')
-			return (EAST);
-	}
-	else if (move.x >= 0 && move.y < 0)
-	{
-		if (map[(int)next_pos.y][(int)pos.x] == '1')
-			return (NORTH);
-		else if (map[(int)pos.y][(int)next_pos.x] == '1')
-			return (WEST);
-	}
-	return (NONE);
+	return (get_collision_quad34(move, pos, next_pos, map));
 }
