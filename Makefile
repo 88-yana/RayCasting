@@ -111,7 +111,9 @@ t: all
 
 #: Open normal maps.
 p: all
-	./${NAME} test/cub/M00_normal.cub
+	@for map in ${MAPS} ; \
+	do echo $$map ; ./${NAME} $$map ; echo "$?"; done
+	@echo "${GREEN}----finish----${DEFAULT}"
 
 #: Check norminette.
 norm:
