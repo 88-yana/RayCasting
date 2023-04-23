@@ -6,7 +6,7 @@
 /*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 01:16:56 by tmuramat          #+#    #+#             */
-/*   Updated: 2023/04/23 14:28:19 by tmuramat         ###   ########.fr       */
+/*   Updated: 2023/04/23 14:43:39 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param wall
  * @return t_vec
  */
-static t_vec	get_normal_vector(t_news wall)
+t_vec	get_normal_vector(t_news wall)
 {
 	if (wall & NORTH)
 		return ((t_vec){0, -1});
@@ -32,8 +32,8 @@ static t_vec	get_normal_vector(t_news wall)
 }
 
 /** 衝突した壁の向きを判定（第3・4象限）*/
-static t_news	get_collision_dir_quad34(
-	t_vec move, t_vec pos, t_vec next_pos, char **map)
+static t_news	get_collision_dir_quad34(t_vec move, t_vec pos,
+	t_vec next_pos, char **map)
 {
 	if (move.x < 0 && move.y < 0)
 	{
@@ -52,17 +52,9 @@ static t_news	get_collision_dir_quad34(
 	return (NONE);
 }
 
-/**
- * @brief 衝突した壁の向きを判定(第1・2象限)
- *
- * @param move
- * @param pos
- * @param next_pos
- * @param map
- * @return t_news
- */
-t_news	get_collision_dir_quad12(
-	t_vec move, t_vec pos, t_vec next_pos, char **map)
+/** 衝突した壁の向きを判定(第1・2象限) */
+t_news	get_collision_dir_quad12(t_vec move,
+	t_vec pos, t_vec next_pos, char **map)
 {
 	if (move.x >= 0 && move.y >= 0)
 	{
@@ -78,5 +70,25 @@ t_news	get_collision_dir_quad12(
 		else if (map[(int)pos.y][(int)next_pos.x] == '1')
 			return (EAST);
 	}
-	return (get_collision_quad34(move, pos, next_pos, map));
+	return (NONE);
+}
+
+/**
+ * @brief 衝突した壁の向きを判定
+ *
+ * @param move
+ * @param pos
+ * @param next_pos
+ * @param map
+ * @return t_news
+ */
+t_news	get_collision_dir(t_vec move, t_vec pos, t_vec next_pos, char **map)
+{
+	t_news	dir;
+
+	dir = get_collision_dir_quad12(move, pos, next_pos, map);
+	if (dir != NONE)
+		return (dir);
+	dir = get_collision_dir_quad34(move, pos, next_pos, map);
+	return (dir);
 }
